@@ -1,0 +1,35 @@
+{
+  "name": "meal-planner",
+  "version": "0.0.1",
+  "description": "A way to plan your meals and create grocery lists.",
+  "main": "server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeliaCodes/Meal-Planner.git"
+  },
+  "keywords": [
+    "food",
+    "planning",
+    "meals",
+    "grocery",
+    "shopping",
+    "list"
+  ],
+  "author": "me@delia.codes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeliaCodes/Meal-Planner/issues"
+  },
+  "homepage": "https://github.com/DeliaCodes/Meal-Planner#readme"
+}

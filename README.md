@@ -10,7 +10,6 @@ MVP User Stories to incorporate into the project
 
 * As a user, I want my meals to be reflected in next week's schedule.
 
-
 Stretch Goal User Stories
 
 * As a busy person, I want to be able to import recipes.
