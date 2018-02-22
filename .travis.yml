@@ -1,3 +1,9 @@
 language: node_js
-node_js:
-  - "node"
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: eiiYmG1njowmoKYWU0+6muIc1frxpemTN7ftlvDLz7QXElh+pRe8A+bK/e8u0uW2RlX1lnZWYuuNqujJFx8iMgohnmMniH/UTKvWGn3S+KMFCI7CXUh0ZiN1RRphCOB27sTCx1ndN4kBchPWnf0YFPwzG96Fe1+gqC8hSocLwl038679RenZmg3Le5IPfvCNGKlg3/H9sGEcw3WvhtUyT9R91pmss5aUQnPKlUUmcHr3VO9OrFDTj00SWzFUE2H2Q/+IpCbq4itiqBlgpKJygCkl3iltaj9nsXRtonvCL/+erKTUcKm1SjHT6v3nsTXhLEeK1v+9T01992YRrF2L1xKYY9Vyi+p5vc5Z0FkxS53I4uBB3/7CG6I5J9Hg2yoCsTJ00x1N34FqYGFVzzFRU7zdA5JIIBMsGCzzm3DRYjJE+tCrKjQaqTHAVCTznfk9ejmfrBaWgDCo87EVFvO8o6A/EiTpsIrcb2H1K9/tlKd1gS+MJqc1YzEUjXXMvQEjqV3gMi1/M6F+rBaSjdQC16V5P8rdR+aFQPqBvt99jUHG5e0UtFNaiV1/uMs+adtKyTEaeUfxBuS+/3aT/uV/GNnx+g/SV7Wj+zGw4Vbs91tcpudWxFjOk02dZLP6/w1TH+MJa8XgiISnw4poqELrS8PM++W4xlpAZghv9P8QqL8=
+  app: enigmatic-eyrie-64422.herokuapp.com/
+  on:
+    repo: DeliaCodes/Meal-Planner
