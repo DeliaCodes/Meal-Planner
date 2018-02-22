@@ -11,19 +11,26 @@
     <h1>Meal Planner</h1>
   </header>
   <main role="main">
-    <form>
-      <fieldset>
-        <label for="meal-name">
-          <input id="meal-name" type="text" name="Meal Name" role="input">
-        </label>
-        <label for="ingredient">
-          <input id="ingredient" type="text" name="ingredient">
-        </label>
-        <input type="submit" name="submit" role="submit">
-      </fieldset>
-    </form>
+    <div>
+      <h3>Your Current Meals</h3>
+      <div id="currentMeals"></div>
+    </div>
+    <section>
+      <form>
+        <label>Add A Meal Here</label>
+        <fieldset>
+          <label for="meal-name">
+            <input id="meal-name" type="text" name="Meal Name" role="input">
+          </label>
+          <label for="ingredient">
+            <input id="ingredient" type="text" name="ingredient">
+          </label>
+          <input type="submit" name="submit" role="submit">
+        </fieldset>
+      </form>
+    </section>
   </main>
-
+  <script type="javascript" src="api.js"></script>
 </body>
 
 </html>
