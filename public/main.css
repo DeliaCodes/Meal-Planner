@@ -2,6 +2,10 @@ html {
   font-family: 'Lato', sans-serif;
 }
 
+* {
+  margin: auto;
+}
+
 header {
   background-color: #CC0200;
 }
