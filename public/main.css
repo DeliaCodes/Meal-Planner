@@ -1,15 +1,52 @@
 html {
   font-family: 'Lato', sans-serif;
+  height: 100%
 }
 
 * {
   margin: auto;
 }
 
+body {
+  /*height: 100%;*/
+  display: flex;
+  flex-wrap: wrap;
+}
+
 header {
   background-color: #CC0200;
+  width: 100%;
+  display: flex;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 header h1 {
   color: #FFFFFF;
+}
+
+.title {
+  align-self: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+fieldset label {
+  width: 100%;
+}
+
+label input {
+  width: 100%;
 }
