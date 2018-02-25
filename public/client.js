@@ -20,10 +20,10 @@ addMyMeal(data);
 
 // render that data to the html
 const render = () => {
-  if (STORE !== {}) {
+  if (STORE.meals === undefined) {
     STORE.meals = getMyMeals();
   } else {
-    document.getElementById('currentMeals').textContent(template(STORE.meals))
+    document.getElementById('currentMeals').innerText(template(STORE.meals));
   }
 };
 
