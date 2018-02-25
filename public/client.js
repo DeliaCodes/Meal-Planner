@@ -14,13 +14,25 @@ const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingre
 const data = {
   name: 'Macaroni and Cheese',
   ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
-
 };
 
+addMyMeal(data);
+
 // render that data to the html
-const render = () => document.getElementById('currentMeals').textContent(template(STORE.meals));
+const render = () => {
+  if (STORE !== {}) {
+    STORE.meals = getMyMeals();
+  } else {
+    document.getElementById('currentMeals').textContent(template(STORE.meals))
+  }
+};
+
+render();
 
 
 // accept data from the form and then add it to display data
+//onclick('submit').val()->value
+//addMyMeal(value);
 
 // rerender the form
+//
