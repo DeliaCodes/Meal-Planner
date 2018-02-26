@@ -1,9 +1,10 @@
 // creating a fake database to simulate later use
-const cooperDB = {};
+const cooperDB = [];
 
 // stub post function to add itens to fake database
 const addingMeal = post => new Promise((resolve, reject) => {
-  fakeDB.post = post;
+  cooperDB.push(post);
+  console.log('Adding');
   resolve(post);
 });
 
@@ -11,7 +12,8 @@ const addingMeal = post => new Promise((resolve, reject) => {
 const getAllMeals = () => Promise.resolve(cooperDB);
 
 // exporting of the stubbed get and post functions.
-module.exports = {
+/* module.exports = {
   addMeal: addingMeal(),
   getMeals: getAllMeals(),
 };
+ */

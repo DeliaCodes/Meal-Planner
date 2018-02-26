@@ -1,10 +1,4 @@
 // add a state variable to store meals
-const mealsAPI = require('./api.js');
-
-const getMyMeals = mealsAPI.getMeals;
-
-const addMyMeal = mealsAPI.addMeal;
-
 const STORE = {};
 
 // create template for the insertion
@@ -16,14 +10,18 @@ const data = {
   ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
 };
 
-addMyMeal(data);
+addingMeal(data);
 
 // render that data to the html
 const render = () => {
-  if (STORE.meals === undefined) {
-    STORE.meals = getMyMeals();
+  if (STORE.meals !== undefined) {
+    const mealsToHtml = () => STORE.meals.map(m => template(m));
+    $('#currentMeals').append(mealsToHtml(STORE.meals));
   } else {
-    document.getElementById('currentMeals').innerText(template(STORE.meals));
+    getAllMeals().then((value) => {
+      STORE.meals = value;
+      render();
+    });
   }
 };
 
@@ -31,8 +29,8 @@ render();
 
 
 // accept data from the form and then add it to display data
-//onclick('submit').val()->value
-//addMyMeal(value);
+// onclick('submit').val()->value
+// addMyMeal(value);
 
 // rerender the form
 //
