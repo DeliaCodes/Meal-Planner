@@ -11,7 +11,7 @@ const data = [{
   },
   {
     name: 'Boiled Cabbage',
-    ingredients: ['cabbage', 'water', 'salt', 'pepper'],
+    ingredients: ['cabbage', ' water', ' salt', ' pepper'],
   },
 ];
 
