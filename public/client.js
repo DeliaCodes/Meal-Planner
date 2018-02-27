@@ -5,17 +5,22 @@ const STORE = {};
 const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
 
 // add some data to the store variable
-const data = {
-  name: 'Macaroni and Cheese',
-  ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
-};
+const data = [{
+    name: 'Macaroni and Cheese',
+    ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
+  },
+  {
+    name: 'Boiled Cabbage',
+    ingredients: ['cabbage', 'water', 'salt', 'pepper'],
+  },
+];
 
 addingMeal(data);
 
 // render that data to the html
 const render = () => {
   if (STORE.meals !== undefined) {
-    const mealsToHtml = () => STORE.meals.map(m => template(m));
+    const mealsToHtml = () => STORE.meals[0].map(m => template(m));
     $('#currentMeals').append(mealsToHtml(STORE.meals));
   } else {
     getAllMeals().then((value) => {
