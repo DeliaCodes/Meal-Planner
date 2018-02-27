@@ -34,13 +34,26 @@ header h1 {
   align-self: center;
 }
 
+#displayMeals {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
 section {
   display: flex;
   flex-direction: column;
+  margin-top: 4em;
 }
 
 #currentMeals {
   background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+#currentMeals p {
+  margin: 1em;
 }
 
 form {
@@ -55,6 +68,11 @@ fieldset {
 
 fieldset label {
   width: 100%;
+  margin-bottom: 1em;
+}
+
+label input {
+  margin-top: 1em;
 }
 
 label input {
