@@ -1,3 +1,4 @@
+/* global getAllMealsFromDB, addingMealToDB */
 // add a state variable to store meals
 const STORE = {};
 
@@ -19,10 +20,11 @@ addingMealToDB(data);
 
 // render that data to the html
 const render = () => {
+  // if store.meals has data then write it to html
   if (STORE.meals !== undefined) {
     const mealsToHtml = () => STORE.meals[0].map(m => template(m));
     $('#currentMeals').append(mealsToHtml(STORE.meals));
-  } else {
+  } else { // update store from Database to make it defined
     getAllMealsFromDB().then((value) => {
       STORE.meals = value;
       render();
