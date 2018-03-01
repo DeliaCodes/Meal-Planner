@@ -15,7 +15,7 @@ const data = [{
   },
 ];
 
-addingMeal(data);
+addingMealToDB(data);
 
 // render that data to the html
 const render = () => {
@@ -23,7 +23,7 @@ const render = () => {
     const mealsToHtml = () => STORE.meals[0].map(m => template(m));
     $('#currentMeals').append(mealsToHtml(STORE.meals));
   } else {
-    getAllMeals().then((value) => {
+    getAllMealsFromDB().then((value) => {
       STORE.meals = value;
       render();
     });
@@ -36,6 +36,26 @@ render();
 // accept data from the form and then add it to display data
 // onclick('submit').val()->value
 // addMyMeal(value);
+
+const getMealsFromUser = () => {
+  const newMeal = {};
+  newMeal.name = $('#meal-name').val();
+  newMeal.ingredients = [];
+  newMeal.ingredients.push($('#ingredient').val());
+  return newMeal;
+};
+
+const addUserMeals = () => {
+  $('#submit').submit((event) => {
+    event.preventDefault();
+    const dataToAdd = getMealsFromUser();
+    addingMealToDB(dataToAdd);
+    render();
+  });
+};
+
+addUserMeals();
+
 
 // rerender the form
 //

@@ -2,14 +2,14 @@
 const cooperDB = [];
 
 // stub post function to add itens to fake database
-const addingMeal = post => new Promise((resolve, reject) => {
+const addingMealToDB = post => new Promise((resolve, reject) => {
   cooperDB.push(post);
   console.log('Adding');
   resolve(post);
 });
 
 // stub get function to get data stored in fake database
-const getAllMeals = () => Promise.resolve(cooperDB);
+const getAllMealsFromDB = () => Promise.resolve(cooperDB);
 
 // exporting of the stubbed get and post functions.
 /* module.exports = {
