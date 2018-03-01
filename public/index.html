@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -15,6 +15,7 @@
     <div id="displayMeals">
       <h1 class="title">Your Current Meals</h1>
       <div id="currentMeals"></div>
+      <!-- <div id="userAddedMeal"></div>-->
     </div>
     <section>
       <h1 class="title">
@@ -23,13 +24,13 @@
         <fieldset>
           <label for="meal-name">
             Insert Meal Name Here:
-            <input id="meal-name" type="text" name="Meal Name" role="input">
+            <input role="textbox" id="meal-name" type="text" name="Meal Name" role="input">
           </label>
           <label for="ingredient">
             Insert Your First Ingredient Here:
-            <input id="ingredient" type="text" name="ingredient">
+            <input role="textbox" id="ingredient" type="text" name="ingredient">
           </label>
-          <input id="submit" type="submit" name="submit" role="submit">
+          <input id="submit" type="submit" name="submit" role="button">
         </fieldset>
       </form>
     </section>
