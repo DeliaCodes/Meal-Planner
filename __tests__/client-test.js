@@ -1,8 +1,15 @@
-const render = require('../public/client');
+const $ = require('jquery');
+const {
+  render,
+} = require('../src/client');
 // const getAllMealsFromDB =
 
 describe('Client', () => {
   it('It renders', () => {
-    // render();
+    // console.log(render);
+    document.body.innerHTML =
+      `<div id='currentMeals'></div>`;
+    render();
+    expect($('body').html()).toContain('macaroni');
   });
 });

@@ -20,8 +20,6 @@ const addingMealToDB = post => new Promise((resolve, reject) => {
 const getAllMealsFromDB = () => Promise.resolve(cooperDB);
 
 // exporting of the stubbed get and post functions.
-/* module.exports = {
-  addMeal: addingMeal(),
-  getMeals: getAllMeals(),
+module.exports = {
+  getAllMealsFromDB,
 };
- */

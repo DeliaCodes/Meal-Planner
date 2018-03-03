@@ -1,4 +1,4 @@
-const api = require('../public/api');
+const api = require('../src/api');
 
 xdescribe('Kitten!!!!', () => {
   test('Data is created as expected', () => {

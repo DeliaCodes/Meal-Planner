@@ -1,5 +1,10 @@
-/* global getAllMealsFromDB, addingMealToDB */
 // add a state variable to store meals
+const $ = require('jquery');
+const {
+  getAllMealsFromDB,
+  addingMealToDB,
+} = require('./api.js');
+
 const STORE = {};
 
 // create template for the insertion
@@ -9,8 +14,11 @@ const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingre
 const render = () => {
   // if store.meals has data then write it to html
   if (STORE.meals !== undefined) {
-    const mealsToHtml = () => STORE.meals[0].map(m => template(m));
-    $('#currentMeals').append(mealsToHtml(STORE.meals));
+    // console.log(STORE.meals);
+    const mealsToHtml = (meals) => meals.map(m => template(m));
+    console.log(mealsToHtml(STORE.meals));
+    console.log($('#currentMeals'));
+    $('#currentMeals').html(mealsToHtml(STORE.meals));
   } else { // update store from Database to make it defined
     getAllMealsFromDB().then((value) => {
       STORE.meals = value;
