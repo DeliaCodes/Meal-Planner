@@ -6,19 +6,6 @@ const STORE = {};
 const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
 
 // add some data to the store variable
-const data = [{
-    name: 'Macaroni and Cheese',
-    ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
-  },
-  {
-    name: 'Boiled Cabbage',
-    ingredients: ['cabbage', ' water', ' salt', ' pepper'],
-  },
-];
-
-addingMealToDB(data);
-
-// render that data to the html
 const render = () => {
   // if store.meals has data then write it to html
   if (STORE.meals !== undefined) {
@@ -32,8 +19,10 @@ const render = () => {
   }
 };
 
-render();
-
+// render that data to the html
+$(document).ready(() => {
+  render();
+});
 
 // accept data from the form and then add it to display data
 // onclick('submit').val()->value
@@ -56,8 +45,9 @@ const addUserMeals = () => {
   });
 };
 
-addUserMeals();
-
+module.exports = {
+  render,
+};
 
 // rerender the form
 //
