@@ -10,15 +10,14 @@ const {
 // create template for the insertion
 const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
 
-
+const mappingMealsIntoTemplate = (input) => {
+  console.log(input);
+  input.map(m => template(m));
+};
 
 // add some data to the store variable
 const render = (store) => {
   // if store.meals has data then write it to html
-  const mappingMealsIntoTemplate = (input) => {
-    // console.log(input);
-    input.map(m => template(m));
-  };
   $('#currentMeals').html(mappingMealsIntoTemplate(store.meals));
 };
 
@@ -53,6 +52,7 @@ const addUserMeals = () => {
 module.exports = {
   render,
   template,
+  mappingMealsIntoTemplate,
 };
 
 // rerender the form

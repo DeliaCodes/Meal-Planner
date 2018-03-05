@@ -2,21 +2,9 @@ const $ = require('jquery');
 const {
   render,
   template,
+  mappingMealsIntoTemplate,
 } = require('../src/client');
 // const getAllMealsFromDB =
-describe('template', () => {
-  it('templates returns', () => {
-    /* template({
-      name: 'macaroni',
-      ingredients: ['macaroni', 'salt', 'water'],
-    }); */
-    // is this expect correct?
-    expect(template({
-      name: 'macaroni',
-      ingredients: ['macaroni', 'salt', 'water'],
-    })).toContain('macaroni');
-  });
-});
 
 describe('Client', () => {
   it('It renders', () => {
@@ -30,5 +18,17 @@ describe('Client', () => {
       }],
     });
     expect($('div').html()).toContain('macaroni');
+  });
+  it('mappingMeals is correct', () => {
+    expect(mappingMealsIntoTemplate([{
+      name: 'macaroni',
+      ingredients: ['macaroni', 'salt', 'water'],
+    }])).toContain('macaroni');
+  });
+  it('templates returns', () => {
+    expect(template({
+      name: 'macaroni',
+      ingredients: ['macaroni', 'salt', 'water'],
+    })).toContain('macaroni');
   });
 });
