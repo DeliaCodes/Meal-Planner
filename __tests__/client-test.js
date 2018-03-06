@@ -3,6 +3,7 @@ const {
   render,
   template,
   mappingMealsIntoTemplate,
+  addToState,
 } = require('../src/client');
 
 describe('Client', () => {
@@ -38,5 +39,11 @@ describe('Client', () => {
     render(duck);
 
     expect($('#currentMeals').html()).toContain('macaroni');
+  });
+
+  it('modifies store', () => {
+    const appleResult = addToState();
+
+    expect(appleResult).toBeFalsy();
   });
 });

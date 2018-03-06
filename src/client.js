@@ -7,6 +7,10 @@ const {
 
 const STORE = {};
 
+const addToState = () => {
+  return false;
+};
+
 // create template for the insertion
 const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
 
@@ -55,6 +59,7 @@ module.exports = {
   render,
   template,
   mappingMealsIntoTemplate,
+  addToState,
 };
 
 // rerender the form
