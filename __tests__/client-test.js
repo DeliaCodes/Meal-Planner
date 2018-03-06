@@ -4,9 +4,15 @@ const {
   template,
   mappingMealsIntoTemplate,
 } = require('../src/client');
-// const getAllMealsFromDB =
 
-describe('Testing', () => {
+describe('Client', () => {
+  it('template returns', () => {
+    expect(template({
+      name: 'macaroni',
+      ingredients: ['macaroni', 'salt', 'water'],
+    })).toContain('macaroni');
+  });
+
   it('mappingMeals is correct', () => {
     const data = [{
       name: 'macaroni',
@@ -14,31 +20,23 @@ describe('Testing', () => {
     }];
 
     const result = mappingMealsIntoTemplate(data);
-    console.log(result);
 
     expect(result).toContain('macaroni');
   });
-});
 
-describe('Client', () => {
   it('It renders', () => {
     // console.log(render);
     document.body.innerHTML =
       '<div><div id="currentMeals"/></div>';
-    render({
+    const duck = {
       meals: [{
         name: 'macaroni',
         ingredients: ['macaroni', 'salt', 'water'],
       }],
-    });
+    };
+
+    render(duck);
 
     expect($('#currentMeals').html()).toContain('macaroni');
-  });
-
-  it('templates returns', () => {
-    expect(template({
-      name: 'macaroni',
-      ingredients: ['macaroni', 'salt', 'water'],
-    })).toContain('macaroni');
   });
 });
