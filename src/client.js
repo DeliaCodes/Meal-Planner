@@ -1,13 +1,19 @@
-// add a state variable to store meals
 const $ = require('jquery');
 const {
   getAllMealsFromDB,
   addingMealToDB,
 } = require('./api.js');
 
+// add a state variable to store meals
 const STORE = {};
 
+// create modified store function and pass it into render
 const addToState = () => {
+  return false;
+};
+
+// create a save to send one meal to api
+const sendMealToApi = () => {
   return false;
 };
 
@@ -22,7 +28,7 @@ const render = (store) => {
   $('#currentMeals').html(mappingMealsIntoTemplate(store.meals));
 };
 
-// create modified store function and pass it into render
+
 
 // render that data to the html
 $(document).ready(() => {
@@ -35,7 +41,7 @@ $(document).ready(() => {
 // onclick('submit').val()->value
 // addMyMeal(value);
 
-// create a save to send one meal to api
+
 
 const getMealsFromUser = () => {
   const newMeal = {};
@@ -60,6 +66,7 @@ module.exports = {
   template,
   mappingMealsIntoTemplate,
   addToState,
+  sendMealToApi,
 };
 
 // rerender the form

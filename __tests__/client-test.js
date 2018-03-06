@@ -4,6 +4,7 @@ const {
   template,
   mappingMealsIntoTemplate,
   addToState,
+  sendMealToApi,
 } = require('../src/client');
 
 describe('Client', () => {
@@ -45,5 +46,10 @@ describe('Client', () => {
     const appleResult = addToState();
 
     expect(appleResult).toBeFalsy();
+  });
+
+  it('sends data to Api', () => {
+    const berryResult = sendMealToApi();
+    expect(berryResult).toBeFalsy();
   });
 });
