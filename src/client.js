@@ -5,21 +5,20 @@ const {
   addingMealToDB,
 } = require('./api.js');
 
-// const STORE = {};
+const STORE = {};
 
 // create template for the insertion
 const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
 
 const mappingMealsIntoTemplate = (input) => {
-  console.log(input);
-  input.map(m => template(m));
+  return input.map(m => template(m)).join("");
 };
 
-// add some data to the store variable
 const render = (store) => {
-  // if store.meals has data then write it to html
   $('#currentMeals').html(mappingMealsIntoTemplate(store.meals));
 };
+
+// create modified store function and pass it into render
 
 // render that data to the html
 $(document).ready(() => {
@@ -32,6 +31,8 @@ $(document).ready(() => {
 // onclick('submit').val()->value
 // addMyMeal(value);
 
+// create a save to send one meal to api
+
 const getMealsFromUser = () => {
   const newMeal = {};
   newMeal.name = $('#meal-name').val();
@@ -41,13 +42,14 @@ const getMealsFromUser = () => {
 };
 
 const addUserMeals = () => {
-  $('#submit').submit((event) => {
+  $('form').submit((event) => {
     event.preventDefault();
     const dataToAdd = getMealsFromUser();
-    addingMealToDB(dataToAdd);
-    render();
+    render(dataToAdd);
   });
 };
+
+addUserMeals();
 
 module.exports = {
   render,
