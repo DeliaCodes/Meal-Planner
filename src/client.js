@@ -5,11 +5,15 @@ const {
 } = require('./api.js');
 
 // add a state variable to store meals
-const STORE = {};
+const STORE = {
+  meals: [],
+};
 
 // create modified store function and pass it into render
-const addToState = () => {
-  return false;
+const addToState = (storeToChange, meal, index) => {
+  // some operation on currentState to add meal into currentState
+
+  return storeToChange;
 };
 
 // create a save to send one meal to api

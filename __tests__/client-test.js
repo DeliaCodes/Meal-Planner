@@ -43,9 +43,18 @@ describe('Client', () => {
   });
 
   it('modifies store', () => {
-    const appleResult = addToState();
+    const appleCore = {
+      meals: [{
+        name: 'macaroni',
+        ingredients: ['macaroni', 'salt', 'water'],
+      }],
+    };
 
-    expect(appleResult).toBeFalsy();
+    const appleResult = addToState(appleCore);
+
+    console.log(appleResult);
+
+    expect(appleResult).toEqual(appleCore);
   });
 
   it('sends data to Api', () => {
