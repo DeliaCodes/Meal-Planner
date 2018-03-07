@@ -21,8 +21,8 @@ const addToState = (storeToChange, meal, index) => {
 };
 
 // create a save to send one meal to api
-const sendMealToDbApi = () => {
-  return false;
+const sendMealToDbApi = (mealToAdd) => {
+  return addingMealToDB(mealToAdd);
 };
 
 // create template for the insertion

@@ -7,6 +7,10 @@ const {
   sendMealToDbApi,
 } = require('../src/client');
 
+const {
+  addingMealToDB,
+} = require('../src/api');
+
 describe('Client', () => {
   it('template returns', () => {
     expect(template({
@@ -67,7 +71,18 @@ describe('Client', () => {
   });
 
   it('sends data to Api', () => {
-    const berryResult = sendMealToDbApi();
-    expect(berryResult).toBeFalsy();
+    const berryData = {
+      name: 'macaroni',
+      ingredients: ['macaroni', 'salt', 'water'],
+    };
+
+    const berryResult = sendMealToDbApi(berryData);
+
+    const berryExpected = [{
+      name: 'macaroni',
+      ingredients: ['macaroni', 'salt', 'water'],
+    }];
+
+    expect(berryResult).toEqual(berryExpected);
   });
 });
