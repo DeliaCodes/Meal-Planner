@@ -15,7 +15,11 @@ const addToState = (storeToChange, meal, index) => {
 
   const mealToAdd = meal;
 
-  storeToChange.meals.push(mealToAdd);
+  if (index === undefined) {
+    index = 0;
+  }
+
+  storeToChange.meals.splice(index, 0, mealToAdd);
 
   return storeToChange;
 };
