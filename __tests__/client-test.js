@@ -49,7 +49,7 @@ describe('Client', () => {
   });
 
   it('sends data to Api', () => {
-    const berryResult = sendMealToApi();
+    const berryResult = sendMealToDbApi();
     expect(berryResult).toBeFalsy();
   });
 });
