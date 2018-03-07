@@ -12,15 +12,11 @@ const STORE = {
 // create modified store function and pass it into render
 const addToState = (storeToChange, meal, index) => {
   // some operation on currentState to add meal into currentState
-
   const mealToAdd = meal;
-
   if (index === undefined) {
     index = 0;
   }
-
   storeToChange.meals.splice(index, 0, mealToAdd);
-
   return storeToChange;
 };
 
