@@ -13,6 +13,10 @@ const STORE = {
 const addToState = (storeToChange, meal, index) => {
   // some operation on currentState to add meal into currentState
 
+  const mealToAdd = meal;
+
+  storeToChange.meals.push(mealToAdd);
+
   return storeToChange;
 };
 
