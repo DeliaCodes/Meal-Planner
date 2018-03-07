@@ -13,7 +13,7 @@ const addToState = () => {
 };
 
 // create a save to send one meal to api
-const sendMealToApi = () => {
+const sendMealToDbApi = () => {
   return false;
 };
 
@@ -28,8 +28,6 @@ const render = (store) => {
   $('#currentMeals').html(mappingMealsIntoTemplate(store.meals));
 };
 
-
-
 // render that data to the html
 $(document).ready(() => {
   getAllMealsFromDB().then(value => render({
@@ -40,8 +38,6 @@ $(document).ready(() => {
 // accept data from the form and then add it to display data
 // onclick('submit').val()->value
 // addMyMeal(value);
-
-
 
 const getMealsFromUser = () => {
   const newMeal = {};
@@ -66,7 +62,7 @@ module.exports = {
   template,
   mappingMealsIntoTemplate,
   addToState,
-  sendMealToApi,
+  sendMealToDbApi,
 };
 
 // rerender the form

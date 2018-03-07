@@ -4,7 +4,7 @@ const {
   template,
   mappingMealsIntoTemplate,
   addToState,
-  sendMealToApi,
+  sendMealToDbApi,
 } = require('../src/client');
 
 describe('Client', () => {
