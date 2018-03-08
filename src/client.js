@@ -65,5 +65,4 @@ module.exports = {
   template,
   mappingMealsIntoTemplate,
   addToState,
-  sendMealToDbApi,
 };
