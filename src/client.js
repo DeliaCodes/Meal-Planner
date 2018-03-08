@@ -59,7 +59,8 @@ const addUserMeals = () => {
   $('form').submit((event) => {
     event.preventDefault();
     const dataToAdd = getMealsFromUser();
-    render(dataToAdd);
+    addToState(STORE, dataToAdd);
+    render(STORE);
   });
 };
 
