@@ -9,9 +9,7 @@ const STORE = {
   meals: [],
 };
 
-// create modified store function and pass it into render
 const addToState = (storeToChange, meal, index) => {
-  // some operation on currentState to add meal into currentState
   const mealToAdd = meal;
   if (index === undefined) {
     index = 0;
@@ -20,7 +18,7 @@ const addToState = (storeToChange, meal, index) => {
   return storeToChange;
 };
 
-// create a save to send one meal to api
+// send meal to Db via api
 const sendMealToDbApi = (mealToAdd, api) => {
   api(mealToAdd);
 };
@@ -36,16 +34,11 @@ const render = (store) => {
   $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
 };
 
-// render that data to the html
 $(document).ready(() => {
   getAllMealsFromDB().then(value => render({
     meals: value,
   }));
 });
-
-// accept data from the form and then add it to display data
-// onclick('submit').val()->value
-// addMyMeal(value);
 
 const getMealsFromUser = () => {
   const newMeal = {};
@@ -74,6 +67,3 @@ module.exports = {
   addToState,
   sendMealToDbApi,
 };
-
-// rerender the form
-//

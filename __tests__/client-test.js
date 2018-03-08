@@ -33,7 +33,6 @@ describe('Client', () => {
   });
 
   it('It renders', () => {
-    // console.log(render);
     document.body.innerHTML =
       '<div><div id="currentMeals"/></div>';
     const duck = {
@@ -66,8 +65,6 @@ describe('Client', () => {
     };
 
     const appleResult = addToState(appleStore, appleCore);
-
-    // console.log(appleResult);
 
     expect(appleResult).toEqual(appleExpected);
   });
