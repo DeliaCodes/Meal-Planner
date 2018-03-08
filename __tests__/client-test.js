@@ -7,9 +7,11 @@ const {
   sendMealToDbApi,
 } = require('../src/client');
 
-const {
+/* const {
   addingMealToDB,
-} = require('../src/api');
+} = require('../src/api'); */
+
+jest.mock('../src/api');
 
 describe('Client', () => {
   it('template returns', () => {
@@ -65,7 +67,7 @@ describe('Client', () => {
 
     const appleResult = addToState(appleStore, appleCore);
 
-    console.log(appleResult);
+    // console.log(appleResult);
 
     expect(appleResult).toEqual(appleExpected);
   });
@@ -76,13 +78,34 @@ describe('Client', () => {
       ingredients: ['macaroni', 'salt', 'water'],
     };
 
-    const berryResult = sendMealToDbApi(berryData);
+    // const addingMealToDb = require('../src/api');
+
+    // console.log(addingMealToDb);
+
+    /*   addingMealToDb.mockImplementation((data) => {
+        const result = [];
+        return result.push(data);
+      }); */
+
+    const mockApi = jest.fn();
+
+    // console.log(addingMealToDb.mockImplementation);
+
+    const berryResult = sendMealToDbApi(berryData, mockApi);
 
     const berryExpected = [{
       name: 'macaroni',
       ingredients: ['macaroni', 'salt', 'water'],
     }];
 
+    mockApi.mockImplementationOnce((data) => {
+      const result = [];
+      return result.push(data);
+    });
+
+    // console.log(mockApi());
+
+    expect(mockApi).toBeCalled();
     expect(berryResult).toEqual(berryExpected);
   });
 });
