@@ -33,7 +33,7 @@ const mappingMealsIntoTemplate = (input) => {
 };
 
 const render = (store) => {
-  $('#currentMeals').html(mappingMealsIntoTemplate(store.meals));
+  $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
 };
 
 // render that data to the html
