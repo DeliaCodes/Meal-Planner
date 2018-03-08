@@ -1,7 +1,7 @@
 const $ = require('jquery');
 const {
   getAllMealsFromDB,
-  addingMealToDB,
+  addMealToDB,
 } = require('./api.js');
 
 // add a state variable to store meals
@@ -19,10 +19,10 @@ const addToState = (storeToChange, meal, index) => {
 };
 
 // send meal to Db via api
-const sendMealToDbApi = (mealToAdd, api) => {
+/* const sendMealToDbApi = (mealToAdd, api) => {
   api(mealToAdd);
 };
-
+ */
 // create template for the insertion
 const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
 
@@ -54,7 +54,7 @@ const addUserMeals = () => {
     const dataToAdd = getMealsFromUser();
     addToState(STORE, dataToAdd);
     render(STORE);
-    sendMealToDbApi(dataToAdd, addingMealToDB);
+    addMealToDB(dataToAdd);
   });
 };
 
