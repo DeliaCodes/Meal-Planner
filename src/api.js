@@ -1,13 +1,12 @@
 // creating a fake database to simulate later use
-const cooperDB = [
-  /* {
-      name: 'Macaroni and Cheese',
-      ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
-    },
-    {
-      name: 'Boiled Cabbage',
-      ingredients: ['cabbage', ' water', ' salt', ' pepper'],
-    }, */
+const cooperDB = [{
+    name: 'Macaroni and Cheese',
+    ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
+  },
+  {
+    name: 'Boiled Cabbage',
+    ingredients: ['cabbage', ' water', ' salt', ' pepper'],
+  },
 ];
 
 // stub post function to add itens to fake database

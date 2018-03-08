@@ -61,6 +61,7 @@ const addUserMeals = () => {
     const dataToAdd = getMealsFromUser();
     addToState(STORE, dataToAdd);
     render(STORE);
+    sendMealToDbApi(dataToAdd, addingMealToDB);
   });
 };
 
