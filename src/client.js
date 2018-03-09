@@ -18,11 +18,6 @@ const addToState = (storeToChange, meal, index) => {
   return storeToChange;
 };
 
-// send meal to Db via api
-/* const sendMealToDbApi = (mealToAdd, api) => {
-  api(mealToAdd);
-};
- */
 // create template for the insertion
 const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
 
