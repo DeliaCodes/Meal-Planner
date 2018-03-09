@@ -14,7 +14,7 @@
   <main role="main">
     <div id="displayMeals">
       <h1 class="title">Your Current Meals</h1>
-      <div id="currentMeals"></div>
+      <div id="currentMeals" aria-live="assertive"></div>
       <!-- <div id="userAddedMeal"></div>-->
     </div>
     <section>
@@ -31,6 +31,7 @@
             <input role="textbox" id="ingredient" type="text" name="ingredient">
           </label>
           <input id="submit" type="submit" name="submit" role="button">
+          <input id="addIngredient" type="button" name="add additional ingredients" role="button">
         </fieldset>
       </form>
     </section>
