@@ -22,7 +22,8 @@
     "test": "jest",
     "start": "node server.js",
     "build": "webpack",
-    "build-dist": "webpack"
+    "build-dist": "webpack",
+    "heroku-postbuild": "webpack"
   },
   "repository": {
     "type": "git",
