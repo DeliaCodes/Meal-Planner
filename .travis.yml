@@ -1,7 +1,7 @@
 language: node_js
 node_js: node
 install: - npm ci
-script: npm run build
+script: npm run build-dist
 deploy:
   provider: heroku
   api_key:
