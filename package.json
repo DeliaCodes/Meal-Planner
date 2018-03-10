@@ -21,7 +21,8 @@
   "scripts": {
     "test": "jest",
     "start": "node server.js",
-    "build": "webpack"
+    "build": "webpack",
+    "build-dist": "webpack"
   },
   "repository": {
     "type": "git",
