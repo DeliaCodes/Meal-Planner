@@ -6,8 +6,15 @@ const app = express();
 
 const publicPath = path.resolve(__dirname, 'public');
 
-app.use(express.static(publicPath));
+// use this or the thing below
+// app.use(express.static(publicPath));
 // app.use(express.static('dist'));
+
+app.use(express.static(__dirname + '/dist'));
+app.get('*',
+  const response = (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+  });
 
 const runServer = () => {
   app.listen(process.env.PORT || 8020);
