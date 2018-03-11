@@ -12,7 +12,7 @@ const publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(__dirname + '/dist'));
 app.get('*',
-  const response = (req, res) => {
+  function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 
