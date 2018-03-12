@@ -21,7 +21,7 @@
   "scripts": {
     "test": "jest",
     "start": "node server.js",
-    "start-n": "nodemon server.js",
+    "strt": "nodemon server.js",
     "build": "webpack",
     "build-dist": "webpack",
     "heroku-postbuild": "webpack"
