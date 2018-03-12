@@ -1,3 +1,5 @@
+const request = require('supertest');
+
 const getSomething = require('../server');
 
 xdescribe('Bunny', () => {
