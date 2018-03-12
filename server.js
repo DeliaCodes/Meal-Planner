@@ -1,8 +1,7 @@
-const express = require('express');
-
-const path = require('path');
-
-const app = express();
+const {
+  app,
+  express,
+} = require('./app.js');
 
 app.use(express.static('dist'));
 
