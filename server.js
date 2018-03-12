@@ -10,22 +10,22 @@ const app = express();
 // app.use(express.static(publicPath));
 // app.use(express.static('dist'));
 
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static('dist'));
 
 /* eslint-disable */
-app.get('*',
-  function response(req, res) {
-    const options = {
-      headers: {
-        'content-type': 'application/javascript'
-      }
-    };
-    // res.sendFile(path.join(__dirname, 'dist/main.css'));
-    res.sendFile(path.join(__dirname, '/dist/bundle.js'), options);
-    //res.sendFile(path.join(__dirname, '/dist/index.html'));
-    // res.sendFile(publicPath);
+/* app.get('*',
+  function (req, res) {
+    /*  const options = {
+       headers: {
+         'content-type': 'application/javascript'
+       }
+     }; */
+// res.sendFile(path.join(__dirname, 'dist/main.css'));
+// res.sendFile(path.join(__dirname, '/dist/bundle.js'), options);
+// res.sendFile(path.join('dist', '/dist/index.html'));
+// res.sendFile(publicPath);
 
-  });
+// }); */
 const runServer = (port) => {
   app.listen(process.env.PORT || port);
   console.log('Server running on ', port);
