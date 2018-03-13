@@ -1,19 +1,8 @@
 const {
   app,
-  express,
 } = require('./app.js');
 
-app.use(express.static('dist'));
+const port = process.env.PORT || 8010;
 
-const runServer = (port) => {
-  app.listen(process.env.PORT || port);
-  console.log('Server running on ', port);
-};
-
-function getSomething() {
-  return true;
-}
-
-module.exports = getSomething;
-
-runServer(8010);
+app.listen(port);
+console.log('Server running on ', port);
