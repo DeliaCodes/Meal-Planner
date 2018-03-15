@@ -2,6 +2,10 @@ const {
   app,
 } = require('./app.js');
 
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+
 const port = process.env.PORT || 8010;
 
 app.listen(port);
