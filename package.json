@@ -8,12 +8,14 @@
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "express": "^4.16.2",
     "jquery": "^3.3.1",
-    "babel-preset-env": "^1.6.1"
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",
+    "dotenv": "^5.0.1",
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
@@ -26,12 +28,14 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node src/server.js",
     "dev": "run-p dev-server build-watch ",
-    "build": "webpack",
-    "dev-server": "nodemon src/server.js",
     "build-watch": "webpack --watch",
-    "heroku-postbuild": "webpack"
+    "heroku-postbuild": "webpack",
+    "prestart": "npm run -s build",
+    "start": "node server_dist/index.js",
+    "dev-server": "nodemon src/server.js --exec \"node -r dotenv/config -r babel-register\"",
+    "clean": "rimraf server_dist",
+    "build": "npm run clean && babel src -s -D -d server_dist"
   },
   "repository": {
     "type": "git",
