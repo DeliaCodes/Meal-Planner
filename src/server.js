@@ -2,6 +2,8 @@ const {
   app,
 } = require('./app.js');
 
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -9,4 +11,5 @@ mongoose.Promise = global.Promise;
 const port = process.env.PORT || 8010;
 
 app.listen(port);
+
 console.log('Server running on ', port);
