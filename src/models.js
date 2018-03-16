@@ -9,3 +9,5 @@ const mealSchema = new Schema({
   ingredients: [],
   _someId: Schema.Types.ObjectId,
 });
+
+const mealModel = mongoose.model('Meal Model', mealSchema);
