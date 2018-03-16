@@ -9,6 +9,20 @@ const cooperDB = [{
   },
 ];
 
+// do I need this?
+const SECRET_DB_ADDRESS = require('../.env');
+
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(SECRET_DB_ADDRESS);
+
+const db = mongoose.connection;
+
+// is there a way to do this without a console statement?
+db.on('error', console.error.bind(console, 'MongoDB econnection error:'));
+
 // stub post function to add itens to fake database
 const addMealToDB = post => new Promise((resolve, reject) => {
   cooperDB.push(post);
