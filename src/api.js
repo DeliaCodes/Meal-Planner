@@ -10,7 +10,7 @@ const cooperDB = [{
 ];
 
 // do I need this?
-const SECRET_DB_ADDRESS = require('../.env');
+// const SECRET_DB_ADDRESS = require('../.env');
 
 const mongoose = require('mongoose');
 
