@@ -21,6 +21,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
+/* global SECRET_DB_USER */
 const dbAddress = `mongodb://${process.env.SECRET_DB_USER}:${process.env.SECRET_DB_PS}@ds113849.mlab.com:13849/mplannerdb`;
 
 mongoose.connect(dbAddress);
