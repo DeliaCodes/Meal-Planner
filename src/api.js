@@ -12,10 +12,10 @@ const cooperDB = [{
 require('dotenv').config();
 
 // do I need this?
-const {
+/* const {
   SECRET_DB_USER,
   SECRET_DB_PS,
-} = require('../.env');
+} = require('../.env'); */
 
 const mongoose = require('mongoose');
 
