@@ -31,7 +31,6 @@
     "test": "jest",
     "dev": "run-p dev-server build-watch ",
     "build-watch": "webpack --watch",
-
     "prestart": "npm run -s build",
     "start": "node server_dist/server.js",
     "dev-server": "nodemon src/server.js --exec \"node -r dotenv/config -r babel-register\"",
