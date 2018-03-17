@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+mongoose.Promise = global.Promise;
+
 const {
   Schema,
 } = mongoose.Schema;
@@ -14,4 +16,4 @@ const mealModel = mongoose.model('Meal Model', mealSchema);
 
 module.exports = {
   mealModel,
-}
+};
