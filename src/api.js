@@ -9,14 +9,21 @@ const cooperDB = [{
   },
 ];
 
+require('dotenv').config();
+
 // do I need this?
-// const SECRET_DB_ADDRESS = require('../.env');
+const {
+  SECRET_DB_USER,
+  SECRET_DB_PS,
+} = require('../.env');
 
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(SECRET_DB_ADDRESS);
+const dbAddress = `mongodb://${process.env.SECRET_DB_USER}:${process.env.SECRET_DB_PS}@ds113849.mlab.com:13849/mplannerdb`;
+
+mongoose.connect(dbAddress);
 
 const db = mongoose.connection;
 
