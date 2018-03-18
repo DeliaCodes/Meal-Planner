@@ -1,6 +1,6 @@
 const MongodbMemoryServer = require('mongodb-memory-server');
 
-//should this be named something else? 
+// should this be named something else? 
 const MONGO_DB_FAKE = 'jest';
 
 const mongod = new MongodbMemoryServer.default({
@@ -8,7 +8,7 @@ const mongod = new MongodbMemoryServer.default({
     dbName: MONGO_DB_FAKE,
   },
   binary: {
-    version: '3.2.19',
+    version: '3.0.4',
   },
 });
 
