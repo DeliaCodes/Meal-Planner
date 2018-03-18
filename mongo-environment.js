@@ -1,3 +1,5 @@
+const NodeEnvironment = require('jest-environment-node');
+
 class MongoEnvironment extends NodeEnvironment {
   constructor(config) {
     super(config);
