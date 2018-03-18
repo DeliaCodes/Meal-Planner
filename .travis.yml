@@ -1,11 +1,20 @@
 language: node_js
-node_js: node
-before_deploy: npm run build
-deploy:
-  provider: heroku
-  api_key:
-    secure: Nxq4A3t7PomUQ5dnriHbtxP4K3Bo24b6wtkzfEoSnnapUDRJjcwB5SOaXgBu4JyHgYxFnDsN1aLOmgrlsia8NCvGFzDdLawkWyasVsgd8uO4AY3XqeOi64x9HkGqO2ipftee2tnyivVaWemn2+0PiFXXVvIck3N2W7y9zD/SukXNZ6J0OsX62dLCUFXBzOLdZRAaCkYED24zCyfi6d/stpenY6x0yj24u5OsZqP1aVrIRlzE2fMgmfqapQNFodhikqgbFMDAmjqn9uN1MKLiKW9lq9p8PhlpztN7NH+dKZkwi5zXEq4x2fibIbbK7BhMSUSogm3SJ1qze4QmXQZGpMKJ0oPA0EBAQ/kukRlk1HOPlIWl+BK+8CPcDILCTCzohMbgP/xMHhuyKWygkNrhffgbY31LFw/oUPbvya6l/4hq6/SQoRI/nBFnjIHGM/F/vXAWmtBA+w+/0ZNKTdWXMMd1iqW0a9jAmqrj8eOwJ9bwfoSTRtaof4TLseq1yvDVyQ67BXCfOm3djse37RND1gvfio/kG8/1/IOkhvRnkNuKCkIvZCHi0KFV7yp/2g5yy5Saf5eTKzBF00SU58S0PYy3eg7NG/9J57PlwNalUkGhZ/c25paeSJlIstPl26wR/4pNrqdyjBykIzk5woz3LLhIOEfVGLR7A91CRcxVmPY=
-  app: limitless-bayou-99473
-  skip_cleanup: true
-  on:
-    repo: DeliaCodes/Meal-Planner
+node_js:
+- v4
+- v5
+- v6
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+script:
+  - npm test -- -i --coverage
+env:
+  global:
+  - CXX=g++-4.8
+  - SENDGRID_KEY=sendgridKey
+  - MASTER_KEY=masterKey
+  - JWT_SECRET=jwtSecret
