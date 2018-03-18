@@ -9,10 +9,11 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "jquery": "^3.3.1",
+    "mongodb": "^3.0.4",
     "mongoose": "^5.0.10",
-    "dotenv": "^5.0.1",
     "rimraf": "^2.6.2"
   },
   "devDependencies": {
