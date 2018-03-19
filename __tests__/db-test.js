@@ -11,7 +11,7 @@ beforeAll(async () => {
   db = await connection.db(global.__MONGO_DB_FAKE__);
 });
 
-it('Kitten', () => {
+xit('Kitten', () => {
   expect().toBe(true);
 });
 
