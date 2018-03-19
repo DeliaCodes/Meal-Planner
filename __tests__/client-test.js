@@ -6,10 +6,6 @@ const {
   addToState,
 } = require('../src/client');
 
-/* const {
-  addingMealToDB,
-} = require('../src/api'); */
-
 jest.mock('../src/api');
 
 describe('Client', () => {

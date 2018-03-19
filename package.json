@@ -33,6 +33,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test-plain": "jest",
     "dev": "run-p dev-server build-watch ",
     "build-watch": "webpack --watch",
     "prestart": "npm run -s build",

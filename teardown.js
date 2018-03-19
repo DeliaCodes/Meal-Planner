@@ -1,5 +1,4 @@
-// why does this need to be in a separare file?
-
-module.exports = async function () {
+module.exports = async function() {
+  console.log('Teardown mongod');
   await global.__MONGOD__.stop();
 };
