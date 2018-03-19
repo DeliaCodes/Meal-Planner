@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <title>Meal Planner</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Meal Planner</h1>
+  </header>
+  <main role="main">
+    <div id="displayMeals">
+      <h1 class="title">Your Current Meals</h1>
+      <div id="currentMeals" aria-live="assertive"></div>
+      <!-- <div id="userAddedMeal"></div>-->
+    </div>
+    <section>
+      <h1 class="title">
+        Add A Meal Here</h1>
+      <form>
+        <fieldset>
+          <label for="meal-name">
+            Insert Meal Name Here:
+            <input role="textbox" id="meal-name" type="text" name="Meal Name" role="input">
+          </label>
+
+          <label for="ingredient">
+            Insert Your First Ingredient Here:
+            <input role="textbox" id="ingredient" type="text" name="ingredient">
+          </label>
+          <input id="submit" type="submit" name="submit" role="button">
+          <!--<input id="addIngredient" type="button" name="add additional ingredients" role="button">-->
+        </fieldset>
+      </form>
+    </section>
+  </main>
+  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+  <script type="application/javascript" src="bundle.js"></script>
+</body>
+
+</html>
