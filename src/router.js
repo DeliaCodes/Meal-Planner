@@ -10,3 +10,4 @@ router.post('/', (req, res) => {
   addMealToDB(req.body);
   return res.sendStatus(200);
 });
+module.exports = router;
