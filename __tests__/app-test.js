@@ -17,3 +17,11 @@ describe('Root Path', () => {
     });
   });
 });
+
+describe('Meal Tests', () => {
+  test('adds a meal - Router POST', () => {
+    return request(app).post('/meals').then((Response) => {
+      expect(Response.statusCode).toBe(200);
+    });
+  });
+});
