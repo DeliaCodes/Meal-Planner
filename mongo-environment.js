@@ -1,16 +1,20 @@
+const {
+  TEST_DATABASE_URL
+} = require('./config');
+
 const NodeEnvironment = require('jest-environment-node');
 
 class MongoEnvironment extends NodeEnvironment {
   constructor(config) {
     super(config);
-  }
+  };
 
   async setup() {
     console.log('Setup MongoDB Test Environment');
 
-    this.global.__MONGO_URI__ = await global.__MONGOD__.getConnectionString();
-    this.global.__MONGO_DB_NAME__ = global.__MONGO_DB_NAME__;
-
+    this.global.__MONGO_URI__ =
+      TEST_DATABASE_URL
+    // global.__MONGOD__
     await super.setup();
   }
 
