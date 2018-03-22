@@ -13,6 +13,10 @@ require('dotenv').config();
 
 const mongoose = require('mongoose');
 
+const {
+  mealModel,
+} = require('./models.js');
+
 /* global SECRET_DB_USER */
 const dbAddress = `mongodb://${process.env.SECRET_DB_USER}:${process.env.SECRET_DB_PS}@ds113849.mlab.com:13849/mplannerdb`;
 
@@ -24,14 +28,11 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB econnection error:'));
 
 // stub post function to add itens to fake database
-const addMealToDB = post => new Promise((resolve, reject) => {
-  cooperDB.push(post);
-  console.log('Adding');
-  resolve(post);
-});
+const addMealToDB = post => mealModel.create(post);
 
 // stub get function to get data stored in fake database
-const getAllMealsFromDB = () => Promise.resolve(cooperDB);
+const getAllMealsFromDB = () =>
+  mealModel.find();
 
 // exporting of the stubbed get and post functions.
 module.exports = {
