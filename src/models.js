@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 
 const {
   Schema,
-} = mongoose.Schema;
+} = mongoose;
 
 const mealSchema = new Schema({
   name: String,
