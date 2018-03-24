@@ -7,8 +7,8 @@ let connection;
 let db;
 
 beforeAll(async () => {
-  connection = await MongoClient.connect(global.__MONGO_URI__);
-  db = await connection.db(global.__MONGO_DB_FAKE__);
+  connection = /* await */ MongoClient.connect(global.__MONGO_URI__);
+  db = /* await */ connection.db(global.__MONGO_DB_FAKE__);
 });
 
 xit('Kitten', () => {
@@ -16,6 +16,8 @@ xit('Kitten', () => {
 });
 
 afterAll(async () => {
-  await connection.close();
-  await db.close();
+  /* await */
+  connection.close();
+  /* await */
+  db.close();
 });
