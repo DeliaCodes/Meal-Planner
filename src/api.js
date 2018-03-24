@@ -25,7 +25,7 @@ mongoose.connect(dbAddress);
 const db = mongoose.connection;
 
 // is there a way to do this without a console statement?
-/* db.on('error', console.error.bind(console, 'MongoDB econnection error:')); */
+db.on('error', console.error.bind(console, 'MongoDB econnection error:'));
 
 // stub post function to add itens to fake database
 const addMealToDB = post => mealModel.create(post);
