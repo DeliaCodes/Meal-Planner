@@ -9,16 +9,18 @@ const stringCheck = (mightBeAString) => {
 };
 
 // do I need this and the stringCheck?
-const hasTitleAndIngredient = (userContent) => {
-  if (userContent.title !== undefined && userContent.ingredients !== undefined) {
+const hasNameAndIngredient = (userContent) => {
+  if (userContent.name !== undefined && userContent.ingredients !== undefined) {
     return userContent;
-  } else {
-    return console.error(userContent, 'needs to be entered');
+  } else if (userContent.ingredients !== undefined) {
+    return 'Meal name is required';
+  } else if (userContent.name !== undefined) {
+    return 'Meal ingredients are required';
   }
 };
 // need to do this for each value of the request body
 const validateUserInput = (input) => {
-  hasTitleAndIngredient(input).then(stringCheck(input)).then(Promise.resolve(input));
+  hasNameAndIngredient(input).then(stringCheck(input)).then(Promise.resolve(input));
 };
 
 // write something that will convert user input into what is needed by the database
@@ -34,4 +36,5 @@ const convertInputDataIntoDbFormat = (validateUserInput, userData) => {
 
 module.exports = {
   stringCheck,
+  hasNameAndIngredient,
 };

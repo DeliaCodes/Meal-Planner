@@ -1,5 +1,6 @@
 const {
   stringCheck,
+  hasNameAndIngredient,
 } = require('../src/validation.js');
 
 describe('successfully validates meal input', () => {
@@ -17,6 +18,28 @@ describe('successfully validates meal input', () => {
     const input = 'A';
     const result = stringCheck(input);
     expect(result).toContain('Please write more than one character for the name');
+  });
+  it('returns object if it contains meal name and ingredient', () => {
+    const input = {
+      name: 'Cheeseburger',
+      ingredients: ['cheese'],
+    };
+    const result = hasNameAndIngredient(input);
+    expect(result).toMatchObject(input);
+  });
+  it('returns error message if t is missing a name', () => {
+    const input = {
+      ingredients: ['cheese'],
+    };
+    const result = hasNameAndIngredient(input);
+    expect(result).toContain('Meal name is required');
+  });
+  it('returns error message if it is missing ingredients', () => {
+    const input = {
+      name: 'Cheeseburger',
+    };
+    const result = hasNameAndIngredient(input);
+    expect(result).toContain('Meal ingredients are required');
   });
   xit('ingredient should be in the form of an array', () => {
     const ingredient = 'cheese';
