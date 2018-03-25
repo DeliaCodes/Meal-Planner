@@ -1,17 +1,24 @@
-const validation = require('../src/validation');
+const {
+  stringCheck,
+} = require('../src/validation.js');
 
 describe('successfully validates meal input', () => {
-  it('errors out if an input is not a string', () => {
+  it('returns a message if an input is not a string', () => {
     const input = 56;
-    const result = validation(input);
-    expect(result).toContain('error');
+    const result = stringCheck(input);
+    expect(result).toContain('Input Is Not A String');
+  });
+  it('Returns string if input is a string', () => {
+    const input = 'cheese';
+    const result = stringCheck(input);
+    expect(result).toContain('cheese');
   });
   it('sends a response if input is less than 2 characters', () => {
     const input = 'A';
-    const result = validation(input);
-    expect(result).toContain('Please write more than two characters for the name');
+    const result = stringCheck(input);
+    expect(result).toContain('Please write more than one character for the name');
   });
-  it('ingredient should be in the form of an array', () => {
+  xit('ingredient should be in the form of an array', () => {
     const ingredient = 'cheese';
     const result = validation(ingredient);
     expect(result).toBe(['cheese']);

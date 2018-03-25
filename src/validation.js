@@ -2,11 +2,10 @@
 
 // should these be a try and catch block instead of an if / else?
 const stringCheck = (mightBeAString) => {
-  if (typeof mightBeAString === string) {
+  if (typeof mightBeAString === 'string' && mightBeAString.length > 1) {
     return mightBeAString;
-  } else {
-    return console.error(mightBeAString, 'Is Not A String');
   }
+  return 'Input Is Not A String or is only one character. Please write more than one character for the name.';
 };
 
 // do I need this and the stringCheck?
@@ -22,8 +21,6 @@ const validateUserInput = (input) => {
   hasTitleAndIngredient(input).then(stringCheck(input)).then(Promise.resolve(input));
 };
 
-// /\ write tests for the above and below \/
-
 // write something that will convert user input into what is needed by the database
 // take input and convert it into an object with name: "" and ingredients: []
 const convertInputDataIntoDbFormat = (validateUserInput, userData) => {
@@ -33,4 +30,8 @@ const convertInputDataIntoDbFormat = (validateUserInput, userData) => {
   validateUserInput(userData.name).then(formattedData.name = userData.name);
   validateUserInput(userData.ingredient).then(formattedData.ingredients.push(userData.ingredient));
   return formattedData;
+};
+
+module.exports = {
+  stringCheck,
 };
