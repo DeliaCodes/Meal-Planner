@@ -1,3 +1,5 @@
+// file for database models
+
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;

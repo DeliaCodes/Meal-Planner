@@ -1,3 +1,5 @@
+// this file manipulates client side
+
 const $ = require('jquery');
 const {
   getAllMealsFromDB,

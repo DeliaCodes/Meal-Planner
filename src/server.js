@@ -1,3 +1,5 @@
+// file for the application server
+
 const {
   app,
 } = require('./app.js');
