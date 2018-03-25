@@ -1,3 +1,5 @@
+// this file serves enpoints and passes data to the api
+
 const express = require('express');
 
 // const path = require('path');
@@ -16,7 +18,7 @@ const stringCheck = (mightBeAString) => {
     return mightBeAString;
   } else {
     return console.error(mightBeAString, 'Is Not A String');
-  };
+  }
 };
 
 // do I need this and the stringCheck?
