@@ -11,4 +11,9 @@ describe('successfully validates meal input', () => {
     const result = validation(input);
     expect(result).toContain('Please write more than two characters for the name');
   });
+  it('ingredient should be in the form of an array', () => {
+    const ingredient = 'cheese';
+    const result = validation(ingredient);
+    expect(result).toBe(['cheese']);
+  });
 });
