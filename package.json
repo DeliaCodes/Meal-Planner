@@ -40,7 +40,7 @@
     "start": "node server_dist/server.js",
     "dev-server": "nodemon src/server.js --exec \"node -r dotenv/config -r babel-register\"",
     "clean": "rimraf server_dist",
-    "build": "npm run clean && babel src -s -D -d server_dist && webpack"
+    "build": "webpack && npm run clean && babel src -s -D -d server_dist"
   },
   "repository": {
     "type": "git",
