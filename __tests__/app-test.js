@@ -17,7 +17,7 @@ describe('Root Path', () => {
 });
 
 describe('Meal Tests', () => {
-  test('returns meal saved', () => {
+  test('returns saved meal - POST', () => {
     return request(app)
       .post('/meals')
       .send({
