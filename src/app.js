@@ -1,14 +1,20 @@
 // this file serves enpoints and passes data to the api
 
+const bodyParser = require('body-parser');
+
 const express = require('express');
+
+
 
 // const path = require('path');
 
 const app = express();
 
-const {
+app.use(bodyParser.json());
+
+/* const {
   addMealToDB,
-} = require('./api.js');
+} = require('./api.js'); */
 
 app.use(express.static('dist'));
 
@@ -19,8 +25,10 @@ app.get('/', (req, res) => {
 
 app.post('/meals', (req, res) => {
   // console.log('runs', req.body);
-  addMealToDB(req.body);
-  return res.sendStatus(200);
+  res.status(200).json({
+    name: req.body.name,
+    ingredients: req.body.ingredients,
+  });
 });
 
 module.exports = {
