@@ -17,7 +17,10 @@ const {
   mealModel,
 } = require('./models.js');
 
-const addMealToDB = post => mealModel.create(post);
+const addMealToDB = post => new Promise((resolve, reject) => {
+  mealModel.create(post);
+  resolve();
+});
 
 const getAllMealsFromDB = () =>
   mealModel.find();
