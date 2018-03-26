@@ -1,8 +1,15 @@
 const request = require('supertest');
 
 const {
+  runServer,
+  closeServer,
+} = require('../src/server.js');
+
+const {
   app,
 } = require('../src/app.js');
+
+// run server and stop server
 
 /* describe('Test the root path', () => {
   test('It should response the GET method', () => {
@@ -17,6 +24,10 @@ describe('Root Path', () => {
 });
 
 describe('Meal Tests', () => {
+  beforeAll(() => runServer());
+
+  afterAll(() => closeServer());
+
   test('returns saved meal - POST', () => {
     return request(app)
       .post('/meals')
