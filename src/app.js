@@ -12,9 +12,9 @@ const app = express();
 
 app.use(bodyParser.json());
 
-/* const {
+const {
   addMealToDB,
-} = require('./api.js'); */
+} = require('./api.js');
 
 app.use(express.static('dist'));
 
@@ -24,11 +24,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/meals', (req, res) => {
-  // console.log('runs', req.body);
-  res.status(200).json({
+  const newMeal = {
     name: req.body.name,
     ingredients: req.body.ingredients,
-  });
+  };
+  addMealToDB(newMeal);
+  res.status(200).json(newMeal);
+
+
 });
 
 module.exports = {
