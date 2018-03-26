@@ -22,7 +22,7 @@ const addMealToDB = post => mealModel.create(post);
 const getAllMealsFromDB = () =>
   mealModel.find();
 
-// exporting of the stubbed get and post functions.
+// exporting get and post functions.
 module.exports = {
   getAllMealsFromDB,
   addMealToDB,
