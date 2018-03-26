@@ -18,21 +18,21 @@ const hasNameAndIngredient = (userContent) => {
     return 'Meal ingredients are required';
   }
 };
-// need to do this for each value of the request body
-const validateUserInput = (input) => {
+// do I need to do this for each value of the request body
+/* const validateUserInput = (input) => {
   hasNameAndIngredient(input).then(stringCheck(input)).then(Promise.resolve(input));
-};
+}; */
 
 // write something that will convert user input into what is needed by the database
 // take input and convert it into an object with name: "" and ingredients: []
-const convertInputDataIntoDbFormat = (validateUserInput, userData) => {
+/* const convertInputDataIntoDbFormat = (validateUserInput, userData) => {
   const formattedData = {
     ingredients: [],
   };
   validateUserInput(userData.name).then(formattedData.name = userData.name);
   validateUserInput(userData.ingredient).then(formattedData.ingredients.push(userData.ingredient));
   return formattedData;
-};
+}; */
 
 module.exports = {
   stringCheck,
