@@ -11,7 +11,7 @@ const {
 }); */
 
 describe('Root Path', () => {
-  test('response to get', () => request(app).get("/").then((Response) => {
+  test('response to get', () => request(app).get('/').then((Response) => {
     expect(Response.statusCode).toBe(200);
   }));
 });
