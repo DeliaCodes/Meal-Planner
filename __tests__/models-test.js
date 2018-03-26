@@ -1,23 +1,36 @@
 const {
+  mealModel,
+} = require('../src/models');
+const mongoose = require('mongoose');
+
+const {
+  TEST_DATABASE_URL,
+} = require('../config');
+
+/* const {
   MongoClient,
-} = require('mongodb');
+} = require('mongodb'); */
 
-let connection;
 
-let db;
+describe('Testing Meal Models', () => {
+  let connection;
+  beforeAll(() => {
+    connection = mongoose.connect(TEST_DATABASE_URL);
+    return connection;
+  });
+  beforeEach(() => {
+    mongoose.connection.db.dropDatabase();
+  });
 
-beforeAll(async () => {
-  connection = /* await */ MongoClient.connect(global.__MONGO_URI__);
-  db = /* await */ connection.db(global.__MONGO_DB_NAME__);
-});
+  afterAll(() => {
+    mongoose.disconnect();
+  });
 
-xit('Kitten', () => {
-  expect().toBe(true);
-});
-
-afterAll(async () => {
-  /* await */
-  connection.close();
-  /* await */
-  db.close();
+  it('data can be created', () => mealModel.create({
+      name: 'burger',
+    })
+    .then(() =>
+      mealModel.findOne().then((model) => {
+        expect(model.name).toEqual('burger');
+      })));
 });
