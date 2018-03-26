@@ -28,10 +28,7 @@ app.post('/meals', (req, res) => {
     name: req.body.name,
     ingredients: req.body.ingredients,
   };
-  addMealToDB(newMeal);
-  res.status(200).json(newMeal);
-
-
+  addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
 });
 
 module.exports = {
