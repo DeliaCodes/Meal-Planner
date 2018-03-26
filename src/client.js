@@ -26,7 +26,7 @@ const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingre
 const mappingMealsIntoTemplate = (input) => {
   return input.map(m => template(m)).join("");
 };
-// https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+// to convert to vanilla JS use https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
 const render = (store) => {
   /* document.getElementById('currentMeals').innerHTML(mappingMealsIntoTemplate(store.meals)) */
   $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
