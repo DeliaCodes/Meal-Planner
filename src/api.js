@@ -11,18 +11,14 @@ const cooperDB = [{
   },
 ];
 
-// require('dotenv').config();
-
 const mongoose = require('mongoose');
 
 const {
   mealModel,
 } = require('./models.js');
 
-// stub post function to add itens to fake database
 const addMealToDB = post => mealModel.create(post);
 
-// stub get function to get data stored in fake database
 const getAllMealsFromDB = () =>
   mealModel.find();
 
