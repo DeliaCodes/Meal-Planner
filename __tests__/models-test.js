@@ -24,9 +24,11 @@ describe('Testing Meal Models', () => {
 
   it('data can be created', () => mealModel.create({
       name: 'burger',
+      ingredients: ['burger'],
     })
     .then(() =>
       mealModel.findOne().then((model) => {
         expect(model.name).toEqual('burger');
+        expect(model.ingredients).toContain('burger');
       })));
 });
