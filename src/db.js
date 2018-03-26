@@ -14,3 +14,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB econnection error:'));
 
 // what do we need to export?
+module.exports = {
+  db,
+  dbAddress,
+};
