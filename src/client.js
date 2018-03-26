@@ -1,6 +1,7 @@
 // this file manipulates client side
 
 const $ = require('jquery');
+// instead of these use endpoints to serve - use FETCH or AJAX
 const {
   getAllMealsFromDB,
   addMealToDB,
