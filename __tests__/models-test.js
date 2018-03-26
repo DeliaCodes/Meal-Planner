@@ -7,7 +7,6 @@ const {
   TEST_DATABASE_URL,
 } = require('../config');
 
-
 describe('Testing Meal Models', () => {
   let connection;
   beforeAll(() => {
