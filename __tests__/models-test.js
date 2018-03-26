@@ -7,10 +7,6 @@ const {
   TEST_DATABASE_URL,
 } = require('../config');
 
-/* const {
-  MongoClient,
-} = require('mongodb'); */
-
 
 describe('Testing Meal Models', () => {
   let connection;
