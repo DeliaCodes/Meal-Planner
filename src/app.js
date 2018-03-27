@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 const {
   addMealToDB,
+  getAllMealsFromDB,
 } = require('./api.js');
 
 app.use(express.static('dist'));
@@ -22,6 +23,8 @@ app.get('/', (req, res) => {
   // res.send('Working!!!');
   res.sendStatus(200);
 });
+
+// add endpoint to get all meals
 
 app.post('/meals', (req, res) => {
   const newMeal = {
