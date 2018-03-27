@@ -19,7 +19,7 @@ const {
 
 const addMealToDB = post => new Promise((resolve, reject) => {
   mealModel.create(post);
-  resolve();
+  resolve(post);
 });
 
 const getAllMealsFromDB = () =>
