@@ -30,4 +30,15 @@ describe('Testing Meal Models', () => {
         expect(model.name).toEqual('burger');
         expect(model.ingredients).toContain('burger');
       })));
+
+  it('data can be found', () => mealModel.create({
+      name: 'pretzel',
+      ingredients: ['salt', 'dough'],
+    })
+    .then(() =>
+      mealModel.find().then((model) => {
+        const [data] = model;
+        expect(data.name).toEqual('pretzel');
+        expect(data.ingredients).toContain('salt');
+      })));
 });
