@@ -27,6 +27,14 @@ describe('Meal Tests', () => {
   beforeAll(() => runServer());
 
   afterAll(() => closeServer());
+  test('returns meals saved in db', () => {
+    return request(app)
+      .get('/meals')
+      .then((Response) => {
+        expect(Response.statusCode).toBe(200);
+        expect(Response.body.meals).toBeDefined();
+      });
+  });
 
   test('returns saved meal - POST', () => {
     return request(app)
