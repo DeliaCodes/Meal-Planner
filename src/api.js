@@ -1,7 +1,7 @@
 // this file is a layer between the database, the models, and the app aka endpoints
 
 // creating a fake database to simulate later use
-const cooperDB = [{
+/* const cooperDB = [{
     name: 'Macaroni and Cheese',
     ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
   },
@@ -9,7 +9,7 @@ const cooperDB = [{
     name: 'Boiled Cabbage',
     ingredients: ['cabbage', ' water', ' salt', ' pepper'],
   },
-];
+]; */
 
 const mongoose = require('mongoose');
 
