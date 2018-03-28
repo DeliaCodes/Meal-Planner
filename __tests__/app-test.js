@@ -23,7 +23,7 @@ describe('Root Path', () => {
   }));
 });
 
-describe('Meal Tests', () => {
+describe('Meal Endpoint Tests', () => {
   beforeAll(() => runServer());
 
   afterAll(() => closeServer());
