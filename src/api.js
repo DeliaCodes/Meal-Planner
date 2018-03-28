@@ -13,17 +13,11 @@
 
 const mongoose = require('mongoose');
 
-const {
-  mealModel,
-} = require('./models.js');
+const { mealModel } = require('./models.js');
 
-const addMealToDB = post => new Promise((resolve, reject) => {
-  mealModel.create(post);
-  resolve(post);
-});
+const addMealToDB = mealModel.create.bind(mealModel);
 
-const getAllMealsFromDB = () =>
-  mealModel.find();
+const getAllMealsFromDB = () => mealModel.find();
 
 // exporting get and post functions.
 module.exports = {
