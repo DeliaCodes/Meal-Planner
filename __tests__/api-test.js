@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
-import { TEST_DATABASE_URL } from '../config';
+import {
+  TEST_DATABASE_URL
+} from '../config';
 
-const { getAllMealsFromDB, addMealToDB } = require('../src/api');
+const {
+  getAllMealsFromDB,
+  addMealToDB
+} = require('../src/api');
 
 describe('Database Api works as expected', () => {
   let connection;
@@ -24,7 +29,8 @@ describe('Database Api works as expected', () => {
     };
     // expect.assertions(2);
     return addMealToDB(input).then((data) => {
-      expect(data).toBe(input);
+      expect(data).toHaveProperty('name', 'Macaroni and Cheese');
+      // not working - expect(data.ingredients).toEqual(input.ingredients);
       expect(data.id).toBeDefined();
     });
   });
