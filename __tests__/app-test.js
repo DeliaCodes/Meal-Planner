@@ -1,6 +1,4 @@
-import {
-  TEST_DATABASE_URL
-} from '../config.js';
+import {TEST_DATABASE_URL,} from '../config.js';
 
 const request = require('supertest');
 
@@ -22,7 +20,6 @@ const {
 }); */
 
 
-
 describe('Meal Endpoint Tests', () => {
   beforeAll(() => runServer(TEST_DATABASE_URL));
 
@@ -34,25 +31,21 @@ describe('Meal Endpoint Tests', () => {
     }));
   });
 
-  test('GET - returns meals saved in db', () => {
-    return request(app)
-      .get('/meals')
-      .then((Response) => {
-        expect(Response.statusCode).toBe(200);
-        expect(Response.body.meals).toBeDefined();
-      });
-  });
+  test('GET - returns meals saved in db', () => request(app)
+    .get('/meals')
+    .then((Response) => {
+      expect(Response.status).toBe(200);
+      expect(Response.body).toBeDefined();
+    }));
 
-  test('POST - returns saved meal', () => {
-    return request(app)
-      .post('/meals')
-      .send({
-        name: 'cheeseburger',
-        ingredients: ['cheese', 'burger'],
-      }).then((Response) => {
-        expect(Response.statusCode).toEqual(200);
-        expect(Response.body.name).toEqual('cheeseburger');
-        expect(Response.body.ingredients).toContain('cheese');
-      });
-  });
+  test('POST - returns saved meal', () => request(app)
+    .post('/meals')
+    .send({
+      name: 'cheeseburger',
+      ingredients: ['cheese', 'burger'],
+    }).then((Response) => {
+      expect(Response.statusCode).toEqual(200);
+      expect(Response.body.name).toEqual('cheeseburger');
+      expect(Response.body.ingredients).toContain('cheese');
+    }));
 });

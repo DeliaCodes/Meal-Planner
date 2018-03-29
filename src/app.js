@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 
 const {
-  mealModel
+  mealModel,
 } = require('./models');
 
 // const path = require('path');
@@ -28,18 +28,15 @@ app.get('/', (req, res) => {
 
 // add endpoint to get all meals
 app.get('/meals', (req, res) => {
-  mealModel.find().then((meals) => {
-    console.log(meals);
-    res.status(200).json({
-      meals
-    });
+  /*  mealModel.find().then((meals) => {
+     console.log(meals);
+     res.status(200).json({
+       meals
+     });
+   }); */
+  getAllMealsFromDB().then((meals) => {
+    res.status(200).json(meals);
   });
-  /*   getAllMealsFromDB().then((meals) => {
-      console.log('meals', meals);
-      res.status(200).json(meals)
-    }); */
-  /* getAllMealsFromDB();
-  res.status(200).json(); */
 });
 
 app.post('/meals', (req, res) => {
