@@ -1,3 +1,7 @@
+import {
+  TEST_DATABASE_URL
+} from '../config.js';
+
 const request = require('supertest');
 
 const {
@@ -17,17 +21,20 @@ const {
   });
 }); */
 
-describe('Root Path', () => {
-  test('response to get', () => request(app).get('/').then((Response) => {
-    expect(Response.statusCode).toBe(200);
-  }));
-});
+
 
 describe('Meal Endpoint Tests', () => {
-  beforeAll(() => runServer());
+  beforeAll(() => runServer(TEST_DATABASE_URL));
 
   afterAll(() => closeServer());
-  test('returns meals saved in db', () => {
+
+  describe('Root Path', () => {
+    test('response to get', () => request(app).get('/').then((Response) => {
+      expect(Response.statusCode).toBe(200);
+    }));
+  });
+
+  test.only('GET - returns meals saved in db', () => {
     return request(app)
       .get('/meals')
       .then((Response) => {
@@ -36,7 +43,7 @@ describe('Meal Endpoint Tests', () => {
       });
   });
 
-  test('returns saved meal - POST', () => {
+  test('POST - returns saved meal', () => {
     return request(app)
       .post('/meals')
       .send({

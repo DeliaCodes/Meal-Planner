@@ -1,4 +1,5 @@
 // file for database models
+'use strict';
 
 const mongoose = require('mongoose');
 
