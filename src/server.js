@@ -23,7 +23,7 @@ const {
 
 /* console.log('Server running on ', port); */
 
-function runServer(databaseUrl = DATABASE_URL) {
+function runServer(databaseUrl = DATABASE_URL, port = 8010) {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
       if (err) {

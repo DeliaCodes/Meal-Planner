@@ -30,7 +30,9 @@ app.get('/', (req, res) => {
 app.get('/meals', (req, res) => {
   mealModel.find().then((meals) => {
     console.log(meals);
-    res.sendStatus(200).json(meals);
+    res.status(200).json({
+      meals
+    });
   });
   /*   getAllMealsFromDB().then((meals) => {
       console.log('meals', meals);
@@ -45,7 +47,7 @@ app.post('/meals', (req, res) => {
     name: req.body.name,
     ingredients: req.body.ingredients,
   };
-  addMealToDB(newMeal).then(() => res.statusCode(200).json(newMeal));
+  addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
   /* addMealToDB(newMeal);
   res.status(200).json(newMeal); */
 });

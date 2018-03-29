@@ -34,7 +34,7 @@ describe('Meal Endpoint Tests', () => {
     }));
   });
 
-  test.only('GET - returns meals saved in db', () => {
+  test('GET - returns meals saved in db', () => {
     return request(app)
       .get('/meals')
       .then((Response) => {
