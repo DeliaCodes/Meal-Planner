@@ -1,7 +1,3 @@
-/* import {
-  resolve
-} from 'path'; */
-
 // file for the application server
 
 const {
@@ -17,12 +13,6 @@ mongoose.Promise = global.Promise;
 const {
   DATABASE_URL,
 } = require('../config');
-
-/* const port = process.env.PORT || 8010; */
-
-/* app.listen(port); */
-
-/* console.log('Server running on ', port); */
 
 const connectMongo = mongoose.connect.bind(mongoose);
 const startNodeServer = port => new Promise((resolve, reject) => {
@@ -51,16 +41,6 @@ const closeNodeServer = () => new Promise((resolve, reject) => {
 });
 
 const closeServer = () => disconnectMongo().then(closeNodeServer);
-/* return mongoose.disconnect().then(() => new Promise((resolve, reject) => {
-  console.log('Closing server');
-  server.close((err) => {
-    if (err) {
-      return reject(err);
-    }
-    resolve();
-  });
-})); */
-
 
 if (require.main === module) {
   runServer().catch(err => console.error(err));

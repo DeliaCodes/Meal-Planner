@@ -8,8 +8,6 @@ const {
   mealModel,
 } = require('./models');
 
-// const path = require('path');
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -22,18 +20,11 @@ const {
 app.use(express.static('dist'));
 
 app.get('/', (req, res) => {
-  // res.send('Working!!!');
   res.sendStatus(200);
 });
 
 // add endpoint to get all meals
 app.get('/meals', (req, res) => {
-  /*  mealModel.find().then((meals) => {
-     console.log(meals);
-     res.status(200).json({
-       meals
-     });
-   }); */
   getAllMealsFromDB().then((meals) => {
     res.status(200).json(meals);
   });
@@ -45,8 +36,6 @@ app.post('/meals', (req, res) => {
     ingredients: req.body.ingredients,
   };
   addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
-  /* addMealToDB(newMeal);
-  res.status(200).json(newMeal); */
 });
 
 module.exports = {
