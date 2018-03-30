@@ -17,6 +17,7 @@ describe('Client Side tests', () => {
   describe('client-side to server tests', () => {
     it('successfully return data from meals endpoint', () => {
       const result = getMealsFromEndpoint();
+      console.log('getting results', result);
       expect(result.status).toBe(200);
       expect(result.response.body).toBeDefined();
     });
