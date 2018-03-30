@@ -31,9 +31,13 @@ const render = (store) => {
   $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
 };
 
-//
 
 const getMealsFromEndpoint = () => {
+  $.ajax({
+    url: '/meals',
+    type: 'GET',
+    dataType: 'json',
+  }).done(result => console.log('done!', result));
   /*   const request = new XMLHttpRequest();
     request.onreadystatechange = () => {
       if (request.readyState === 4) {
