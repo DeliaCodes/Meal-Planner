@@ -1,4 +1,5 @@
 // file for the application server
+require('dotenv').config();
 
 const {
   app,
