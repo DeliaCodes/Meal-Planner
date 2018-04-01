@@ -22,19 +22,19 @@ describe('Testing Meal Models', () => {
   });
 
   it('data can be created', () => mealModel.create({
-      name: 'burger',
-      ingredients: ['burger'],
-    })
+    name: 'cheeseburger',
+    ingredients: ['burger', 'cheese'],
+  })
     .then(() =>
       mealModel.findOne().then((model) => {
-        expect(model.name).toEqual('burger');
+        expect(model.name).toEqual('cheeseburger');
         expect(model.ingredients).toContain('burger');
       })));
 
   it('data can be found', () => mealModel.create({
-      name: 'pretzel',
-      ingredients: ['salt', 'dough'],
-    })
+    name: 'pretzel',
+    ingredients: ['salt', 'dough'],
+  })
     .then(() =>
       mealModel.find().then((model) => {
         const [data] = model;

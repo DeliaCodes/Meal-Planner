@@ -15,11 +15,21 @@ jest.mock('../src/api');
 
 describe('Client Side tests', () => {
   describe('client-side to server tests', () => {
-    it('successfully return data from meals endpoint', () => {
+    xit('successfully return data from meals endpoint', () => {
       const result = getMealsFromEndpoint();
       console.log('getting results', result);
       expect(result.status).toBe(200);
       expect(result.response.body).toBeDefined();
+    });
+
+    xit('adds a meal to the meals endpoint', () => {
+      const input = {
+        name: 'Tea',
+        ingredients: ['Tea', 'water'],
+      };
+      // const result;
+      expect(result.status).toBe(200);
+      expect(result.body).toContain(input);
     });
   });
 
