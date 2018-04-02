@@ -1,5 +1,8 @@
 // this file manipulates client side
 
+const fetch = require('isomorphic-fetch');
+require('es6-promise').polyfill();
+
 const $ = require('jquery');
 // instead of these use endpoints to serve - use FETCH or AJAX
 /* const {
@@ -31,21 +34,43 @@ const render = (store) => {
   $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
 };
 
-
-const getMealsFromEndpoint = () => {
+/* const passMealToAPI = (input) => {
   $.ajax({
     url: '/meals',
-    type: 'GET',
+    type: 'POST',
     dataType: 'json',
-  }).done(result => console.log('done!', result));
-  /*   const request = new XMLHttpRequest();
-    request.onreadystatechange = () => {
-      if (request.readyState === 4) {
-        return request.response;
+  });
+}; */
+
+
+const getMealsFromEndpoint = () => {
+  fetch('//limitless-bayou-99473.herokuapp.com/meals')
+    .then((response) => {
+      if (response.status >= 400) {
+        console.log(response);
+        throw new Error('Bad response from server');
       }
-      console.log('An Error Occured In Your Request');
-    };
-    request.open('Get', '/meals'); */
+      return response.json();
+    });
+};
+
+const sendMealToEndpoint = (data) => {
+  fetch('https://limitless-bayou-99473.herokuapp.com/meals', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: data.name,
+      ingredients: data.ingredients,
+    }),
+  }).then((response) => {
+    if (response.status >= 400) {
+      console.log(response);
+      throw new Error('Bad response from server');
+    }
+    return response.status(200).json();
+  });
 };
 
 
