@@ -31,7 +31,7 @@ describe('Testing Meal Models', () => {
         expect(model.ingredients).toContain('burger');
       })));
 
-  it('data can be found', () => mealModel.create({
+  xit('data can be found', () => mealModel.create({
     name: 'pretzel',
     ingredients: ['salt', 'dough'],
   })
