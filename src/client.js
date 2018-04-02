@@ -50,6 +50,7 @@ const getMealsFromEndpoint = () => {
         console.log(response);
         throw new Error('Bad response from server');
       }
+      console.log(response);
       return response.json();
     });
 };
@@ -73,10 +74,19 @@ const sendMealToEndpoint = (data) => {
   });
 };
 
+const seedDataIntoDb = (data) => {
+  if (getMealsFromEndpoint === undefined) {
+    sendMealToEndpoint(data);
+  }
+};
+
 
 $(document).ready(() => {
-  // getAllMealsFromDB()
-
+  const meal = {
+    name: 'Boiled Cabbage',
+    ingredients: ['cabbage', ' water', ' salt', ' pepper'],
+  };
+  seedDataIntoDb(meal);
   getMealsFromEndpoint().then(value => render({
     meals: value,
   }));
