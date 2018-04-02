@@ -96,9 +96,11 @@ const addUserMeals = () => {
   $('form').submit((event) => {
     event.preventDefault();
     const dataToAdd = getMealsFromUser();
-    addToState(STORE, dataToAdd);
-    render(STORE);
-    // addMealToDB(dataToAdd);
+    // do I need to pass in data to add to anon function below?
+    sendMealToEndpoint(dataToAdd).then(() => {
+      addToState(STORE, dataToAdd);
+      render(STORE);
+    });
   });
 };
 
