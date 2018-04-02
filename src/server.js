@@ -27,7 +27,7 @@ const startNodeServer = port => new Promise((resolve, reject) => {
 });
 const disconnectMongo = mongoose.disconnect.bind(mongoose);
 
-function runServer(databaseUrl = DATABASE_URL, port = 27018) {
+function runServer(databaseUrl = DATABASE_URL, port = 5000) {
   // console.log(databaseUrl);
   return connectMongo(databaseUrl)
     .then(startNodeServer(port))
