@@ -1,3 +1,5 @@
+import {resolve,} from 'url';
+
 // this file manipulates client side
 
 const fetch = require('isomorphic-fetch');
@@ -74,11 +76,11 @@ const sendMealToEndpoint = (data) => {
   });
 };
 
-const seedDataIntoDb = (data) => {
+const seedDataIntoDb = data => new Promise((resolve, reject) => {
   if (getMealsFromEndpoint === undefined) {
     sendMealToEndpoint(data);
   }
-};
+});
 
 
 $(document).ready(() => {
@@ -86,10 +88,9 @@ $(document).ready(() => {
     name: 'Boiled Cabbage',
     ingredients: ['cabbage', ' water', ' salt', ' pepper'],
   };
-  seedDataIntoDb(meal);
-  getMealsFromEndpoint().then(value => render({
+  seedDataIntoDb(meal).then(getMealsFromEndpoint().then(value => render({
     meals: value,
-  }));
+  })));
 });
 
 // untested

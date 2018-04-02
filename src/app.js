@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 // add endpoint to get all meals
 app.get('/meals', (req, res) => {
   getAllMealsFromDB().then((meals) => {
-    console.log('meals gotten', meals);
     res.status(200).json(meals);
   });
 });
