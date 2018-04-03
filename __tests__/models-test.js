@@ -21,7 +21,7 @@ describe('Testing Meal Models', () => {
     mongoose.disconnect();
   });
 
-  xit('data can be created', () => mealModel.create({
+  it('data can be created', () => mealModel.create({
     name: 'cheeseburger',
     ingredients: ['burger', 'cheese'],
   })
@@ -31,7 +31,7 @@ describe('Testing Meal Models', () => {
         expect(model.ingredients).toContain('burger');
       })));
 
-  xit('data can be found', () => mealModel.create({
+  it('data can be found', () => mealModel.create({
     name: 'pretzel',
     ingredients: ['salt', 'dough'],
   })
