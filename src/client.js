@@ -1,16 +1,11 @@
-import {resolve,} from 'url';
+// import {resolve,} from 'url';
 
 // this file manipulates client side
 
-const fetch = require('isomorphic-fetch');
+require('isomorphic-fetch');
 require('es6-promise').polyfill();
 
 const $ = require('jquery');
-// instead of these use endpoints to serve - use FETCH or AJAX
-/* const {
-  getAllMealsFromDB,
-  addMealToDB,
-} = require('./api.js'); */
 
 // add a state variable to store meals
 const STORE = {
@@ -43,54 +38,54 @@ const render = (store) => {
     dataType: 'json',
   });
 }; */
-
-
-const getMealsFromEndpoint = () => {
-  fetch('//limitless-bayou-99473.herokuapp.com/meals')
-    .then((response) => {
-      if (response.status >= 400) {
-        console.log(response);
-        throw new Error('Bad response from server');
-      }
-      console.log(response);
-      return response.json();
-    });
+const checkForErrors = (response) => {
+  if (response.status >= 400) {
+    // console.log(response);
+    throw new Error('Bad response from server');
+  }
+  return response;
 };
 
-const sendMealToEndpoint = (data) => {
-  fetch('https://limitless-bayou-99473.herokuapp.com/meals', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: data.name,
-      ingredients: data.ingredients,
-    }),
-  }).then((response) => {
+const noErrorResponse = response => response.json();
+
+const getMealsFromEndpoint = () => fetch('http://localhost:5000/meals')
+  .then(checkForErrors)
+  .then(noErrorResponse);
+
+
+const sendMealToEndpoint = data => fetch('//localhost:5000/meals', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: data.name,
+    ingredients: data.ingredients,
+  }),
+})
+  .then((response) => {
     if (response.status >= 400) {
-      console.log(response);
+      // console.log(response);
       throw new Error('Bad response from server');
     }
-    return response.status(200).json();
+    return response.json();
   });
-};
 
-const seedDataIntoDb = data => new Promise((resolve, reject) => {
-  if (getMealsFromEndpoint === undefined) {
+/* const seedDataIntoDb = data => new Promise((resolve, reject) => {
+  if (getMealsFromEndpoint() === undefined) {
     sendMealToEndpoint(data);
   }
-});
+}); */
 
 
 $(document).ready(() => {
-  const meal = {
+  /* const meal = {
     name: 'Boiled Cabbage',
     ingredients: ['cabbage', ' water', ' salt', ' pepper'],
-  };
-  seedDataIntoDb(meal).then(getMealsFromEndpoint().then(value => render({
+  }; */
+  getMealsFromEndpoint().then(value => render({
     meals: value,
-  })));
+  }));
 });
 
 // untested
