@@ -1,5 +1,6 @@
 // file for database models
-'use strict';
+
+
 
 const mongoose = require('mongoose');
 
@@ -11,7 +12,7 @@ const {
 
 const mealSchema = new Schema({
   name: String,
-  ingredients: [],
+  description: [],
 });
 
 const mealModel = mongoose.model('Meal Model', mealSchema);
