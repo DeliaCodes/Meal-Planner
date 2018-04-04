@@ -48,12 +48,12 @@ const checkForErrors = (response) => {
 
 const noErrorResponse = response => response.json();
 
-const getMealsFromEndpoint = () => fetch('http://localhost:5000/meals')
+const getMealsFromEndpoint = () => fetch('/meals')
   .then(checkForErrors)
   .then(noErrorResponse);
 
 
-const sendMealToEndpoint = data => fetch('//localhost:5000/meals', {
+const sendMealToEndpoint = data => fetch('/meals', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
