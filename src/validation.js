@@ -9,7 +9,7 @@ const stringCheck = (mightBeAString) => {
 };
 
 // do I need this and the stringCheck?
-const hasNameAndIngredient = (userContent) => {
+const hasNameAndDescription = (userContent) => {
   if (userContent.name !== undefined && userContent.description !== undefined) {
     return userContent;
   } else if (userContent.description !== undefined) {
@@ -20,7 +20,7 @@ const hasNameAndIngredient = (userContent) => {
 };
 // do I need to do this for each value of the request body
 /* const validateUserInput = (input) => {
-  hasNameAndIngredient(input).then(stringCheck(input)).then(Promise.resolve(input));
+  hasNameAndDescription(input).then(stringCheck(input)).then(Promise.resolve(input));
 }; */
 
 // write something that will convert user input into what is needed by the database
@@ -30,11 +30,11 @@ const hasNameAndIngredient = (userContent) => {
     description: [],
   };
   validateUserInput(userData.name).then(formattedData.name = userData.name);
-  validateUserInput(userData.ingredient).then(formattedData.description.push(userData.ingredient));
+  validateUserInput(userData.description).then(formattedData.description.push(userData.description));
   return formattedData;
 }; */
 
 module.exports = {
   stringCheck,
-  hasNameAndIngredient,
+  hasNameAndDescription,
 };

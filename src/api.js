@@ -3,18 +3,18 @@
 // creating a fake database to simulate later use
 /* const cooperDB = [{
     name: 'Macaroni and Cheese',
-    ingredients: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
+    description: ['macaroni', ' cheese', ' water', ' seasoning', ' salt', ' oil'],
   },
   {
     name: 'Boiled Cabbage',
-    ingredients: ['cabbage', ' water', ' salt', ' pepper'],
+    description: ['cabbage', ' water', ' salt', ' pepper'],
   },
 ]; */
 
 const mongoose = require('mongoose');
 
 const {
-  mealModel
+  mealModel,
 } = require('./models.js');
 
 const addMealToDB = mealModel.create.bind(mealModel);
