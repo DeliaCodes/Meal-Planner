@@ -22,7 +22,7 @@ const addToState = (storeToChange, meal, index) => {
 };
 
 // create template for the insertion
-const template = item => `<p>Name: ${item.name}</p> <p>Ingredients: ${item.ingredients}</p>`;
+const template = item => `<p>Name: ${item.name}</p> <p>Description: ${item.description}</p>`;
 
 const mappingMealsIntoTemplate = input => input.map(m => template(m)).join('');
 // to convert to vanilla JS use https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
@@ -60,7 +60,7 @@ const sendMealToEndpoint = data => fetch('/meals', {
   },
   body: JSON.stringify({
     name: data.name,
-    ingredients: data.ingredients,
+    description: data.description,
   }),
 })
   .then((response) => {
@@ -81,7 +81,7 @@ const sendMealToEndpoint = data => fetch('/meals', {
 $(document).ready(() => {
   /* const meal = {
     name: 'Boiled Cabbage',
-    ingredients: ['cabbage', ' water', ' salt', ' pepper'],
+    description: ['cabbage', ' water', ' salt', ' pepper'],
   }; */
   getMealsFromEndpoint().then(value => render({
     meals: value,
@@ -92,8 +92,8 @@ $(document).ready(() => {
 const getMealsFromUser = () => {
   const newMeal = {};
   newMeal.name = document.getElementById('meal-name').value;
-  newMeal.ingredients = [];
-  newMeal.ingredients.push(document.getElementById('ingredient').value);
+  newMeal.description = [];
+  newMeal.description.push(document.getElementById('description').value);
   return newMeal;
 };
 

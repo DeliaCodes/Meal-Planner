@@ -25,7 +25,7 @@ describe('Client Side tests', () => {
     xit('adds a meal to the meals endpoint', () => {
       const input = {
         name: 'Tea',
-        ingredients: ['Tea', 'water'],
+        description: 'Tea and water',
       };
       // const result;
       expect(result.status).toBe(200);
@@ -36,14 +36,14 @@ describe('Client Side tests', () => {
   it('template returns - template function', () => {
     expect(template({
       name: 'macaroni',
-      ingredients: ['macaroni', 'salt', 'water'],
+      description: 'macaroni, salt, and water',
     })).toContain('macaroni');
   });
 
   it('mappingMeals is correct - mappingMealsIntoTemplate function', () => {
     const data = [{
       name: 'macaroni',
-      ingredients: ['macaroni', 'salt', 'water'],
+      description: 'macaroni, pepper, salt, and water',
     }];
 
     const result = mappingMealsIntoTemplate(data);
@@ -56,20 +56,20 @@ describe('Client Side tests', () => {
       '<div><div id="currentMeals"/></div>';
     const duck = {
       meals: [{
-        name: 'macaroni',
-        ingredients: ['macaroni', 'salt', 'water'],
+        name: 'ravioli',
+        description: 'ravioli, salt, and water',
       }],
     };
 
     render(duck);
 
-    expect($('#currentMeals').html()).toContain('macaroni');
+    expect($('#currentMeals').html()).toContain('ravioli');
   });
 
   it('modifies store - addToState function', () => {
     const appleCore = {
       name: 'macaroni',
-      ingredients: ['macaroni', 'salt', 'water'],
+      description: 'macaroni, cayenne, salt, and water',
     };
 
     const appleStore = {
@@ -79,7 +79,7 @@ describe('Client Side tests', () => {
     const appleExpected = {
       meals: [{
         name: 'macaroni',
-        ingredients: ['macaroni', 'salt', 'water'],
+        description: 'macaroni, cayenne, salt, and water',
       }],
     };
 
