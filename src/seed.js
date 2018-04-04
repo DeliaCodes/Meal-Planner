@@ -4,9 +4,13 @@ const {
   mealmodel,
 } = require('./models');
 
+// Add clearing of db code
+
 const meal = {
   name: 'Boiled Cabbage',
   description: ['cabbage', ' water', ' salt', ' pepper'],
 };
+
+// double check seed script in package json
 
 mealmodel.create(meal);
