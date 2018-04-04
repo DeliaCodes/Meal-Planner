@@ -79,10 +79,6 @@ const sendMealToEndpoint = data => fetch('/meals', {
 
 
 $(document).ready(() => {
-  /* const meal = {
-    name: 'Boiled Cabbage',
-    description: ['cabbage', ' water', ' salt', ' pepper'],
-  }; */
   getMealsFromEndpoint().then(value => render({
     meals: value,
   }));
