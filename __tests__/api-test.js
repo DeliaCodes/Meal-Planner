@@ -1,11 +1,9 @@
 import mongoose from 'mongoose';
-import {
-  TEST_DATABASE_URL
-} from '../config';
+import {TEST_DATABASE_URL,} from '../config';
 
 const {
   getAllMealsFromDB,
-  addMealToDB
+  addMealToDB,
 } = require('../src/api');
 
 describe('Database Api works as expected', () => {
@@ -25,12 +23,11 @@ describe('Database Api works as expected', () => {
   test('Data is created as expected', () => {
     const input = {
       name: 'Macaroni and Cheese',
-      ingredients: ['macaroni', 'cheese', 'water', 'seasoning', 'salt', 'oil'],
+      description: 'Made with Love',
     };
     // expect.assertions(2);
     return addMealToDB(input).then((data) => {
       expect(data).toHaveProperty('name', 'Macaroni and Cheese');
-      // not working - expect(data.ingredients).toEqual(input.ingredients);
       expect(data.id).toBeDefined();
     });
   });
