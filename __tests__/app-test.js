@@ -42,10 +42,10 @@ describe('Meal Endpoint Tests', () => {
     .post('/meals')
     .send({
       name: 'cheeseburger',
-      ingredients: ['cheese', 'burger'],
+      description: 'cheese, burger, and bun',
     }).then((Response) => {
       expect(Response.statusCode).toEqual(200);
       expect(Response.body.name).toEqual('cheeseburger');
-      expect(Response.body.ingredients).toContain('cheese');
+      expect(Response.body.description).toContain('cheese');
     }));
 });

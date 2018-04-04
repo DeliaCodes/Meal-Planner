@@ -33,7 +33,7 @@ app.get('/meals', (req, res) => {
 app.post('/meals', (req, res) => {
   const newMeal = {
     name: req.body.name,
-    ingredients: req.body.ingredients,
+    description: req.body.description,
   };
   addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
 });
