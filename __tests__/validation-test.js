@@ -22,28 +22,28 @@ describe('successfully validates meal input', () => {
   it('returns object if it contains meal name and ingredient', () => {
     const input = {
       name: 'Cheeseburger',
-      ingredients: ['cheese'],
+      description: ['cheese'],
     };
     const result = hasNameAndIngredient(input);
     expect(result).toMatchObject(input);
   });
-  it('returns error message if t is missing a name', () => {
+  it('returns error message if it is missing a name', () => {
     const input = {
-      ingredients: ['cheese'],
+      description: ['cheese'],
     };
     const result = hasNameAndIngredient(input);
     expect(result).toContain('Meal name is required');
   });
-  it('returns error message if it is missing ingredients', () => {
+  it('returns error message if it is missing description', () => {
     const input = {
       name: 'Cheeseburger',
     };
     const result = hasNameAndIngredient(input);
-    expect(result).toContain('Meal ingredients are required');
+    expect(result).toContain('Meal description is required');
   });
-  xit('ingredient should be in the form of an array', () => {
-    const ingredient = 'cheese';
-    const result = validation(ingredient);
+  xit('description should be in the form of an array', () => {
+    const description = 'cheese';
+    const result = validation(description);
     expect(result).toBe(['cheese']);
   });
 });

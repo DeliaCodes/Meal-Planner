@@ -10,12 +10,12 @@ const stringCheck = (mightBeAString) => {
 
 // do I need this and the stringCheck?
 const hasNameAndIngredient = (userContent) => {
-  if (userContent.name !== undefined && userContent.ingredients !== undefined) {
+  if (userContent.name !== undefined && userContent.description !== undefined) {
     return userContent;
-  } else if (userContent.ingredients !== undefined) {
+  } else if (userContent.description !== undefined) {
     return 'Meal name is required';
   } else if (userContent.name !== undefined) {
-    return 'Meal ingredients are required';
+    return 'Meal description is required';
   }
 };
 // do I need to do this for each value of the request body
@@ -24,13 +24,13 @@ const hasNameAndIngredient = (userContent) => {
 }; */
 
 // write something that will convert user input into what is needed by the database
-// take input and convert it into an object with name: "" and ingredients: []
+// take input and convert it into an object with name: "" and description: []
 /* const convertInputDataIntoDbFormat = (validateUserInput, userData) => {
   const formattedData = {
-    ingredients: [],
+    description: [],
   };
   validateUserInput(userData.name).then(formattedData.name = userData.name);
-  validateUserInput(userData.ingredient).then(formattedData.ingredients.push(userData.ingredient));
+  validateUserInput(userData.ingredient).then(formattedData.description.push(userData.ingredient));
   return formattedData;
 }; */
 
