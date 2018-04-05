@@ -32,6 +32,15 @@ header h1 {
 
 .title {
   align-self: center;
+  font-size: 2em;
+}
+
+section h1 {
+  background: #FF937F;
+}
+
+div h1 {
+  background: #FF937F;
 }
 
 #displayMeals {
