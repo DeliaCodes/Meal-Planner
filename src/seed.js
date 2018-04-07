@@ -1,7 +1,7 @@
 // require model - mealmodel.create and then seeds data once by calling script
 
 const {
-  mealmodel,
+  mealModel,
 } = require('./models');
 
 // Add clearing of db code
@@ -13,4 +13,4 @@ const meal = {
 
 // double check seed script in package json
 
-mealmodel.create(meal);
+mealModel.create(meal);
