@@ -6,7 +6,7 @@ require('isomorphic-fetch');
 require('es6-promise').polyfill();
 
 const $ = require('jquery');
-
+require('fullcalendar');
 // add a state variable to store meals
 const STORE = {
   meals: [],
@@ -82,6 +82,10 @@ $(document).ready(() => {
   getMealsFromEndpoint().then(value => render({
     meals: value,
   }));
+  $('#calendar').fullCalendar({
+    defaultView: 'basicWeek',
+    themeSystem: 'jquery-ui',
+  });
 });
 
 // untested
