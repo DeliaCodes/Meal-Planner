@@ -21,6 +21,7 @@ const addToState = (storeToChange, meal, index) => {
   return storeToChange;
 };
 
+
 // create template for the insertion
 const template = item => `<p>Name: ${item.name}</p> <p>Description: ${item.description}</p>`;
 
@@ -86,6 +87,14 @@ $(document).ready(() => {
     defaultView: 'listWeek',
     themeSystem: 'jquery-ui',
     events: 'https://fullcalendar.io/demo-events.json',
+  });
+  $('#mealNav').click(() => {
+    $('#addMealSection').show();
+    $('#calendar').hide();
+  });
+  $('#scheduleNav').click(() => {
+    $('#addMealSection').hide();
+    $('#calendar').show();
   });
 });
 
