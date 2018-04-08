@@ -78,6 +78,12 @@ const sendMealToEndpoint = data => fetch('/meals', {
   }
 }); */
 
+const hideEverything = () => {
+  $('#calendar').hide();
+  $('#displayMeals').hide();
+  $('#addMealSection').hide();
+};
+
 
 $(document).ready(() => {
   getMealsFromEndpoint().then(value => render({
@@ -88,6 +94,7 @@ $(document).ready(() => {
     themeSystem: 'jquery-ui',
     events: 'https://fullcalendar.io/demo-events.json',
   });
+  hideEverything();
   $('#mealNav').click(() => {
     $('#addMealSection').show();
     $('#calendar').hide();
