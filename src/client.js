@@ -83,8 +83,9 @@ $(document).ready(() => {
     meals: value,
   }));
   $('#calendar').fullCalendar({
-    defaultView: 'basicWeek',
+    defaultView: 'listWeek',
     themeSystem: 'jquery-ui',
+    events: 'https://fullcalendar.io/demo-events.json',
   });
 });
 
