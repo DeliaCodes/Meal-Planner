@@ -49,6 +49,11 @@ nav a:hover {
   color: #000000;
 }
 
+.blankSpace {
+  width: 100%;
+  height: 1em;
+}
+
 main {
   display: flex;
   flex-direction: column;
