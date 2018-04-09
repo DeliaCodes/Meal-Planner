@@ -43,9 +43,11 @@ describe('Meal Endpoint Tests', () => {
     .send({
       name: 'cheeseburger',
       description: 'cheese, burger, and bun',
+      dayOfWeek: 'Wednesday',
     }).then((Response) => {
       expect(Response.statusCode).toEqual(200);
       expect(Response.body.name).toEqual('cheeseburger');
       expect(Response.body.description).toContain('cheese');
+      expect(Response.body.dayOfWeek).toEqual('Wednesday');
     }));
 });

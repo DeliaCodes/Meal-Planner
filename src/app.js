@@ -34,6 +34,7 @@ app.post('/meals', (req, res) => {
   const newMeal = {
     name: req.body.name,
     description: req.body.description,
+    dayOfWeek: req.body.dayOfWeek,
   };
   addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
 });
