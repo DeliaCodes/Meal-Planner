@@ -111,6 +111,7 @@ const getMealsFromUser = () => {
   newMeal.name = document.getElementById('meal-name').value;
   newMeal.description = [];
   newMeal.description.push(document.getElementById('description').value);
+  newMeal.dayOfWeek = document.getElementById('dayOfWeek').value;
   return newMeal;
 };
 
