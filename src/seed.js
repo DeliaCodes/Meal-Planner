@@ -9,6 +9,7 @@ const {
 const meal = {
   name: 'Boiled Cabbage',
   description: ['cabbage', ' water', ' salt', ' pepper'],
+  dayOfWeek: 'Sunday',
 };
 
 // double check seed script in package json
