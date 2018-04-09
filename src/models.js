@@ -1,7 +1,6 @@
 // file for database models
 
 
-
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -13,6 +12,7 @@ const {
 const mealSchema = new Schema({
   name: String,
   description: [],
+  dayOfWeek: String,
 });
 
 const mealModel = mongoose.model('Meal Model', mealSchema);
