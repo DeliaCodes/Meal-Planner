@@ -159,4 +159,6 @@ module.exports = {
   mappingMealsIntoTemplate,
   addToState,
   getMealsFromEndpoint,
+  displayInOrder,
+  sortMealData,
 };

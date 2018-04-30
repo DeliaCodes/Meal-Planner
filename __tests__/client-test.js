@@ -9,6 +9,8 @@ const {
   mappingMealsIntoTemplate,
   addToState,
   getMealsFromEndpoint,
+  displayInOrder,
+  sortMealData,
 } = require('../src/client');
 
 jest.mock('../src/api');
