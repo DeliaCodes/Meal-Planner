@@ -9,6 +9,7 @@ const {
 
 const {
   app,
+  sortMealData,
 } = require('../src/app.js');
 
 // run server and stop server
@@ -18,6 +19,29 @@ const {
     request(app).get('/').expect(200);
   });
 }); */
+
+describe('Pure function tests', () => {
+  it('succeeds in adding user data to week object', () => {
+    const data = [{
+      name: 'Something',
+      dayOfWeek: 3,
+    }];
+
+    const result = {
+      0: [],
+      1: [],
+      2: [],
+      3: [{
+        name: 'Something',
+        dayOfWeek: 3,
+      }],
+      4: [],
+      5: [],
+      6: [],
+    };
+    expect(sortMealData(data)).toEqual(result);
+  });
+});
 
 
 describe('Meal Endpoint Tests', () => {

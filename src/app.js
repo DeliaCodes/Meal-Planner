@@ -39,6 +39,23 @@ app.post('/meals', (req, res) => {
   addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
 });
 
+const sortMealData = (data) => {
+  const sortedItems = {
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  };
+
+  data.map(m => sortedItems[m.dayOfWeek].push(m));
+
+  return sortedItems;
+};
+
 module.exports = {
   app,
+  sortMealData,
 };

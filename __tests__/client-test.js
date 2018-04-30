@@ -10,7 +10,6 @@ const {
   addToState,
   getMealsFromEndpoint,
   displayInOrder,
-  sortMealData,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -89,26 +88,7 @@ describe('Client Side tests', () => {
 
     expect(appleResult).toEqual(appleExpected);
   });
-  it('succeeds in adding user data to week object', () => {
-    const data = [{
-      name: 'Something',
-      dayOfWeek: 3,
-    }];
 
-    const result = {
-      0: [],
-      1: [],
-      2: [],
-      3: [{
-        name: 'Something',
-        dayOfWeek: 3,
-      }],
-      4: [],
-      5: [],
-      6: [],
-    };
-    expect(sortMealData(data)).toEqual(result);
-  });
   it('sorts data into proper order', () => {
     const mealsOfWeek = {
       0: ['Thing', 'other thing'],
