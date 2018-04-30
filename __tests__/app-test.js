@@ -74,4 +74,12 @@ describe('Meal Endpoint Tests', () => {
       expect(Response.body.description).toContain('cheese');
       expect(Response.body.dayOfWeek).toEqual('Wednesday');
     }));
+
+  test('GET - return meals sorted into object', () =>
+    request(app)
+      .get('/schedule')
+      .then((Response) => {
+        expect(Response.status).toBe(200);
+        expect(Response.body).toBeDefined();
+      }));
 });
