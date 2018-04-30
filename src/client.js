@@ -83,7 +83,29 @@ const hideEverything = () => {
   $('#displayMeals').hide();
   $('#addMealSection').hide();
 };
+const sortMealData = (data) => {
+  const sortedItems = {
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  };
 
+  data.map(m => sortedItems[m.dayOfWeek].push(m));
+
+  return sortedItems;
+};
+
+const sortMeals = (sortMe, day) => sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
+
+const displayInOrder = (dataObject, currentDay) => {
+  const week = Object.keys(dataObject);
+  const sorted = sortMeals(week, currentDay);
+  return sorted.map(i => dataObject[i]);
+};
 
 $(document).ready(() => {
   getMealsFromEndpoint().then(value => render({
@@ -104,6 +126,7 @@ $(document).ready(() => {
     $('#calendar').show();
   });
 });
+
 
 // untested
 const getMealsFromUser = () => {
