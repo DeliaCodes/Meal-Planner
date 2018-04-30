@@ -12,7 +12,7 @@ const {
 const mealSchema = new Schema({
   name: String,
   description: [],
-  dayOfWeek: String,
+  dayOfWeek: Number,
 });
 
 const mealModel = mongoose.model('Meal Model', mealSchema);
