@@ -22,7 +22,7 @@ const {
 }); */
 
 describe('Pure function tests', () => {
-  it('Converts string day of week into number', () => {
+  xit('Converts string day of week into number', () => {
     const data = [{
       dayOfWeek: 'wednesday',
     }];
