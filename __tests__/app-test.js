@@ -10,6 +10,7 @@ const {
 const {
   app,
   sortMealData,
+  convertDayOfWeek,
 } = require('../src/app.js');
 
 // run server and stop server
@@ -21,6 +22,15 @@ const {
 }); */
 
 describe('Pure function tests', () => {
+  it('Converts string day of week into number', () => {
+    const data = [{
+      dayOfWeek: 'wednesday',
+    }];
+    const result = [{
+      dayOfWeek: 3,
+    }];
+    expect(convertDayOfWeek(data).toBe(result));
+  });
   it('succeeds in adding user data to week object', () => {
     const data = [{
       name: 'Something',
