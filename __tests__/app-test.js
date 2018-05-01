@@ -1,17 +1,10 @@
-import {TEST_DATABASE_URL,} from '../config.js';
+import { TEST_DATABASE_URL } from '../config.js';
 
 const request = require('supertest');
 
-const {
-  runServer,
-  closeServer,
-} = require('../src/server.js');
+const { runServer, closeServer } = require('../src/server.js');
 
-const {
-  app,
-  sortMealData,
-  convertDayOfWeek,
-} = require('../src/app.js');
+const { app, sortMealData } = require('../src/app.js');
 
 // run server and stop server
 
@@ -22,29 +15,33 @@ const {
 }); */
 
 describe('Pure function tests', () => {
-  xit('Converts string day of week into number', () => {
-    const data = [{
-      dayOfWeek: 'wednesday',
-    }];
-    const result = [{
-      dayOfWeek: 3,
-    }];
-    expect(convertDayOfWeek(data).toBe(result));
-  });
+  /*   xit('Converts string day of week into number', () => {
+      const data = [{
+        dayOfWeek: 'wednesday',
+      }];
+      const result = [{
+        dayOfWeek: 3,
+      }];
+      expect(convertDayOfWeek(data).toBe(result));
+    }); */
   it('succeeds in adding user data to week object', () => {
-    const data = [{
-      name: 'Something',
-      dayOfWeek: 3,
-    }];
+    const data = [
+      {
+        name: 'Something',
+        dayOfWeek: 3,
+      },
+    ];
 
     const result = {
       0: [],
       1: [],
       2: [],
-      3: [{
-        name: 'Something',
-        dayOfWeek: 3,
-      }],
+      3: [
+        {
+          name: 'Something',
+          dayOfWeek: 3,
+        },
+      ],
       4: [],
       5: [],
       6: [],
@@ -53,37 +50,42 @@ describe('Pure function tests', () => {
   });
 });
 
-
 describe('Meal Endpoint Tests', () => {
   beforeAll(() => runServer(TEST_DATABASE_URL));
 
   afterAll(() => closeServer());
 
   describe('Root Path', () => {
-    test('response to get', () => request(app).get('/').then((Response) => {
-      expect(Response.statusCode).toBe(200);
-    }));
+    test('response to get', () =>
+      request(app)
+        .get('/')
+        .then((Response) => {
+          expect(Response.statusCode).toBe(200);
+        }));
   });
 
-  test('GET - returns meals saved in db', () => request(app)
-    .get('/meals')
-    .then((Response) => {
-      expect(Response.status).toBe(200);
-      expect(Response.body).toBeDefined();
-    }));
+  test('GET - returns meals saved in db', () =>
+    request(app)
+      .get('/meals')
+      .then((Response) => {
+        expect(Response.status).toBe(200);
+        expect(Response.body).toBeDefined();
+      }));
 
-  test('POST - returns saved meal', () => request(app)
-    .post('/meals')
-    .send({
-      name: 'cheeseburger',
-      description: 'cheese, burger, and bun',
-      dayOfWeek: 'Wednesday',
-    }).then((Response) => {
-      expect(Response.statusCode).toEqual(200);
-      expect(Response.body.name).toEqual('cheeseburger');
-      expect(Response.body.description).toContain('cheese');
-      expect(Response.body.dayOfWeek).toEqual('Wednesday');
-    }));
+  test('POST - returns saved meal', () =>
+    request(app)
+      .post('/meals')
+      .send({
+        name: 'cheeseburger',
+        description: 'cheese, burger, and bun',
+        dayOfWeek: 3,
+      })
+      .then((Response) => {
+        expect(Response.statusCode).toEqual(200);
+        expect(Response.body.name).toEqual('cheeseburger');
+        expect(Response.body.description).toContain('cheese');
+        expect(Response.body.dayOfWeek).toEqual(3);
+      }));
 
   test('GET - return meals sorted into object', () =>
     request(app)

@@ -4,18 +4,13 @@ const bodyParser = require('body-parser');
 
 const express = require('express');
 
-const {
-  mealModel,
-} = require('./models');
+const { mealModel } = require('./models');
 
 const app = express();
 
 app.use(bodyParser.json());
 
-const {
-  addMealToDB,
-  getAllMealsFromDB,
-} = require('./api.js');
+const { addMealToDB, getAllMealsFromDB } = require('./api.js');
 
 app.use(express.static('dist'));
 
@@ -25,6 +20,7 @@ app.get('/', (req, res) => {
 
 // add endpoint to get all meals
 app.get('/meals', (req, res) => {
+  console.log('something');
   getAllMealsFromDB().then((meals) => {
     res.status(200).json(meals);
   });
@@ -73,5 +69,4 @@ app.get('/schedule', (req, res) => {
 module.exports = {
   app,
   sortMealData,
-  convertDayOfWeek,
 };
