@@ -101,17 +101,18 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
-const scheduleTemplate = (day, meals) => `<h2>${day}</h2><p>${meals}</p>`;
+const scheduleTemplate = meals =>
+  `<h2>${moment()
+    .weekday(meals.day)
+    .format('ddd')}</h2><p>${meals.meals}</p>`;
 
-const sortMeals = sortMe =>
-  sortMe
-    .filter(x => x >= moment().weekday())
-    .concat(sortMe.filter(x => x < moment().weekday()));
+const sortMeals = (sortMe, day) =>
+  sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
 
-const displayInOrder = (dataObject) => {
+const displayInOrder = (dataObject, day) => {
   const week = Object.keys(dataObject);
-  const sorted = sortMeals(week);
-  return sorted.map(i => dataObject[i]);
+  const sorted = sortMeals(week, day);
+  return sorted.map(i => ({ day: i, meals: dataObject[i] }));
 };
 
 const renderSchedule = (meals) => {
@@ -119,8 +120,7 @@ const renderSchedule = (meals) => {
   const week = Object.keys(meals);
 
   const currentWeek = sortMeals(week);
-
-  scheduleTemplate();
+  scheduleTemplate(currentWeek, orderedMeals);
 };
 
 $(document).ready(() => {

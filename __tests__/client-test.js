@@ -44,7 +44,10 @@ describe('Client Side tests', () => {
   });
 
   it('schedule template returns ok', () => {
-    expect(scheduleTemplate('Tuesday', 'Fish')).toContain('Fish');
+    expect(scheduleTemplate({
+        day: 0,
+        meals: 'Fish',
+      }),).toContain('Fish');
   });
 
   it('mappingMeals is correct - mappingMealsIntoTemplate function', () => {
@@ -116,7 +119,11 @@ describe('Client Side tests', () => {
       5: ['Res'],
     };
 
-    const result = [['Gestae'], ['Res'], ['Thing', 'other thing']];
+    const result = [
+      { day: '3', meals: ['Gestae'] },
+      { day: '5', meals: ['Res'] },
+      { day: '0', meals: ['Thing', 'other thing'] },
+    ];
 
     expect(displayInOrder(mealsOfWeek, 3)).toEqual(result);
   });
