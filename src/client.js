@@ -9,6 +9,8 @@ const $ = require('jquery');
 
 const moment = require('moment');
 
+moment().format();
+
 // add a state variable to store meals
 const STORE = {
   meals: [],
