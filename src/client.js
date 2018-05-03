@@ -53,6 +53,11 @@ const checkForErrors = (response) => {
 
 const noErrorResponse = response => response.json();
 
+const getScheduleFromEndpoint = () =>
+  fetch('/schedule')
+    .then(checkForErrors)
+    .then(noErrorResponse);
+
 const getMealsFromEndpoint = () =>
   fetch('/meals')
     .then(checkForErrors)
@@ -96,6 +101,8 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
+const scheduleTemplate = (day, meals) => `<h2>${day}</h2><p>${meals}</p>`;
+
 const sortMeals = sortMe =>
   sortMe
     .filter(x => x >= moment().weekday())
@@ -107,11 +114,22 @@ const displayInOrder = (dataObject) => {
   return sorted.map(i => dataObject[i]);
 };
 
+const renderSchedule = (meals) => {
+  const orderedMeals = displayInOrder(meals);
+  const week = Object.keys(meals);
+
+  const currentWeek = sortMeals(week);
+
+  scheduleTemplate();
+};
+
 $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
     }),);
+  /* getScheduleFromEndpoint().then(value =>
+    ) */
   hideEverything();
   $('#mealNav').click(() => {
     $('#addMealSection').show();
@@ -155,4 +173,6 @@ module.exports = {
   addToState,
   getMealsFromEndpoint,
   displayInOrder,
+  scheduleTemplate,
+  renderSchedule,
 };
