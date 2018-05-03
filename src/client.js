@@ -21,9 +21,9 @@ const addToState = (storeToChange, meal, index) => {
   return storeToChange;
 };
 
-
 // create template for the insertion
-const template = item => `<p>Name: ${item.name}</p> <p>Description: ${item.description}</p>`;
+const template = item =>
+  `<p>Name: ${item.name}</p> <p>Description: ${item.description}</p>`;
 
 const mappingMealsIntoTemplate = input => input.map(m => template(m)).join('');
 // to convert to vanilla JS use https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
@@ -49,22 +49,22 @@ const checkForErrors = (response) => {
 
 const noErrorResponse = response => response.json();
 
-const getMealsFromEndpoint = () => fetch('/meals')
-  .then(checkForErrors)
-  .then(noErrorResponse);
+const getMealsFromEndpoint = () =>
+  fetch('/meals')
+    .then(checkForErrors)
+    .then(noErrorResponse);
 
-
-const sendMealToEndpoint = data => fetch('/meals', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    name: data.name,
-    description: data.description,
-  }),
-})
-  .then((response) => {
+const sendMealToEndpoint = data =>
+  fetch('/meals', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: data.name,
+      description: data.description,
+    }),
+  }).then((response) => {
     if (response.status >= 400) {
       // console.log(response);
       throw new Error('Bad response from server');
@@ -78,13 +78,22 @@ const sendMealToEndpoint = data => fetch('/meals', {
   }
 }); */
 
+/* const convertDayOfWeek = (data) => {
+  const three = data.filter(x => x.dayOfWeek === 'wed');
+
+  const threeNum = three.map(m => m.dayOfWeek = 3);
+  console.log('three', threeNum);
+  // data.map(m => );
+}; */
+
 const hideEverything = () => {
   $('#calendar').hide();
   $('#displayMeals').hide();
   $('#addMealSection').hide();
 };
 
-const sortMeals = (sortMe, day) => sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
+const sortMeals = (sortMe, day) =>
+  sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
 
 const displayInOrder = (dataObject, currentDay) => {
   const week = Object.keys(dataObject);
@@ -93,9 +102,10 @@ const displayInOrder = (dataObject, currentDay) => {
 };
 
 $(document).ready(() => {
-  getMealsFromEndpoint().then(value => render({
-    meals: value,
-  }));
+  getMealsFromEndpoint().then(value =>
+    render({
+      meals: value,
+    }),);
   $('#calendar').fullCalendar({
     defaultView: 'listWeek',
     themeSystem: 'jquery-ui',
@@ -111,7 +121,6 @@ $(document).ready(() => {
     $('#calendar').show();
   });
 });
-
 
 // untested
 const getMealsFromUser = () => {

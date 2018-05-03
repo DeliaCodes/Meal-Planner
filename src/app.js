@@ -51,14 +51,6 @@ const sortMealData = (data) => {
   return sortedItems;
 };
 
-/* const convertDayOfWeek = (data) => {
-  const three = data.filter(x => x.dayOfWeek === 'wed');
-
-  const threeNum = three.map(m => m.dayOfWeek = 3);
-  console.log('three', threeNum);
-  // data.map(m => );
-}; */
-
 app.get('/schedule', (req, res) => {
   getAllMealsFromDB().then((meals) => {
     const scheduledMeals = sortMealData(meals);
