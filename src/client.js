@@ -96,12 +96,14 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
-const sortMeals = (sortMe, day) =>
-  sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
+const sortMeals = sortMe =>
+  sortMe
+    .filter(x => x >= moment().weekday())
+    .concat(sortMe.filter(x => x < moment().weekday()));
 
-const displayInOrder = (dataObject, currentDay) => {
+const displayInOrder = (dataObject) => {
   const week = Object.keys(dataObject);
-  const sorted = sortMeals(week, currentDay);
+  const sorted = sortMeals(week);
   return sorted.map(i => dataObject[i]);
 };
 
