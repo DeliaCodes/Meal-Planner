@@ -7,6 +7,8 @@ require('es6-promise').polyfill();
 
 const $ = require('jquery');
 
+const moment = require('moment');
+
 // add a state variable to store meals
 const STORE = {
   meals: [],
