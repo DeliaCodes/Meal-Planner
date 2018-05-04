@@ -116,11 +116,16 @@ const sortMeals = (sortMe, day) =>
 const displayInOrder = (dataObject, day) => {
   const week = Object.keys(dataObject);
   const sorted = sortMeals(week, day);
-  return sorted.map(i => ({ day: i, meals: dataObject[i] }));
+  return sorted.map(i => ({
+    day: i,
+    meals: dataObject[i],
+  }));
 };
 
 const renderSchedule = (meals) => {
-  const orderedMeals = displayInOrder(meals);
+  const today = moment().weekday();
+  const orderedMeals = displayInOrder(meals, today);
+  console.log(orderedMeals);
   $('#schedule').append(mappingScheduleTemplate(orderedMeals));
 };
 
@@ -128,7 +133,7 @@ $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }),);
+    }));
   /* getScheduleFromEndpoint().then(value =>
     ) */
   hideEverything();
