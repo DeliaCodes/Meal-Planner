@@ -103,15 +103,11 @@ describe('Client Side tests', () => {
 
   it('renders Schedule as expected', () => {
     document.body.innerHTML = '<div><div id="schedule"/></div>';
-    const meals = [{
-      day: '3',
-      meal: ['Gestae'],
-    },
-    {
-      day: '5',
-      meal: ['Res'],
-    },
-    ];
+    const meals = {
+      0: ['Thing', 'other thing'],
+      3: ['Gestae'],
+      5: ['Res'],
+    };
 
     renderSchedule(meals);
 

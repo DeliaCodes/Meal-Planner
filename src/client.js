@@ -131,6 +131,7 @@ const renderSchedule = (meals) => {
   $('#schedule').append(mappingScheduleTemplate(orderedMeals));
 };
 
+
 $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
