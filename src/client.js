@@ -137,8 +137,8 @@ $(document).ready(() => {
     render({
       meals: value,
     }));
-  /* getScheduleFromEndpoint().then(value =>
-    ) */
+  getScheduleFromEndpoint().then(value =>
+    renderSchedule(value));
   hideEverything();
   $('#mealNav').click(() => {
     $('#addMealSection').show();
