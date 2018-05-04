@@ -97,7 +97,7 @@ const sendMealToEndpoint = data =>
 }; */
 
 const hideEverything = () => {
-  $('#calendar').hide();
+  $('#schedule').hide();
   $('#displayMeals').hide();
   $('#addMealSection').hide();
 };
