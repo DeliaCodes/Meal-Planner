@@ -142,11 +142,11 @@ $(document).ready(() => {
   hideEverything();
   $('#mealNav').click(() => {
     $('#addMealSection').show();
-    $('#calendar').hide();
+    $('#schedule').hide();
   });
   $('#scheduleNav').click(() => {
     $('#addMealSection').hide();
-    $('#calendar').show();
+    $('#schedule').show();
   });
 });
 
