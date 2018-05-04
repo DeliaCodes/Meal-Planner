@@ -110,6 +110,8 @@ const scheduleTemplate = meals =>
 const mappingScheduleTemplate = input =>
   input.map(m => scheduleTemplate(m)).join('');
 
+const unrollingPerDayMeals = input => input.map(m => m).join('<div>');
+
 const sortMeals = (sortMe, day) =>
   sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
 
@@ -182,4 +184,5 @@ module.exports = {
   scheduleTemplate,
   renderSchedule,
   mappingScheduleTemplate,
+  unrollingPerDayMeals,
 };

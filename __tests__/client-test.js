@@ -16,6 +16,7 @@ const {
   scheduleTemplate,
   renderSchedule,
   mappingScheduleTemplate,
+  unrollingPerDayMeals,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -77,7 +78,13 @@ describe('Client Side tests', () => {
     ];
 
     const result = mappingScheduleTemplate(data);
-    expect(result).toContain('Gestae');
+    expect(result).toContain('Wed');
+  });
+
+  it('unrolls the schedule meals', () => {
+    const data = ['coal'];
+    const result = unrollingPerDayMeals(data);
+    expect(result).toContain('coal');
   });
 
   it('It renders - render function', () => {
