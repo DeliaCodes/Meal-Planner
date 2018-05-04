@@ -42,25 +42,23 @@ describe('Client Side tests', () => {
 
   it('meal template returns - template function', () => {
     expect(template({
-        name: 'macaroni',
-        description: 'macaroni, salt, and water',
-      }),).toContain('macaroni');
+      name: 'macaroni',
+      description: 'macaroni, salt, and water',
+    })).toContain('macaroni');
   });
 
   it('schedule template returns ok', () => {
     expect(scheduleTemplate({
-        day: 0,
-        meals: 'Fish',
-      }),).toContain('Fish');
+      day: 0,
+      meal: 'Fish',
+    })).toContain('Fish');
   });
 
   it('mappingMeals is correct - mappingMealsIntoTemplate function', () => {
-    const data = [
-      {
-        name: 'macaroni',
-        description: 'macaroni, pepper, salt, and water',
-      },
-    ];
+    const data = [{
+      name: 'macaroni',
+      description: 'macaroni, pepper, salt, and water',
+    }];
 
     const result = mappingMealsIntoTemplate(data);
 
@@ -68,9 +66,14 @@ describe('Client Side tests', () => {
   });
 
   it('mappingIntoScheduleTemplate is correct', () => {
-    const data = [
-      { day: '3', meals: ['Gestae'] },
-      { day: '5', meals: ['Res'] },
+    const data = [{
+      day: '3',
+      meal: ['Gestae'],
+    },
+    {
+      day: '5',
+      meal: ['Res'],
+    },
     ];
 
     const result = mappingScheduleTemplate(data);
@@ -80,12 +83,10 @@ describe('Client Side tests', () => {
   it('It renders - render function', () => {
     document.body.innerHTML = '<div><div id="currentMeals"/></div>';
     const duck = {
-      meals: [
-        {
-          name: 'ravioli',
-          description: 'ravioli, salt, and water',
-        },
-      ],
+      meals: [{
+        name: 'ravioli',
+        description: 'ravioli, salt, and water',
+      }],
     };
 
     render(duck);
@@ -95,9 +96,14 @@ describe('Client Side tests', () => {
 
   it('renders Schedule as expected', () => {
     document.body.innerHTML = '<div><div id="schedule"/></div>';
-    const meals = [
-      { day: '3', meals: ['Gestae'] },
-      { day: '5', meals: ['Res'] },
+    const meals = [{
+      day: '3',
+      meal: ['Gestae'],
+    },
+    {
+      day: '5',
+      meal: ['Res'],
+    },
     ];
 
     renderSchedule(meals);
@@ -116,12 +122,10 @@ describe('Client Side tests', () => {
     };
 
     const appleExpected = {
-      meals: [
-        {
-          name: 'macaroni',
-          description: 'macaroni, cayenne, salt, and water',
-        },
-      ],
+      meals: [{
+        name: 'macaroni',
+        description: 'macaroni, cayenne, salt, and water',
+      }],
     };
 
     const appleResult = addToState(appleStore, appleCore);
@@ -136,10 +140,18 @@ describe('Client Side tests', () => {
       5: ['Res'],
     };
 
-    const result = [
-      { day: '3', meals: ['Gestae'] },
-      { day: '5', meals: ['Res'] },
-      { day: '0', meals: ['Thing', 'other thing'] },
+    const result = [{
+      day: '3',
+      meal: ['Gestae'],
+    },
+    {
+      day: '5',
+      meal: ['Res'],
+    },
+    {
+      day: '0',
+      meal: ['Thing', 'other thing'],
+    },
     ];
 
     expect(displayInOrder(mealsOfWeek, 3)).toEqual(result);

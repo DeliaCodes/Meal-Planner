@@ -105,7 +105,7 @@ const hideEverything = () => {
 const scheduleTemplate = meals =>
   `<h2>${moment()
     .weekday(meals.day)
-    .format('ddd')}</h2><p>${meals.meals}</p>`;
+    .format('ddd')}</h2><p>${meals.meal}</p>`;
 
 const mappingScheduleTemplate = input =>
   input.map(m => scheduleTemplate(m)).join('');
@@ -118,7 +118,7 @@ const displayInOrder = (dataObject, day) => {
   const sorted = sortMeals(week, day);
   return sorted.map(i => ({
     day: i,
-    meals: dataObject[i],
+    meal: dataObject[i],
   }));
 };
 
