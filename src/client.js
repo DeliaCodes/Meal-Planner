@@ -121,7 +121,7 @@ const displayInOrder = (dataObject, day) => {
 
 const renderSchedule = (meals) => {
   const orderedMeals = displayInOrder(meals);
-  return scheduleTemplate(orderedMeals);
+  $('#schedule').append(mappingScheduleTemplate(orderedMeals));
 };
 
 $(document).ready(() => {
