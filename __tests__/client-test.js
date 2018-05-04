@@ -3,6 +3,9 @@
  */
 
 const $ = require('jquery');
+const moment = require('moment');
+
+moment().format();
 const {
   render,
   template,
@@ -12,6 +15,7 @@ const {
   displayInOrder,
   scheduleTemplate,
   renderSchedule,
+  mappingScheduleTemplate,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -63,6 +67,16 @@ describe('Client Side tests', () => {
     expect(result).toContain('macaroni');
   });
 
+  it('mappingIntoScheduleTemplate is correct', () => {
+    const data = [
+      { day: '3', meals: ['Gestae'] },
+      { day: '5', meals: ['Res'] },
+    ];
+
+    const result = mappingScheduleTemplate(data);
+    expect(result).toContain('Gestae');
+  });
+
   it('It renders - render function', () => {
     document.body.innerHTML = '<div><div id="currentMeals"/></div>';
     const duck = {
@@ -81,11 +95,14 @@ describe('Client Side tests', () => {
 
   it('renders Schedule as expected', () => {
     document.body.innerHTML = '<div><div id="schedule"/></div>';
-    const meals = {};
+    const meals = [
+      { day: '3', meals: ['Gestae'] },
+      { day: '5', meals: ['Res'] },
+    ];
 
     renderSchedule(meals);
 
-    expect($('#schedule').html()).toContain();
+    expect($('#schedule').html()).toContain('Gestae');
   });
 
   it('modifies store - addToState function', () => {

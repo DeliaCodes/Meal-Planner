@@ -30,6 +30,7 @@ const template = item =>
   `<p>Name: ${item.name}</p> <p>Description: ${item.description}</p>`;
 
 const mappingMealsIntoTemplate = input => input.map(m => template(m)).join('');
+
 // to convert to vanilla JS use https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
 const render = (store) => {
   /* document.getElementById('currentMeals').innerHTML(mappingMealsIntoTemplate(store.meals)) */
@@ -106,6 +107,9 @@ const scheduleTemplate = meals =>
     .weekday(meals.day)
     .format('ddd')}</h2><p>${meals.meals}</p>`;
 
+const mappingScheduleTemplate = input =>
+  input.map(m => scheduleTemplate(m)).join('');
+
 const sortMeals = (sortMe, day) =>
   sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
 
@@ -117,10 +121,7 @@ const displayInOrder = (dataObject, day) => {
 
 const renderSchedule = (meals) => {
   const orderedMeals = displayInOrder(meals);
-  const week = Object.keys(meals);
-
-  const currentWeek = sortMeals(week);
-  scheduleTemplate(currentWeek, orderedMeals);
+  return scheduleTemplate(orderedMeals);
 };
 
 $(document).ready(() => {
@@ -175,4 +176,5 @@ module.exports = {
   displayInOrder,
   scheduleTemplate,
   renderSchedule,
+  mappingScheduleTemplate,
 };
