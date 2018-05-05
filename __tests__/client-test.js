@@ -17,6 +17,7 @@ const {
   renderSchedule,
   mappingScheduleTemplate,
   unrollingPerDayMeals,
+  convertWeekDayToNumber,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -53,6 +54,12 @@ describe('Client Side tests', () => {
       day: 0,
       meal: 'Fish',
     })).toContain('Fish');
+  });
+
+  it('Returns Number when given day of week', () => {
+    const data = 'Friday';
+    const result = convertWeekDayToNumber(data);
+    expect(result).toBe('4');
   });
 
   it('mappingMeals is correct - mappingMealsIntoTemplate function', () => {

@@ -150,6 +150,8 @@ $(document).ready(() => {
   });
 });
 
+const convertWeekDayToNumber = data => moment().day(data).format('D');
+
 // untested
 const getMealsFromUser = () => {
   const newMeal = {};
@@ -186,4 +188,5 @@ module.exports = {
   renderSchedule,
   mappingScheduleTemplate,
   unrollingPerDayMeals,
+  convertWeekDayToNumber,
 };
