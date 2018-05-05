@@ -158,7 +158,8 @@ const getMealsFromUser = () => {
   newMeal.name = document.getElementById('meal-name').value;
   newMeal.description = [];
   newMeal.description.push(document.getElementById('description').value);
-  newMeal.dayOfWeek = document.getElementById('dayOfWeek').value;
+  const userWeekday = document.getElementById('dayOfWeek').value;
+  newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
   return newMeal;
 };
 
