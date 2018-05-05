@@ -12,13 +12,9 @@ describe('Database Api works as expected', () => {
     connection = mongoose.connect(TEST_DATABASE_URL);
     return connection;
   });
-  beforeEach(() => {
-    mongoose.connection.db.dropDatabase();
-  });
+  beforeEach(() => mongoose.connection.db.dropDatabase());
 
-  afterAll(() => {
-    mongoose.disconnect();
-  });
+  afterAll(() => mongoose.disconnect());
 
   test('Data is created as expected', () => {
     const input = {

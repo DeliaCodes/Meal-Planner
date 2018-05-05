@@ -4,13 +4,18 @@ const bodyParser = require('body-parser');
 
 const express = require('express');
 
-const { mealModel } = require('./models');
+const {
+  mealModel,
+} = require('./models');
 
 const app = express();
 
 app.use(bodyParser.json());
 
-const { addMealToDB, getAllMealsFromDB } = require('./api.js');
+const {
+  addMealToDB,
+  getAllMealsFromDB,
+} = require('./api.js');
 
 app.use(express.static('dist'));
 
@@ -36,6 +41,7 @@ app.post('/meals', (req, res) => {
 });
 
 const sortMealData = (data) => {
+  console.log('data', data);
   const sortedItems = {
     0: [],
     1: [],
@@ -53,6 +59,7 @@ const sortMealData = (data) => {
 
 app.get('/schedule', (req, res) => {
   getAllMealsFromDB().then((meals) => {
+    // console.log(meals);
     const scheduledMeals = sortMealData(meals);
     return res.status(200).json(scheduledMeals);
   });
