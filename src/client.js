@@ -147,7 +147,7 @@ $(document).ready(() => {
   });
 });
 
-const convertWeekDayToNumber = data => moment().day(data).format('D');
+const convertWeekDayToNumber = data => moment().day(data).format('d');
 
 // untested
 const getMealsFromUser = () => {

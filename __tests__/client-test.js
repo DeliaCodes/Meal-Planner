@@ -59,7 +59,7 @@ describe('Client Side tests', () => {
   it('Returns Number when given day of week', () => {
     const data = 'Friday';
     const result = convertWeekDayToNumber(data);
-    expect(result).toBe('4');
+    expect(result).toBe('5');
   });
 
   it('mappingMeals is correct - mappingMealsIntoTemplate function', () => {
