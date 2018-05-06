@@ -70,10 +70,7 @@ const sendMealToEndpoint = data =>
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      name: data.name,
-      description: data.description,
-    }),
+    body: JSON.stringify(data),
   }).then((response) => {
     if (response.status >= 400) {
       // console.log(response);
