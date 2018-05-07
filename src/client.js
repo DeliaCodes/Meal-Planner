@@ -124,7 +124,7 @@ const displayInOrder = (dataObject, day) => {
 const renderSchedule = (meals) => {
   const today = moment().weekday();
   const orderedMeals = displayInOrder(meals, today);
-  console.log(orderedMeals);
+  // console.log(orderedMeals);
   $('#schedule').append(mappingScheduleTemplate(orderedMeals));
 };
 

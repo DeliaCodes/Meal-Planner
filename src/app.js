@@ -41,7 +41,7 @@ app.post('/meals', (req, res) => {
 });
 
 const sortMealData = (data) => {
-  console.log('data', data);
+  // console.log('data', data);
   const sortedItems = {
     0: [],
     1: [],
