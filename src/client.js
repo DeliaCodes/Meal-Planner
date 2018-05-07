@@ -99,15 +99,14 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
-const scheduleTemplate = meals =>
-  `<h2>${moment()
-    .weekday(meals.day)
-    .format('ddd')}</h2><p>${meals.meal}</p>`;
+const unrollingPerDayMeals = input => input.map(m => m);
+
+// npconst perMealTemplate = input => `<p>${input.meal}</p>`;
+
+const scheduleTemplate = meals => `<h2>${moment().weekday(meals.day).format('ddd')}</h2><p>${meals.meal.map(m => m)}</p>`;
 
 const mappingScheduleTemplate = input =>
   input.map(m => scheduleTemplate(m)).join('');
-
-const unrollingPerDayMeals = input => input.map(m => m).join('<div>');
 
 const sortMeals = (sortMe, day) =>
   sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));

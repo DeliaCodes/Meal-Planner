@@ -52,7 +52,7 @@ describe('Client Side tests', () => {
   it('schedule template returns ok', () => {
     expect(scheduleTemplate({
       day: 0,
-      meal: 'Fish',
+      meal: ['Fish'],
     })).toContain('Fish');
   });
 
