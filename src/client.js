@@ -169,6 +169,7 @@ const addUserMeals = () => {
     sendMealToEndpoint(dataToAdd).then(() => {
       addToState(STORE, dataToAdd);
       render(STORE);
+      $('#addMealForm')[0].reset();
     });
   });
 };
