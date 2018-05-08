@@ -145,22 +145,34 @@ describe('Client Side tests', () => {
 
   it('sorts data into proper order', () => {
     const mealsOfWeek = {
-      0: ['Thing', 'other thing'],
-      3: ['Gestae'],
-      5: ['Res'],
+      day0: [{
+        dayOfWeek: '0',
+        description: ['Thing'],
+        name: 'other thing',
+      }],
+      day3: [{
+        dayOfWeek: '0',
+        description: ['Gestae'],
+        name: 'Res',
+      }],
+      day5: [{
+        dayOfWeek: '0',
+        description: ['etc'],
+        name: 'Ibid',
+      }],
     };
 
     const result = [{
       day: '3',
-      meal: ['Gestae'],
+      meal: ['Res', 'Gestae'],
     },
     {
       day: '5',
-      meal: ['Res'],
+      meal: ['Ibid', 'etc'],
     },
     {
       day: '0',
-      meal: ['Thing', 'other thing'],
+      meal: ['other thing', 'Thing'],
     },
     ];
 
