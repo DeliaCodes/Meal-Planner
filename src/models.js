@@ -11,7 +11,7 @@ const {
 
 const mealSchema = new Schema({
   name: String,
-  description: [],
+  description: String,
   dayOfWeek: String,
 });
 
