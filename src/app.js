@@ -1,4 +1,24 @@
 // this file serves enpoints and passes data to the api
+/**
+ * Meal
+ * @typedef {Object} Meal
+ * @property {string} name
+ * @property {string} description
+ * @property {string} dayOfWeek
+ */
+
+/**
+ * Schedule
+ * @typedef {Object} Schedule
+ * @property {Meal[]} day0 - The first day
+ * @property {Meal[]} day1 - The first day
+ * @property {Meal[]} day2 - The first day
+ * @property {Meal[]} day3 - The first day
+ * @property {Meal[]} day4 - The first day
+ * @property {Meal[]} day5 - The first day
+ * @property {Meal[]} day6 - The first day
+ */
+
 
 const bodyParser = require('body-parser');
 
@@ -40,19 +60,23 @@ app.post('/meals', (req, res) => {
   addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
 });
 
+
+/**
+ * @param {Meal[]} data
+ * @returns {Schedule} sortedItems items sorted
+ */
 const sortMealData = (data) => {
-  // console.log('data', data);
   const sortedItems = {
-    0: [],
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
+    day0: [],
+    day1: [],
+    day2: [],
+    day3: [],
+    day4: [],
+    day5: [],
+    day6: [],
   };
 
-  data.map(m => sortedItems[m.dayOfWeek].push(m));
+  data.forEach(m => sortedItems[`day${m.dayOfWeek}`].push(m));
 
   return sortedItems;
 };
