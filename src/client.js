@@ -1,6 +1,25 @@
 // import {resolve,} from 'url';
 
 // this file manipulates client side
+/**
+ * Meal
+ * @typedef {Object} Meal
+ * @property {string} name
+ * @property {string} description
+ * @property {string} dayOfWeek
+ */
+
+/**
+ * Schedule
+ * @typedef {Object} Schedule
+ * @property {Meal[]} day0 - The first day
+ * @property {Meal[]} day1 - The first day
+ * @property {Meal[]} day2 - The first day
+ * @property {Meal[]} day3 - The first day
+ * @property {Meal[]} day4 - The first day
+ * @property {Meal[]} day5 - The first day
+ * @property {Meal[]} day6 - The first day
+ */
 
 require('isomorphic-fetch');
 require('es6-promise').polyfill();
@@ -111,20 +130,29 @@ const mappingScheduleTemplate = input =>
 const sortMeals = (sortMe, day) =>
   sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
 
-const displayInOrder = (dataObject, day) => {
-  const week = Object.keys(dataObject);
-  const sorted = sortMeals(week, day);
-  return sorted.map(i => ({
-    day: i,
-    meal: dataObject[i],
-  }));
+// const concatNameAndDescription = data => data.name + data.description[0];
+
+/**
+ @param {Schedule} weeksWorthOfMeals
+ */
+const displayDaysandMealsInOrder = (weeksWorthOfMeals, currentDay) => {
+  const standardWeek = Object.keys(weeksWorthOfMeals);
+  const upcomingWeek = sortMeals(standardWeek, currentDay);
+  //  console.log('object data', dataObject);
+  const filterOutDaysWithNoMeals = upcomingWeek.filter(i => weeksWorthOfMeals[i][i] !== undefined);
+
+  // console.log(filterOutDaysWithNoMeals);
+  return filterOutDaysWithNoMeals.map(i => `<h2>${moment().weekday(i).format('ddd')}</h2}${weeksWorthOfMeals[i][i].map(m => `<p>Name:${m.name}</p><p>${m.description}</p>`)}`);
 };
 
+/**
+ @param {Schedule} meals - schedule for meals
+ */
 const renderSchedule = (meals) => {
   const today = moment().weekday();
-  const orderedMeals = displayInOrder(meals, today);
-  // console.log(orderedMeals);
-  $('#schedule').append(mappingScheduleTemplate(orderedMeals));
+  const orderedMeals = displayDaysandMealsInOrder(meals, today);
+  // console.log(orderedMeals.map(m => m);
+  return $('#schedule').append(orderedMeals);
 };
 
 
@@ -133,9 +161,12 @@ $(document).ready(() => {
     render({
       meals: value,
     }));
+
   getScheduleFromEndpoint().then(value =>
     renderSchedule(value));
+
   hideEverything();
+
   $('#mealNav').click(() => {
     $('#addMealSection').show();
     $('#schedule').hide();
@@ -181,7 +212,7 @@ module.exports = {
   mappingMealsIntoTemplate,
   addToState,
   getMealsFromEndpoint,
-  displayInOrder,
+  displayDaysandMealsInOrder,
   scheduleTemplate,
   renderSchedule,
   mappingScheduleTemplate,
