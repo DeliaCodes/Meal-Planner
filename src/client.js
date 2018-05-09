@@ -118,14 +118,14 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
-const unrollingPerDayMeals = input => input.map(m => m);
-
+/* const unrollingPerDayMeals = input => input.map(m => m);
+ */
 // npconst perMealTemplate = input => `<p>${input.meal}</p>`;
 
-const scheduleTemplate = meals => `<h2>${moment().weekday(meals.day).format('ddd')}</h2><p>${meals.meal.map(m => m)}</p>`;
-
+/* const scheduleTemplate = meals => `<h2>${moment().weekday(meals.day).format('ddd')}</h2><p>${meals.meal.map(m => m)}</p>`; */
+/*
 const mappingScheduleTemplate = input =>
-  input.map(m => scheduleTemplate(m)).join('');
+  input.map(m => scheduleTemplate(m)).join(''); */
 
 const convertWeekDayToNumber = data => moment().day(data).format('d');
 
@@ -143,10 +143,6 @@ const sortWeekDays = (daysToSort, currentDay) => {
 const displayDaysandMealsInOrder = (weeksWorthOfMeals, currentDay) => {
   const standardWeek = Object.keys(weeksWorthOfMeals);
   const upcomingWeek = sortWeekDays(standardWeek, currentDay);
-  //  console.log('object data', dataObject);
-  const filterOutDaysWithNoMeals = upcomingWeek.filter(i => weeksWorthOfMeals[i][i] !== undefined);
-  // console.log(filterOutDaysWithNoMeals);
-  return filterOutDaysWithNoMeals.map(i => `<h2>${moment().weekday(i).format('ddd')}</h2}${weeksWorthOfMeals[i][i].map(m => `<p>Name:${m.name}</p><p>${m.description}</p>`)}`);
 };
 
 /**
