@@ -10,13 +10,13 @@
 /**
  * Schedule
  * @typedef {Object} Schedule
- * @property {Meal[]} day0 - The first day
- * @property {Meal[]} day1 - The first day
- * @property {Meal[]} day2 - The first day
- * @property {Meal[]} day3 - The first day
- * @property {Meal[]} day4 - The first day
- * @property {Meal[]} day5 - The first day
- * @property {Meal[]} day6 - The first day
+ * @property {Meal[]} Sun - The first day
+ * @property {Meal[]} Mon - The first day
+ * @property {Meal[]} Tue - The first day
+ * @property {Meal[]} Wed - The first day
+ * @property {Meal[]} Thu - The first day
+ * @property {Meal[]} Fri - The first day
+ * @property {Meal[]} Sat - The first day
  */
 
 
@@ -67,13 +67,13 @@ app.post('/meals', (req, res) => {
  */
 const sortMealData = (data) => {
   const sortedItems = {
-    day0: [],
-    day1: [],
-    day2: [],
-    day3: [],
-    day4: [],
-    day5: [],
-    day6: [],
+    Sun: [],
+    Mon: [],
+    Tue: [],
+    Wed: [],
+    Thu: [],
+    Fri: [],
+    Sat: [],
   };
 
   data.forEach(m => sortedItems[`day${m.dayOfWeek}`].push(m));
