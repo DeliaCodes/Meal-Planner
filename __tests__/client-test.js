@@ -176,8 +176,8 @@ describe('Client Side tests', () => {
       }],
     };
 
-    const result =
+    const result = {};
 
-      expect(displayDaysandMealsInOrder(mealsOfWeek, 3)).toEqual(result);
+    expect(displayDaysandMealsInOrder(mealsOfWeek, 3)).toEqual(result);
   });
 });
