@@ -9,16 +9,12 @@ moment().format();
 const {
   render,
   template,
-  mappingMealsIntoTemplate,
   addToState,
   getMealsFromEndpoint,
   sortWeekDays,
   displayDaysandMealsInOrder,
-  scheduleTemplate,
   convertNumberToWeekDay,
   renderSchedule,
-  mappingScheduleTemplate,
-  unrollingPerDayMeals,
   convertWeekDayToNumber,
 } = require('../src/client');
 

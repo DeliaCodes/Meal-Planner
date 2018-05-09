@@ -213,9 +213,6 @@ module.exports = {
   displayDaysandMealsInOrder,
   sortWeekDays,
   convertNumberToWeekDay,
-  scheduleTemplate,
   renderSchedule,
-  mappingScheduleTemplate,
-  unrollingPerDayMeals,
   convertWeekDayToNumber,
 };
