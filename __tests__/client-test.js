@@ -12,8 +12,10 @@ const {
   mappingMealsIntoTemplate,
   addToState,
   getMealsFromEndpoint,
-  displayInOrder,
+  sortWeekDays,
+  displayDaysandMealsInOrder,
   scheduleTemplate,
+  convertNumberToWeekDay,
   renderSchedule,
   mappingScheduleTemplate,
   unrollingPerDayMeals,
@@ -60,6 +62,11 @@ describe('Client Side tests', () => {
     const data = 'Friday';
     const result = convertWeekDayToNumber(data);
     expect(result).toBe('5');
+    expect(convertWeekDayToNumber('Fri')).toBe('5');
+  });
+
+  it('returns day of week when given number', () => {
+    expect(convertNumberToWeekDay(3)).toBe('Wed');
   });
 
   it('mappingMeals is correct - mappingMealsIntoTemplate function', () => {
@@ -143,19 +150,26 @@ describe('Client Side tests', () => {
     expect(appleResult).toEqual(appleExpected);
   });
 
-  it('sorts data into proper order', () => {
+  it('Sorts array of meals correctly', () => {
+    const unsortedArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    const result = ['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'];
+
+    expect(sortWeekDays(unsortedArray, 3)).toEqual(result);
+  });
+  it('Displays data in order', () => {
     const mealsOfWeek = {
-      day0: [{
+      Sun: [{
         dayOfWeek: '0',
         description: ['Thing'],
         name: 'other thing',
       }],
-      day3: [{
+      Wed: [{
         dayOfWeek: '0',
         description: ['Gestae'],
         name: 'Res',
       }],
-      day5: [{
+      Fri: [{
         dayOfWeek: '0',
         description: ['etc'],
         name: 'Ibid',
@@ -163,19 +177,19 @@ describe('Client Side tests', () => {
     };
 
     const result = [{
-      day: '3',
+      day: 'Wed',
       meal: ['Res', 'Gestae'],
     },
     {
-      day: '5',
+      day: 'Fri',
       meal: ['Ibid', 'etc'],
     },
     {
-      day: '0',
+      day: 'Sun',
       meal: ['other thing', 'Thing'],
     },
     ];
 
-    expect(displayInOrder(mealsOfWeek, 3)).toEqual(result);
+    expect(displayDaysandMealsInOrder(mealsOfWeek, 3)).toEqual(result);
   });
 });

@@ -118,24 +118,31 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
-/* const unrollingPerDayMeals = input => input.map(m => m); */
+const unrollingPerDayMeals = input => input.map(m => m);
 
 // npconst perMealTemplate = input => `<p>${input.meal}</p>`;
 
-/* const scheduleTemplate = meals => `<h2>${moment().weekday(meals.day).format('ddd')}</h2><p>${meals.meal.map(m => m)}</p>`;
+const scheduleTemplate = meals => `<h2>${moment().weekday(meals.day).format('ddd')}</h2><p>${meals.meal.map(m => m)}</p>`;
 
 const mappingScheduleTemplate = input =>
-  input.map(m => scheduleTemplate(m)).join(''); */
+  input.map(m => scheduleTemplate(m)).join('');
 
-const sortMeals = (sortMe, day) =>
-  sortMe.filter(x => x >= day).concat(sortMe.filter(x => x < day));
+const convertWeekDayToNumber = data => moment().day(data).format('d');
+
+const convertNumberToWeekDay = number => moment().weekday(number).format('ddd');
+
+const sortWeekDays = (daysToSort, currentDay) => {
+  const numberedDays = daysToSort.map(stringDay => convertWeekDayToNumber(stringDay));
+  const sortedDayNumbers = numberedDays.filter(x => x >= currentDay).concat(numberedDays.filter(x => x < currentDay));
+  return sortedDayNumbers.map(dayNumber => convertNumberToWeekDay(dayNumber));
+};
 
 /**
  @param {Schedule} weeksWorthOfMeals
  */
 const displayDaysandMealsInOrder = (weeksWorthOfMeals, currentDay) => {
   const standardWeek = Object.keys(weeksWorthOfMeals);
-  const upcomingWeek = sortMeals(standardWeek, currentDay);
+  const upcomingWeek = sortWeekDays(standardWeek, currentDay);
   //  console.log('object data', dataObject);
   const filterOutDaysWithNoMeals = upcomingWeek.filter(i => weeksWorthOfMeals[i][i] !== undefined);
   // console.log(filterOutDaysWithNoMeals);
@@ -174,8 +181,6 @@ $(document).ready(() => {
   });
 });
 
-const convertWeekDayToNumber = data => moment().day(data).format('d');
-
 // untested
 const getMealsFromUser = () => {
   const newMeal = {};
@@ -210,6 +215,8 @@ module.exports = {
   addToState,
   getMealsFromEndpoint,
   displayDaysandMealsInOrder,
+  sortWeekDays,
+  convertNumberToWeekDay,
   scheduleTemplate,
   renderSchedule,
   mappingScheduleTemplate,
