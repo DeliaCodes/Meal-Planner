@@ -142,7 +142,7 @@ const sortWeekDays = (daysToSort, currentDay) => {
  */
 const displayDaysandMealsInOrder = (weeksWorthOfMeals, currentDay) => {
   const standardWeek = Object.keys(weeksWorthOfMeals);
-  const upcomingWeek = sortWeekDays(standardWeek, currentDay);
+  return sortWeekDays(standardWeek, currentDay);
 };
 
 /**

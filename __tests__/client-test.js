@@ -157,23 +157,23 @@ describe('Client Side tests', () => {
     const mealsOfWeek = {
       Sun: [{
         dayOfWeek: '0',
-        description: ['Thing'],
+        description: 'Thing',
         name: 'other thing',
       }],
       Wed: [{
         dayOfWeek: '0',
-        description: ['Gestae'],
+        description: 'Gestae',
         name: 'Res',
       }],
       Fri: [{
         dayOfWeek: '0',
-        description: ['etc'],
+        description: 'etc',
         name: 'Ibid',
       }],
     };
 
-    const result = {};
+    const result = ['Fri', 'Sun', 'Wed'];
 
-    expect(displayDaysandMealsInOrder(mealsOfWeek, 3)).toEqual(result);
+    expect(displayDaysandMealsInOrder(mealsOfWeek, 5)).toEqual(result);
   });
 });
