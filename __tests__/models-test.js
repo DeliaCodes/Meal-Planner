@@ -20,21 +20,21 @@ describe('Testing Meal Models', () => {
     mongoose.disconnect();
   });
 
-  /*   xit('data can be created', () => mealModel.create({
-      name: 'cheeseburger',
-      description: ['burger', 'cheese'],
-      dayOfWeek: 2,
-    })
-      .then(() =>
-        mealModel.findOne().then((model) => {
-          expect(model.name).toEqual('cheeseburger');
-          expect(model.description).toContain('burger');
-          expect(model.dayOfWeek).toEqual(2);
-        }))); */
+  it('data can be created', () => mealModel.create({
+    name: 'cheeseburger',
+    description: 'burger, cheese',
+    dayOfWeek: 2,
+  })
+    .then(() =>
+      mealModel.findOne().then((model) => {
+        expect(model.name).toEqual('cheeseburger');
+        expect(model.description).toContain('burger');
+        expect(model.dayOfWeek).toEqual('2');
+      })));
 
-  xit('data can be found', () => mealModel.create({
+  it('data can be found', () => mealModel.create({
     name: 'pretzel',
-    description: ['salt', 'dough'],
+    description: 'salt, dough',
     dayOfWeek: 1,
   })
     .then(() =>
@@ -42,6 +42,6 @@ describe('Testing Meal Models', () => {
         const [data] = model;
         expect(data.name).toEqual('pretzel');
         expect(data.description).toContain('salt');
-        expect(data.dayOfWeek).toEqual(1);
+        expect(data.dayOfWeek).toEqual('1');
       })));
 });
