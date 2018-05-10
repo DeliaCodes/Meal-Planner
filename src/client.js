@@ -122,7 +122,11 @@ const hideEverything = () => {
  */
 // npconst perMealTemplate = input => `<p>${input.meal}</p>`;
 
-/* const scheduleTemplate = meals => `<h2>${moment().weekday(meals.day).format('ddd')}</h2><p>${meals.meal.map(m => m)}</p>`; */
+const scheduleTemplate = meals =>
+  `<h2>${moment()
+    .weekday(meals.dayOfWeek)
+    .format('ddd')}</h2><p>${meals.name}</p><p>${meals.description}`;
+
 /*
 const mappingScheduleTemplate = input =>
   input.map(m => scheduleTemplate(m)).join(''); */
@@ -158,6 +162,10 @@ const daysFromCurrentDay = (weeksWorthOfMeals, currentDay) => {
  */
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
+
+// do I need this?
+const iterateOverDays = mealsForWeek =>
+  mealsForWeek.map(day => day.map(meals => meals));
 
 /**
  @param {Schedule} meals - schedule for meals
@@ -224,7 +232,9 @@ module.exports = {
   daysFromCurrentDay,
   sortWeekDays,
   convertNumberToWeekDay,
+  iterateOverDays,
   renderSchedule,
+  scheduleTemplate,
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
 };

@@ -13,8 +13,10 @@ const {
   getMealsFromEndpoint,
   sortWeekDays,
   daysFromCurrentDay,
+  iterateOverDays,
   convertNumberToWeekDay,
   renderSchedule,
+  scheduleTemplate,
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
 } = require('../src/client');
@@ -48,12 +50,12 @@ describe('Client Side tests', () => {
       }),).toContain('macaroni');
   });
 
-  /* it('schedule template returns ok', () => {
+  it('schedule template returns ok', () => {
     expect(scheduleTemplate({
-      day: 0,
-      meal: ['Fish'],
-    })).toContain('Fish');
-  }); */
+        dayOfWeek: 0,
+        name: 'Fish',
+      }),).toContain('Fish');
+  });
 
   it('Returns Number when given day of week', () => {
     const data = 'Friday';
@@ -220,6 +222,42 @@ describe('Client Side tests', () => {
     ];
 
     const week = ['Fri', 'Sun', 'Wed'];
-    expect(accessEachDaysMealsInOrder(week, mealsOfWeek)).toContainEqual('gestae',);
+    expect(accessEachDaysMealsInOrder(week, mealsOfWeek)).toContainEqual(result,);
+  });
+
+  it('serves up each days meals', () => {
+    const weeksMeals = [
+      [
+        {
+          dayOfWeek: '0',
+          description: 'etc',
+          name: 'Ibid',
+        },
+      ],
+      [
+        {
+          dayOfWeek: '0',
+          description: 'Thing',
+          name: 'other thing',
+        },
+      ],
+      [
+        {
+          dayOfWeek: '0',
+          description: 'Gestae',
+          name: 'Res',
+        },
+      ],
+    ];
+
+    const result = [
+      {
+        dayOfWeek: '0',
+        description: 'Gestae',
+        name: 'Res',
+      },
+    ];
+
+    expect(iterateOverDays(weeksMeals)).toContainEqual(result);
   });
 });
