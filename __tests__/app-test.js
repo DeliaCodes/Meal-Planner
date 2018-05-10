@@ -95,6 +95,6 @@ describe('Meal Endpoint Tests', () => {
       request(app)
         .get('/schedule'))
     .then((Response) => {
-      expect(Response.body['5'][0].name).toEqual('mince meat');
+      expect(Response.body.Fri[0].name).toEqual('mince meat');
     }));
 });
