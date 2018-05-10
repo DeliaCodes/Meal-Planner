@@ -127,43 +127,54 @@ const hideEverything = () => {
 const mappingScheduleTemplate = input =>
   input.map(m => scheduleTemplate(m)).join(''); */
 
-const convertWeekDayToNumber = data => moment().day(data).format('d');
+const convertWeekDayToNumber = data =>
+  moment()
+    .day(data)
+    .format('d');
 
-const convertNumberToWeekDay = number => moment().weekday(number).format('ddd');
+const convertNumberToWeekDay = number =>
+  moment()
+    .weekday(number)
+    .format('ddd');
 
 const sortWeekDays = (daysToSort, currentDay) => {
-  const numberedDays = daysToSort.map(stringDay => convertWeekDayToNumber(stringDay));
-  const sortedDayNumbers = numberedDays.filter(x => x >= currentDay).concat(numberedDays.filter(x => x < currentDay));
+  const numberedDays = daysToSort.map(stringDay =>
+    convertWeekDayToNumber(stringDay),);
+  const sortedDayNumbers = numberedDays
+    .filter(x => x >= currentDay)
+    .concat(numberedDays.filter(x => x < currentDay));
   return sortedDayNumbers.map(dayNumber => convertNumberToWeekDay(dayNumber));
 };
 
 /**
  @param {Schedule} weeksWorthOfMeals
  */
-const displayDaysandMealsInOrder = (weeksWorthOfMeals, currentDay) => {
+const daysFromCurrentDay = (weeksWorthOfMeals, currentDay) => {
   const standardWeek = Object.keys(weeksWorthOfMeals);
   return sortWeekDays(standardWeek, currentDay);
 };
+/**
+ @param {Schedule} week - array of current week
+ */
+const accessEachDaysMealsInOrder = (week, mealObject) =>
+  week.map(day => mealObject[day]);
 
 /**
  @param {Schedule} meals - schedule for meals
  */
 const renderSchedule = (meals) => {
   const today = moment().weekday();
-  const orderedMeals = displayDaysandMealsInOrder(meals, today);
+  const nextWeek = daysFromCurrentDay(meals, today);
   // console.log(orderedMeals.map(m => m);
-  return $('#schedule').append(orderedMeals);
 };
-
 
 $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }));
+    }),);
 
-  getScheduleFromEndpoint().then(value =>
-    renderSchedule(value));
+  getScheduleFromEndpoint().then(value => renderSchedule(value));
 
   hideEverything();
 
@@ -210,9 +221,10 @@ module.exports = {
   mappingMealsIntoTemplate,
   addToState,
   getMealsFromEndpoint,
-  displayDaysandMealsInOrder,
+  daysFromCurrentDay,
   sortWeekDays,
   convertNumberToWeekDay,
   renderSchedule,
+  accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
 };

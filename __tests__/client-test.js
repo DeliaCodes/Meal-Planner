@@ -12,9 +12,10 @@ const {
   addToState,
   getMealsFromEndpoint,
   sortWeekDays,
-  displayDaysandMealsInOrder,
+  daysFromCurrentDay,
   convertNumberToWeekDay,
   renderSchedule,
+  accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
 } = require('../src/client');
 
@@ -42,9 +43,9 @@ describe('Client Side tests', () => {
 
   it('meal template returns - template function', () => {
     expect(template({
-      name: 'macaroni',
-      description: 'macaroni, salt, and water',
-    })).toContain('macaroni');
+        name: 'macaroni',
+        description: 'macaroni, salt, and water',
+      }),).toContain('macaroni');
   });
 
   /* it('schedule template returns ok', () => {
@@ -100,10 +101,12 @@ describe('Client Side tests', () => {
   it('It renders - render function', () => {
     document.body.innerHTML = '<div><div id="currentMeals"/></div>';
     const duck = {
-      meals: [{
-        name: 'ravioli',
-        description: 'ravioli, salt, and water',
-      }],
+      meals: [
+        {
+          name: 'ravioli',
+          description: 'ravioli, salt, and water',
+        },
+      ],
     };
 
     render(duck);
@@ -135,10 +138,12 @@ describe('Client Side tests', () => {
     };
 
     const appleExpected = {
-      meals: [{
-        name: 'macaroni',
-        description: 'macaroni, cayenne, salt, and water',
-      }],
+      meals: [
+        {
+          name: 'macaroni',
+          description: 'macaroni, cayenne, salt, and water',
+        },
+      ],
     };
 
     const appleResult = addToState(appleStore, appleCore);
@@ -153,27 +158,68 @@ describe('Client Side tests', () => {
 
     expect(sortWeekDays(unsortedArray, 3)).toEqual(result);
   });
-  it('Displays data in order', () => {
+  it('returns days from backend object', () => {
     const mealsOfWeek = {
-      Sun: [{
-        dayOfWeek: '0',
-        description: 'Thing',
-        name: 'other thing',
-      }],
-      Wed: [{
-        dayOfWeek: '0',
-        description: 'Gestae',
-        name: 'Res',
-      }],
-      Fri: [{
-        dayOfWeek: '0',
-        description: 'etc',
-        name: 'Ibid',
-      }],
+      Sun: [
+        {
+          dayOfWeek: '0',
+          description: 'Thing',
+          name: 'other thing',
+        },
+      ],
+      Wed: [
+        {
+          dayOfWeek: '0',
+          description: 'Gestae',
+          name: 'Res',
+        },
+      ],
+      Fri: [
+        {
+          dayOfWeek: '0',
+          description: 'etc',
+          name: 'Ibid',
+        },
+      ],
     };
 
     const result = ['Fri', 'Sun', 'Wed'];
 
-    expect(displayDaysandMealsInOrder(mealsOfWeek, 5)).toEqual(result);
+    expect(daysFromCurrentDay(mealsOfWeek, 5)).toEqual(result);
+  });
+  it('Accesses each days meals', () => {
+    const mealsOfWeek = {
+      Sun: [
+        {
+          dayOfWeek: '0',
+          description: 'Thing',
+          name: 'other thing',
+        },
+      ],
+      Wed: [
+        {
+          dayOfWeek: '0',
+          description: 'Gestae',
+          name: 'Res',
+        },
+      ],
+      Fri: [
+        {
+          dayOfWeek: '0',
+          description: 'etc',
+          name: 'Ibid',
+        },
+      ],
+    };
+    const result = [
+      {
+        dayOfWeek: '0',
+        description: 'etc',
+        name: 'Ibid',
+      },
+    ];
+
+    const week = ['Fri', 'Sun', 'Wed'];
+    expect(accessEachDaysMealsInOrder(week, mealsOfWeek)).toContainEqual('gestae',);
   });
 });
