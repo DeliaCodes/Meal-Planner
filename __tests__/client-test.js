@@ -228,11 +228,7 @@ describe('Client Side tests', () => {
       }],
     ];
 
-    const result = [{
-      dayOfWeek: '0',
-      description: 'Gestae',
-      name: 'Res',
-    }];
+    const result = ['<h2>Sun</h2><p>Ibid</p><p>etc'];
 
     expect(iterateOverDays(weeksMeals)).toContainEqual(result);
   });

@@ -170,9 +170,11 @@ const renderSchedule = (meals) => {
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
-  const mealsHtml = iterateOverDays(orderedMeals);
-  console.log(mealsHtml);
-  $('#schedule').empty().append(mealsHtml[0][0]);
+  const [
+    [mealsHtml],
+  ] = iterateOverDays(orderedMeals);
+  // console.log(mealsHtml);
+  $('#schedule').empty().append(mealsHtml);
 
   // console.log(orderedMeals.map(m => m);
 };

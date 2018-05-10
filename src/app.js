@@ -87,7 +87,7 @@ const sortMealData = (data) => {
 
 app.get('/schedule', (req, res) => {
   getAllMealsFromDB().then((meals) => {
-    // console.log(meals);
+    console.log(meals);
     const scheduledMeals = sortMealData(meals);
     return res.status(200).json(scheduledMeals);
   });
