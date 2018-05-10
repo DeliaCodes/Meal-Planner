@@ -28,6 +28,10 @@ const {
   mealModel,
 } = require('./models');
 
+const moment = require('moment');
+
+moment().format();
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -76,7 +80,7 @@ const sortMealData = (data) => {
     Sat: [],
   };
 
-  data.forEach(m => sortedItems[`day${m.dayOfWeek}`].push(m));
+  data.forEach(m => sortedItems[`${moment().weekday(m.dayOfWeek).format('ddd')}`].push(m));
 
   return sortedItems;
 };

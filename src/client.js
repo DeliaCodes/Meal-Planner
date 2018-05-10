@@ -165,7 +165,7 @@ const accessEachDaysMealsInOrder = (week, mealObject) =>
 
 // do I need this?
 const iterateOverDays = mealsForWeek =>
-  mealsForWeek.map(day => day.map(meals => meals));
+  mealsForWeek.map(day => day.map(meals => scheduleTemplate(meals)));
 
 /**
  @param {Schedule} meals - schedule for meals
@@ -173,6 +173,12 @@ const iterateOverDays = mealsForWeek =>
 const renderSchedule = (meals) => {
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
+
+  const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
+  const mealsHtml = iterateOverDays(orderedMeals);
+  console.log(mealsHtml);
+  $('#schedule').html(mealsHtml);
+
   // console.log(orderedMeals.map(m => m);
 };
 

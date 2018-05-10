@@ -30,16 +30,16 @@ describe('Pure function tests', () => {
     }];
 
     const result = {
-      0: [],
-      1: [],
-      2: [],
-      3: [{
+      Sun: [],
+      Mon: [],
+      Tue: [],
+      Wed: [{
         name: 'Something',
         dayOfWeek: '3',
       }],
-      4: [],
-      5: [],
-      6: [],
+      Thu: [],
+      Fri: [],
+      Sat: [],
     };
     expect(sortMealData(data)).toEqual(result);
   });

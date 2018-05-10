@@ -236,7 +236,7 @@ describe('Client Side tests', () => {
       ],
       [
         {
-          dayOfWeek: '0',
+          dayOfWeek: '1',
           description: 'Thing',
           name: 'other thing',
         },
