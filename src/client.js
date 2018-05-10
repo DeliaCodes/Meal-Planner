@@ -132,18 +132,14 @@ const mappingScheduleTemplate = input =>
   input.map(m => scheduleTemplate(m)).join(''); */
 
 const convertWeekDayToNumber = data =>
-  moment()
-    .day(data)
-    .format('d');
+  moment().day(data).format('d');
 
 const convertNumberToWeekDay = number =>
-  moment()
-    .weekday(number)
-    .format('ddd');
+  moment().weekday(number).format('ddd');
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay),);
+    convertWeekDayToNumber(stringDay));
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -158,7 +154,7 @@ const daysFromCurrentDay = (weeksWorthOfMeals, currentDay) => {
   return sortWeekDays(standardWeek, currentDay);
 };
 /**
- @param {Schedule} week - array of current week
+ @param {Schedule} mealObject - array of current week
  */
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
@@ -173,11 +169,10 @@ const iterateOverDays = mealsForWeek =>
 const renderSchedule = (meals) => {
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
-
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
   const mealsHtml = iterateOverDays(orderedMeals);
   console.log(mealsHtml);
-  $('#schedule').html(mealsHtml);
+  $('#schedule').empty().append(mealsHtml[0][0]);
 
   // console.log(orderedMeals.map(m => m);
 };
@@ -186,7 +181,7 @@ $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }),);
+    }));
 
   getScheduleFromEndpoint().then(value => renderSchedule(value));
 
@@ -196,6 +191,7 @@ $(document).ready(() => {
     $('#addMealSection').show();
     $('#schedule').hide();
   });
+
   $('#scheduleNav').click(() => {
     $('#addMealSection').hide();
     $('#schedule').show();

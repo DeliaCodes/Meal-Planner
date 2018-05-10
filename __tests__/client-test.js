@@ -45,16 +45,16 @@ describe('Client Side tests', () => {
 
   it('meal template returns - template function', () => {
     expect(template({
-        name: 'macaroni',
-        description: 'macaroni, salt, and water',
-      }),).toContain('macaroni');
+      name: 'macaroni',
+      description: 'macaroni, salt, and water',
+    })).toContain('macaroni');
   });
 
   it('schedule template returns ok', () => {
     expect(scheduleTemplate({
-        dayOfWeek: 0,
-        name: 'Fish',
-      }),).toContain('Fish');
+      dayOfWeek: 0,
+      name: 'Fish',
+    })).toContain('Fish');
   });
 
   it('Returns Number when given day of week', () => {
@@ -103,12 +103,10 @@ describe('Client Side tests', () => {
   it('It renders - render function', () => {
     document.body.innerHTML = '<div><div id="currentMeals"/></div>';
     const duck = {
-      meals: [
-        {
-          name: 'ravioli',
-          description: 'ravioli, salt, and water',
-        },
-      ],
+      meals: [{
+        name: 'ravioli',
+        description: 'ravioli, salt, and water',
+      }],
     };
 
     render(duck);
@@ -119,9 +117,11 @@ describe('Client Side tests', () => {
   it('renders Schedule test', () => {
     document.body.innerHTML = '<div><div id="schedule"/></div>';
     const meals = {
-      Sun: ['Thing', 'other thing'],
-      Wed: ['Gestae'],
-      Fri: ['Res'],
+      Wed: [{
+        dayOfWeek: '0',
+        description: 'Gestae',
+        name: 'Res',
+      }],
     };
 
     renderSchedule(meals);
@@ -140,12 +140,10 @@ describe('Client Side tests', () => {
     };
 
     const appleExpected = {
-      meals: [
-        {
-          name: 'macaroni',
-          description: 'macaroni, cayenne, salt, and water',
-        },
-      ],
+      meals: [{
+        name: 'macaroni',
+        description: 'macaroni, cayenne, salt, and water',
+      }],
     };
 
     const appleResult = addToState(appleStore, appleCore);
@@ -162,27 +160,21 @@ describe('Client Side tests', () => {
   });
   it('returns days from backend object', () => {
     const mealsOfWeek = {
-      Sun: [
-        {
-          dayOfWeek: '0',
-          description: 'Thing',
-          name: 'other thing',
-        },
-      ],
-      Wed: [
-        {
-          dayOfWeek: '0',
-          description: 'Gestae',
-          name: 'Res',
-        },
-      ],
-      Fri: [
-        {
-          dayOfWeek: '0',
-          description: 'etc',
-          name: 'Ibid',
-        },
-      ],
+      Sun: [{
+        dayOfWeek: '0',
+        description: 'Thing',
+        name: 'other thing',
+      }],
+      Wed: [{
+        dayOfWeek: '0',
+        description: 'Gestae',
+        name: 'Res',
+      }],
+      Fri: [{
+        dayOfWeek: '0',
+        description: 'etc',
+        name: 'Ibid',
+      }],
     };
 
     const result = ['Fri', 'Sun', 'Wed'];
@@ -191,72 +183,56 @@ describe('Client Side tests', () => {
   });
   it('Accesses each days meals', () => {
     const mealsOfWeek = {
-      Sun: [
-        {
-          dayOfWeek: '0',
-          description: 'Thing',
-          name: 'other thing',
-        },
-      ],
-      Wed: [
-        {
-          dayOfWeek: '0',
-          description: 'Gestae',
-          name: 'Res',
-        },
-      ],
-      Fri: [
-        {
-          dayOfWeek: '0',
-          description: 'etc',
-          name: 'Ibid',
-        },
-      ],
-    };
-    const result = [
-      {
+      Sun: [{
+        dayOfWeek: '0',
+        description: 'Thing',
+        name: 'other thing',
+      }],
+      Wed: [{
+        dayOfWeek: '0',
+        description: 'Gestae',
+        name: 'Res',
+      }],
+      Fri: [{
         dayOfWeek: '0',
         description: 'etc',
         name: 'Ibid',
-      },
-    ];
+      }],
+    };
+    const result = [{
+      dayOfWeek: '0',
+      description: 'etc',
+      name: 'Ibid',
+    }];
 
     const week = ['Fri', 'Sun', 'Wed'];
-    expect(accessEachDaysMealsInOrder(week, mealsOfWeek)).toContainEqual(result,);
+    expect(accessEachDaysMealsInOrder(week, mealsOfWeek)).toContainEqual(result);
   });
 
   it('serves up each days meals', () => {
     const weeksMeals = [
-      [
-        {
-          dayOfWeek: '0',
-          description: 'etc',
-          name: 'Ibid',
-        },
-      ],
-      [
-        {
-          dayOfWeek: '1',
-          description: 'Thing',
-          name: 'other thing',
-        },
-      ],
-      [
-        {
-          dayOfWeek: '0',
-          description: 'Gestae',
-          name: 'Res',
-        },
-      ],
-    ];
-
-    const result = [
-      {
+      [{
+        dayOfWeek: '0',
+        description: 'etc',
+        name: 'Ibid',
+      }],
+      [{
+        dayOfWeek: '1',
+        description: 'Thing',
+        name: 'other thing',
+      }],
+      [{
         dayOfWeek: '0',
         description: 'Gestae',
         name: 'Res',
-      },
+      }],
     ];
+
+    const result = [{
+      dayOfWeek: '0',
+      description: 'Gestae',
+      name: 'Res',
+    }];
 
     expect(iterateOverDays(weeksMeals)).toContainEqual(result);
   });
