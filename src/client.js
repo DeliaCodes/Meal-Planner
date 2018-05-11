@@ -125,17 +125,21 @@ const hideEverything = () => {
 const scheduleTemplate = meals =>
   `<h2>${moment()
     .weekday(meals.dayOfWeek)
-    .format('ddd')}</h2><p>${meals.name}</p><p>${meals.description}`;
+    .format('ddd')}</h2><p>${meals.name}</p><p>${meals.description}</p>`;
 
 /*
 const mappingScheduleTemplate = input =>
   input.map(m => scheduleTemplate(m)).join(''); */
 
 const convertWeekDayToNumber = data =>
-  moment().day(data).format('d');
+  moment()
+    .day(data)
+    .format('d');
 
 const convertNumberToWeekDay = number =>
-  moment().weekday(number).format('ddd');
+  moment()
+    .weekday(number)
+    .format('ddd');
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
@@ -162,7 +166,6 @@ const accessEachDaysMealsInOrder = (week, mealObject) =>
 // do I need this?
 const iterateOverDays = mealsForWeek =>
   mealsForWeek.map(day => day.map(meals => scheduleTemplate(meals)));
-
 /**
  @param {Schedule} meals - schedule for meals
  */
@@ -170,10 +173,10 @@ const renderSchedule = (meals) => {
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
-  const [
-    [mealsHtml],
-  ] = iterateOverDays(orderedMeals);
-  // console.log(mealsHtml);
+  const mealsHtml = iterateOverDays(orderedMeals);
+
+  console.log(Array.from(new Set(mealsHtml)));
+
   $('#schedule').empty().append(mealsHtml);
 
   // console.log(orderedMeals.map(m => m);
