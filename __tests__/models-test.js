@@ -20,7 +20,7 @@ describe('Testing Meal Models', () => {
     mongoose.disconnect();
   });
 
-  it('data can be created', () => mealModel.create({
+  xit('data can be created', () => mealModel.create({
     name: 'cheeseburger',
     description: 'burger, cheese',
     dayOfWeek: 2,
