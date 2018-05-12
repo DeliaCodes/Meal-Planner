@@ -228,8 +228,8 @@ describe('Client Side tests', () => {
       }],
     ];
 
-    const result = ['<h2>Sun</h2><p>Ibid</p><p>etc'];
+    const result = ['<h2>Sun</h2><p>Ibid</p><p>etc</p>', '<h2>Mon</h2><p>other thing</p><p>Thing</p>', '<h2>Sun</h2><p>Res</p><p>Gestae</p>'];
 
-    expect(iterateOverDays(weeksMeals)).toContainEqual(result);
+    expect(iterateOverDays(weeksMeals)).toEqual(result);
   });
 });
