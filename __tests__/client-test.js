@@ -12,13 +12,14 @@ const {
   addToState,
   getMealsFromEndpoint,
   sortWeekDays,
+  iterIterDay,
   daysFromCurrentDay,
-  iterateOverDays,
   convertNumberToWeekDay,
   renderSchedule,
   scheduleTemplate,
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
+  insertAndFlattenToHTML,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -210,26 +211,57 @@ describe('Client Side tests', () => {
   });
 
   it('serves up each days meals', () => {
-    const weeksMeals = [
+    const weeksMeals = [{
+      dayOfWeek: '0',
+      description: 'etc',
+      name: 'Ibid',
+    }, {
+      dayOfWeek: '1',
+      description: 'Thing',
+      name: 'other thing',
+    }];
+
+    const result = ['<p>Ibid</p><p>etc</p>', '<p>other thing</p><p>Thing</p>'];
+
+    expect(iterIterDay(weeksMeals)).toEqual(result);
+  });
+  it('flattens and returns', () => {
+    const nextWeek = ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu'];
+    const someMeals = [
       [{
-        dayOfWeek: '0',
+        dayOfWeek: '5',
         description: 'etc',
         name: 'Ibid',
+      }, {
+        dayOfWeek: '5',
+        description: 'Clipper',
+        name: 'Blue Star Line',
       }],
+      [],
       [{
-        dayOfWeek: '1',
+        dayOfWeek: '0',
+        description: 'Thing',
+        name: 'other thing',
+      }],
+      [],
+      [{
+        dayOfWeek: '2',
         description: 'Thing',
         name: 'other thing',
       }],
       [{
-        dayOfWeek: '0',
+        dayOfWeek: '3',
         description: 'Gestae',
         name: 'Res',
       }],
+      [{
+        dayOfWeek: '4',
+        description: 'Thing',
+        name: 'other thing',
+      }],
     ];
+    const result = '<h2>Fri</h2><p>Ibid</p><p>etc</p><p>Blue Star Line</p><p>Clipper</p><h2>Sat</h2><h2>Sun</h2><p>other thing</p><p>Thing</p><h2>Mon</h2><h2>Tue</h2><p>other thing</p><p>Thing</p><h2>Wed</h2><p>Res</p><p>Gestae</p><h2>Thu</h2><p>other thing</p><p>Thing</p>';
 
-    const result = ['<h2>Sun</h2><p>Ibid</p><p>etc</p>', '<h2>Mon</h2><p>other thing</p><p>Thing</p>', '<h2>Sun</h2><p>Res</p><p>Gestae</p>'];
-
-    expect(iterateOverDays(weeksMeals)).toEqual(result);
+    expect(insertAndFlattenToHTML(someMeals, nextWeek)).toMatch(result);
   });
 });

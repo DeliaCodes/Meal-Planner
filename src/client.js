@@ -123,9 +123,9 @@ const hideEverything = () => {
 // npconst perMealTemplate = input => `<p>${input.meal}</p>`;
 
 const scheduleTemplate = meals =>
-  `<h2>${moment()
-    .weekday(meals.dayOfWeek)
-    .format('ddd')}</h2><p>${meals.name}</p><p>${meals.description}</p>`;
+  `<p>${meals.name}</p><p>${meals.description}</p>`;
+
+const dayTemplate = dayInWeek => `<h2>${dayInWeek}</h2>`;
 
 /*
 const mappingScheduleTemplate = input =>
@@ -164,8 +164,23 @@ const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
 // do I need this?
-const iterateOverDays = mealsForWeek =>
-  mealsForWeek.map(day => day.map(meals => scheduleTemplate(meals)).reduce((acc, x) => acc.concat(x), []).join(''));
+/* const iterateOverDays = mealsForWeek =>
+  mealsForWeek.map(day => day.map(meals => scheduleTemplate(meals)).reduce((acc, x) => acc.concat(x), []).join('')); */
+
+const iterIterDay = mealsForDay => mealsForDay.map(meals => scheduleTemplate(meals));
+
+const insertAndFlattenToHTML = (weekMeals, week) => {
+  // console.log(week);
+  const accumulatorArray = [];
+  for (let i = 0; i < weekMeals.length; i++) {
+    accumulatorArray.push(dayTemplate(week[i]));
+    accumulatorArray.push(iterIterDay(weekMeals[i]));
+    // console.log(i);
+    // console.log(week[i]);
+  }
+  return accumulatorArray.reduce((acc, x) => acc.concat(x), []).join('');
+};
+
 /**
  @param {Schedule} meals - schedule for meals
  */
@@ -173,8 +188,7 @@ const renderSchedule = (meals) => {
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
-  const mealsHtml = iterateOverDays(orderedMeals);
-
+  const mealsHtml = insertAndFlattenToHTML(orderedMeals, nextWeek);
   $('#schedule').empty().append(mealsHtml);
 
   // console.log(orderedMeals.map(m => m);
@@ -237,9 +251,10 @@ module.exports = {
   daysFromCurrentDay,
   sortWeekDays,
   convertNumberToWeekDay,
-  iterateOverDays,
   renderSchedule,
+  iterIterDay,
   scheduleTemplate,
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
+  insertAndFlattenToHTML,
 };
