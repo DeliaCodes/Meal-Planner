@@ -237,4 +237,5 @@ module.exports = {
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
+  sendMealToEndpoint,
 };

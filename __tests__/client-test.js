@@ -20,6 +20,7 @@ const {
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
+  sendMealToEndpoint,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -38,7 +39,7 @@ describe('Client Side tests', () => {
         name: 'Tea',
         description: 'Tea and water',
       };
-      // const result;
+      const result = sendMealToEndpoint(input);
       expect(result.status).toBe(200);
       expect(result.body).toContain(input);
     });
