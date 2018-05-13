@@ -111,7 +111,7 @@ const hideEverything = () => {
 
 
 const scheduleTemplate = meals =>
-  `<div class="meal"><p class="name">${meals.name}</p><p class="description">${meals.description}</p></div>`;
+  `<div class="meal"><p class="name">${meals.name}</p><p class="description">${meals.description}</p><a class="edit">Delete Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
