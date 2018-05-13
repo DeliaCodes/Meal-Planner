@@ -164,6 +164,25 @@ label input {
   padding: 0.25em;
 }
 
+.name {
+  font-size: 1em;
+}
+
 .description {
+  font-size: 1em;
+}
+
+.meal {
+  display: flex;
+  flex-direction: column;
   padding-bottom: 0.75em;
+  width: 100%;
+}
+
+.delete {
+  background: #2287CC;
+  color: #FFFFFF;
+  text-align: center;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
 }
