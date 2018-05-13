@@ -106,7 +106,6 @@ const sendMealToEndpoint = data =>
 
 const hideEverything = () => {
   $('#schedule').hide();
-  $('#displayMeals').hide();
   $('#addMealSection').hide();
 };
 
