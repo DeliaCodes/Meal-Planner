@@ -84,7 +84,7 @@ describe('Client Side tests', () => {
   });
 
   it('renders Schedule test', () => {
-    document.body.innerHTML = '<div><div id="schedule"/></div>';
+    document.body.innerHTML = '<div><div id="displaySchedule"/></div>';
     const meals = {
       Wed: [{
         dayOfWeek: '0',
@@ -95,7 +95,7 @@ describe('Client Side tests', () => {
 
     renderSchedule(meals);
 
-    expect($('#schedule').html()).toContain('Gestae');
+    expect($('#displaySchedule').html()).toContain('Gestae');
   });
 
   it('modifies store - addToState function', () => {

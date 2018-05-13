@@ -169,7 +169,7 @@ const renderSchedule = (meals) => {
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
   const mealsHtml = insertAndFlattenToHTML(orderedMeals, nextWeek);
-  $('#schedule').empty().append(mealsHtml);
+  $('#displaySchedule').empty().append(mealsHtml);
 
   // console.log(orderedMeals.map(m => m);
 };
