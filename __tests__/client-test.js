@@ -68,39 +68,6 @@ describe('Client Side tests', () => {
   it('returns day of week when given number', () => {
     expect(convertNumberToWeekDay(3)).toBe('Wed');
   });
-
-  /*   it('mappingMeals is correct - mappingMealsIntoTemplate function', () => {
-      const data = [{
-        name: 'macaroni',
-        description: 'macaroni, pepper, salt, and water',
-      }];
-
-      const result = mappingMealsIntoTemplate(data);
-
-      expect(result).toContain('macaroni');
-    });
-   */
-  /* it('mappingIntoScheduleTemplate is correct', () => {
-    const data = [{
-      day: '3',
-      meal: ['Gestae'],
-    },
-    {
-      day: '5',
-      meal: ['Res'],
-    },
-    ];
-
-    const result = mappingScheduleTemplate(data);
-    expect(result).toContain('Wed');
-  }); */
-  /*
-    it('unrolls the schedule meals', () => {
-      const data = ['coal'];
-      const result = unrollingPerDayMeals(data);
-      expect(result).toContain('coal');
-    }); */
-
   it('It renders - render function', () => {
     document.body.innerHTML = '<div><div id="currentMeals"/></div>';
     const duck = {

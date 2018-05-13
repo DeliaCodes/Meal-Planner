@@ -104,32 +104,17 @@ const sendMealToEndpoint = data =>
   }
 }); */
 
-/* const convertDayOfWeek = (data) => {
-  const three = data.filter(x => x.dayOfWeek === 'wed');
-
-  const threeNum = three.map(m => m.dayOfWeek = 3);
-  console.log('three', threeNum);
-  // data.map(m => );
-}; */
-
 const hideEverything = () => {
   $('#schedule').hide();
   $('#displayMeals').hide();
   $('#addMealSection').hide();
 };
 
-/* const unrollingPerDayMeals = input => input.map(m => m);
- */
-// npconst perMealTemplate = input => `<p>${input.meal}</p>`;
 
 const scheduleTemplate = meals =>
   `<p>${meals.name}</p><p>${meals.description}</p>`;
 
 const dayTemplate = dayInWeek => `<h2>${dayInWeek}</h2>`;
-
-/*
-const mappingScheduleTemplate = input =>
-  input.map(m => scheduleTemplate(m)).join(''); */
 
 const convertWeekDayToNumber = data =>
   moment()
@@ -162,10 +147,6 @@ const daysFromCurrentDay = (weeksWorthOfMeals, currentDay) => {
  */
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
-
-// do I need this?
-/* const iterateOverDays = mealsForWeek =>
-  mealsForWeek.map(day => day.map(meals => scheduleTemplate(meals)).reduce((acc, x) => acc.concat(x), []).join('')); */
 
 const iterIterDay = mealsForDay => mealsForDay.map(meals => scheduleTemplate(meals));
 
