@@ -125,3 +125,11 @@ label input {
 #submit {
   width: 20em;
 }
+
+#schedule {
+  background: #FFFFFF;
+  border: 2px solid #000000;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+}
