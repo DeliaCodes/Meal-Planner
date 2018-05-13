@@ -189,7 +189,7 @@ describe('Client Side tests', () => {
       name: 'other thing',
     }];
 
-    const result = ['<p class="meal name">Ibid</p><p class="meal description">etc</p>', '<p class="meal name">other thing</p><p class="meal description">Thing</p>'];
+    const result = ['<div class="meal"><p class="name">Ibid</p><p class="description">etc</p></div>', '<div class="meal"><p class="name">other thing</p><p class="description">Thing</p></div>'];
 
     expect(iterIterDay(weeksMeals)).toEqual(result);
   });
@@ -228,7 +228,7 @@ describe('Client Side tests', () => {
         name: 'other thing',
       }],
     ];
-    const result = '<h2 class="day">Fri</h2><p class="meal name">Ibid</p><p class="meal description">etc</p><p class="meal name">Blue Star Line</p><p class="meal description">Clipper</p><h2 class="day">Sat</h2><h2 class="day">Sun</h2><p class="meal name">other thing</p><p class="meal description">Thing</p><h2 class="day">Mon</h2><h2 class="day">Tue</h2><p class="meal name">other thing</p><p class="meal description">Thing</p><h2 class="day">Wed</h2><p class="meal name">Res</p><p class="meal description">Gestae</p><h2 class="day">Thu</h2><p class="meal name">other thing</p><p class="meal description">Thing</p>';
+    const result = '<h2 class="day">Fri</h2><div class="meal"><p class="name">Ibid</p><p class="description">etc</p></div><div class="meal"><p class="name">Blue Star Line</p><p class="description">Clipper</p></div><h2 class="day">Sat</h2><h2 class="day">Sun</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p></div><h2 class="day">Mon</h2><h2 class="day">Tue</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p></div><h2 class="day">Wed</h2><div class="meal"><p class="name">Res</p><p class="description">Gestae</p></div><h2 class="day">Thu</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p></div>';
 
     expect(insertAndFlattenToHTML(someMeals, nextWeek)).toMatch(result);
   });
