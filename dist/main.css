@@ -133,3 +133,11 @@ label input {
   display: flex;
   flex-direction: column;
 }
+
+.day {
+  padding: 0.25em;
+}
+
+.description {
+  padding-bottom: 0.75em;
+}

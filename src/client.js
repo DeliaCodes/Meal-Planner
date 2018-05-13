@@ -112,9 +112,9 @@ const hideEverything = () => {
 
 
 const scheduleTemplate = meals =>
-  `<p>${meals.name}</p><p>${meals.description}</p>`;
+  `<p class="meal name">${meals.name}</p><p class="meal description">${meals.description}</p>`;
 
-const dayTemplate = dayInWeek => `<h2>${dayInWeek}</h2>`;
+const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
 const convertWeekDayToNumber = data =>
   moment()
@@ -183,8 +183,6 @@ $(document).ready(() => {
 
   getScheduleFromEndpoint().then(value => renderSchedule(value));
 
-  hideEverything();
-
   $('#mealNav').click(() => {
     $('#addMealSection').show();
     $('#schedule').hide();
@@ -222,6 +220,8 @@ const addUserMeals = () => {
 };
 
 addUserMeals();
+
+hideEverything();
 
 module.exports = {
   render,
