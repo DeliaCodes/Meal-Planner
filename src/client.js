@@ -103,15 +103,34 @@ const sendMealToEndpoint = data =>
     sendMealToEndpoint(data);
   }
 }); */
+const accessEachDaysMealsInOrder = (week, mealObject) =>
+  week.map(day => mealObject[day]);
+
+const deleteAMealFromSchedule = (meal, store) => {
+  const itemToDelete = meal.id;
+  const newStore = {};
+  const storeKeys = Object.keys(store);
+
+  for (let i = 0; i < storeKeys.length; i++) {
+    const newMeals = store[storeKeys[i]].filter(m => m.id !== itemToDelete);
+    newStore[storeKeys[i]] = newMeals;
+  }
+  return newStore;
+  // find id in store
+  // delete object
+  // return new modified store
+  // re-render the dom
+};
 
 const hideEverything = () => {
   $('#schedule').hide();
   $('#addMealSection').hide();
 };
 
-
 const scheduleTemplate = meals =>
-  `<div class="meal"><p class="name">${meals.name}</p><p class="description">${meals.description}</p><a class="edit delete">Delete Meal</a></div>`;
+  `<div class="meal"><p class="name">${meals.name}</p><p class="description">${
+    meals.description
+  }</p><a class="edit delete">Delete Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
@@ -144,10 +163,9 @@ const daysFromCurrentDay = (weeksWorthOfMeals, currentDay) => {
 /**
  @param {Schedule} mealObject - array of current week
  */
-const accessEachDaysMealsInOrder = (week, mealObject) =>
-  week.map(day => mealObject[day]);
 
-const iterIterDay = mealsForDay => mealsForDay.map(meals => scheduleTemplate(meals));
+const iterIterDay = mealsForDay =>
+  mealsForDay.map(meals => scheduleTemplate(meals));
 
 const insertAndFlattenToHTML = (weekMeals, week) => {
   // console.log(week);
@@ -169,7 +187,9 @@ const renderSchedule = (meals) => {
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
   const mealsHtml = insertAndFlattenToHTML(orderedMeals, nextWeek);
-  $('#displaySchedule').empty().append(mealsHtml);
+  $('#displaySchedule')
+    .empty()
+    .append(mealsHtml);
 
   // console.log(orderedMeals.map(m => m);
 };
@@ -238,4 +258,5 @@ module.exports = {
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
   sendMealToEndpoint,
+  deleteAMealFromSchedule,
 };

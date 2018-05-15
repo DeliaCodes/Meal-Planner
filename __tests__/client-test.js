@@ -21,6 +21,7 @@ const {
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
   sendMealToEndpoint,
+  deleteAMealFromSchedule,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -82,7 +83,52 @@ describe('Client Side tests', () => {
 
     expect($('#currentMeals').html()).toContain('ravioli');
   });
+  it('successfully deletes meal', () => {
+    const changeMe = {
+      Tue: [{
+        dayOfWeek: '0',
+        description: 'We',
+        name: 'Here',
+        id: 8780,
+      }],
+      Wed: [{
+        dayOfWeek: '0',
+        description: 'Gestae',
+        name: 'Res',
+        id: 8910,
+      },
+      {
+        dayOfWeek: '0',
+        description: 'Thing',
+        name: 'otherthing',
+        id: 8820,
+      },
+      ],
+    };
 
+    const mealToDelete = {
+      dayOfWeek: '0',
+      description: 'Gestae',
+      name: 'Res',
+      id: 8910,
+    };
+
+    const result = {
+      Tue: [{
+        dayOfWeek: '0',
+        description: 'We',
+        name: 'Here',
+        id: 8780,
+      }],
+      Wed: [{
+        dayOfWeek: '0',
+        description: 'Thing',
+        name: 'otherthing',
+        id: 8820,
+      }],
+    };
+    expect(deleteAMealFromSchedule(mealToDelete, changeMe)).toEqual(result);
+  });
   it('renders Schedule test', () => {
     document.body.innerHTML = '<div><div id="displaySchedule"/></div>';
     const meals = {
@@ -183,13 +229,18 @@ describe('Client Side tests', () => {
       dayOfWeek: '0',
       description: 'etc',
       name: 'Ibid',
-    }, {
+    },
+    {
       dayOfWeek: '1',
       description: 'Thing',
       name: 'other thing',
-    }];
+    },
+    ];
 
-    const result = ['<div class="meal"><p class="name">Ibid</p><p class="description">etc</p><a class="edit delete">Delete Meal</a></div>', '<div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div>'];
+    const result = [
+      '<div class="meal"><p class="name">Ibid</p><p class="description">etc</p><a class="edit delete">Delete Meal</a></div>',
+      '<div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div>',
+    ];
 
     expect(iterIterDay(weeksMeals)).toEqual(result);
   });
@@ -200,11 +251,13 @@ describe('Client Side tests', () => {
         dayOfWeek: '5',
         description: 'etc',
         name: 'Ibid',
-      }, {
+      },
+      {
         dayOfWeek: '5',
         description: 'Clipper',
         name: 'Blue Star Line',
-      }],
+      },
+      ],
       [],
       [{
         dayOfWeek: '0',
@@ -228,7 +281,8 @@ describe('Client Side tests', () => {
         name: 'other thing',
       }],
     ];
-    const result = '<h2 class="day">Fri</h2><div class="meal"><p class="name">Ibid</p><p class="description">etc</p><a class="edit delete">Delete Meal</a></div><div class="meal"><p class="name">Blue Star Line</p><p class="description">Clipper</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Sat</h2><h2 class="day">Sun</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Mon</h2><h2 class="day">Tue</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Wed</h2><div class="meal"><p class="name">Res</p><p class="description">Gestae</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Thu</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div>';
+    const result =
+      '<h2 class="day">Fri</h2><div class="meal"><p class="name">Ibid</p><p class="description">etc</p><a class="edit delete">Delete Meal</a></div><div class="meal"><p class="name">Blue Star Line</p><p class="description">Clipper</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Sat</h2><h2 class="day">Sun</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Mon</h2><h2 class="day">Tue</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Wed</h2><div class="meal"><p class="name">Res</p><p class="description">Gestae</p><a class="edit delete">Delete Meal</a></div><h2 class="day">Thu</h2><div class="meal"><p class="name">other thing</p><p class="description">Thing</p><a class="edit delete">Delete Meal</a></div>';
 
     expect(insertAndFlattenToHTML(someMeals, nextWeek)).toMatch(result);
   });
