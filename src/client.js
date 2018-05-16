@@ -116,11 +116,14 @@ const deleteAMealFromSchedule = (meal, store) => {
     newStore[storeKeys[i]] = newMeals;
   }
   return newStore;
-  // find id in store
-  // delete object
-  // return new modified store
-  // re-render the dom
 };
+
+/* const deleteARender = () => {
+  const rerenderMe = deleteAMealFromSchedule(STORE.schedule);
+  STORE.schedule = rerenderMe;
+renderSchedule(rerenderMe);
+}; */
+// do some api
 
 const hideEverything = () => {
   $('#schedule').hide();
@@ -200,7 +203,10 @@ $(document).ready(() => {
       meals: value,
     }));
 
-  getScheduleFromEndpoint().then(value => renderSchedule(value));
+  getScheduleFromEndpoint().then((value) => {
+    STORE.schedule = value;
+    return renderSchedule(value);
+  });
 
   $('#mealNav').click(() => {
     $('#addMealSection').show();
