@@ -118,8 +118,16 @@ const deleteAMealFromSchedule = (meal, store) => {
   return newStore;
 };
 
+// untested - look at how to test
+const deleteAndRender = () => {
+  const rerenderMe = deleteAMealFromSchedule(STORE.schedule);
+  STORE.schedule = rerenderMe;
+  renderSchedule(rerenderMe);
+};
 
-// do some api
+// test
+const userClicksDelete = () => {};
+// do some api calls for delete
 
 const hideEverything = () => {
   $('#schedule').hide();
