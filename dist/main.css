@@ -39,12 +39,12 @@ nav a:hover {
   color: #000000;
 }
 
-#mealNav {
+.mealNav {
   background: #2287CC;
   color: #FFFFFF;
 }
 
-#scheduleNav {
+.scheduleNav {
   background: #4CFFE7;
   color: #000000;
 }
@@ -145,7 +145,7 @@ label input {
   font-size: 2em;
 }
 
-#editSchedule {
+.editSchedule {
   background: #2287CC;
   color: #FFFFFF;
   text-align: center;
