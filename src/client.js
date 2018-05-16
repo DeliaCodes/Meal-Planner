@@ -118,11 +118,7 @@ const deleteAMealFromSchedule = (meal, store) => {
   return newStore;
 };
 
-/* const deleteARender = () => {
-  const rerenderMe = deleteAMealFromSchedule(STORE.schedule);
-  STORE.schedule = rerenderMe;
-renderSchedule(rerenderMe);
-}; */
+
 // do some api
 
 const hideEverything = () => {
@@ -133,7 +129,7 @@ const hideEverything = () => {
 const scheduleTemplate = meals =>
   `<div class="meal"><p class="name">${meals.name}</p><p class="description">${
     meals.description
-  }</p><a class="edit delete">Delete Meal</a></div>`;
+  }</p><a class="edit delete" id="${meals._id}">Delete Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
@@ -265,4 +261,5 @@ module.exports = {
   insertAndFlattenToHTML,
   sendMealToEndpoint,
   deleteAMealFromSchedule,
+  userClicksDelete,
 };
