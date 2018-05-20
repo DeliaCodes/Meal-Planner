@@ -180,9 +180,19 @@ label input {
 }
 
 .delete {
+  background: #4CFFE7;
+  color: #000000;
+  text-align: center;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  cursor: pointer;
+}
+
+.editMeal {
   background: #2287CC;
   color: #FFFFFF;
   text-align: center;
   padding-left: 0.25em;
   padding-right: 0.25em;
+  cursor: pointer;
 }
