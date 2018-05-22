@@ -22,7 +22,6 @@ const {
   insertAndFlattenToHTML,
   sendMealToEndpoint,
   deleteAMealFromSchedule,
-  userClicksDelete,
 } = require('../src/client');
 
 jest.mock('../src/api');
@@ -85,24 +84,25 @@ describe('Client Side tests', () => {
     expect($('#currentMeals').html()).toContain('ravioli');
   });
   it('successfully deletes meal', () => {
+    /* eslint-disable no-underscore-dangle */
     const changeMe = {
       Tue: [{
         dayOfWeek: '0',
         description: 'We',
         name: 'Here',
-        id: 8780,
+        _id: 8780,
       }],
       Wed: [{
         dayOfWeek: '0',
         description: 'Gestae',
         name: 'Res',
-        id: 8910,
+        _id: 8910,
       },
       {
         dayOfWeek: '0',
         description: 'Thing',
         name: 'otherthing',
-        id: 8820,
+        _id: 8820,
       },
       ],
     };
@@ -111,7 +111,7 @@ describe('Client Side tests', () => {
       dayOfWeek: '0',
       description: 'Gestae',
       name: 'Res',
-      id: 8910,
+      _id: 8910,
     };
 
     const result = {
@@ -119,19 +119,16 @@ describe('Client Side tests', () => {
         dayOfWeek: '0',
         description: 'We',
         name: 'Here',
-        id: 8780,
+        _id: 8780,
       }],
       Wed: [{
         dayOfWeek: '0',
         description: 'Thing',
         name: 'otherthing',
-        id: 8820,
+        _id: 8820,
       }],
     };
     expect(deleteAMealFromSchedule(mealToDelete, changeMe)).toEqual(result);
-  });
-  xit('delete user button function', () => {
-    expect(userClicksDelete()).toBeCalled();
   });
   it('renders Schedule test', () => {
     document.body.innerHTML = '<div><div id="displaySchedule"/></div>';

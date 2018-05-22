@@ -106,29 +106,6 @@ const sendMealToEndpoint = data =>
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
-const deleteAMealFromSchedule = (meal, store) => {
-  const itemToDelete = meal.id;
-  const newStore = {};
-  const storeKeys = Object.keys(store);
-
-  for (let i = 0; i < storeKeys.length; i++) {
-    const newMeals = store[storeKeys[i]].filter(m => m.id !== itemToDelete);
-    newStore[storeKeys[i]] = newMeals;
-  }
-  return newStore;
-};
-
-// untested - look at how to test
-const deleteAndRender = () => {
-  const rerenderMe = deleteAMealFromSchedule(STORE.schedule);
-  STORE.schedule = rerenderMe;
-  renderSchedule(rerenderMe);
-};
-
-// test
-const userClicksDelete = () => {};
-// do some api calls for delete
-
 const hideEverything = () => {
   $('#schedule').hide();
   $('#addMealSection').hide();
@@ -186,6 +163,27 @@ const insertAndFlattenToHTML = (weekMeals, week) => {
   return accumulatorArray.reduce((acc, x) => acc.concat(x), []).join('');
 };
 
+/* eslint-disable no-underscore-dangle */
+const deleteAMealFromSchedule = (meal, store) => {
+  const itemToDelete = meal._id;
+  const newStore = {};
+  const storeKeys = Object.keys(store);
+
+  for (let i = 0; i < storeKeys.length; i++) {
+    const newMeals = store[storeKeys[i]].filter(m => m._id !== itemToDelete);
+    newStore[storeKeys[i]] = newMeals;
+  }
+  return newStore;
+};
+
+// untested
+const deleteAndRender = (id) => {
+  const rerenderMe = deleteAMealFromSchedule(id, STORE.schedule);
+  STORE.schedule = rerenderMe;
+  console.log('store', rerenderMe);
+  renderSchedule(rerenderMe);
+};
+
 /**
  @param {Schedule} meals - schedule for meals
  */
@@ -198,8 +196,18 @@ const renderSchedule = (meals) => {
     .empty()
     .append(mealsHtml);
 
+  $('.delete').click(() => {
+    event.preventDefault();
+    const toDelete = {};
+    toDelete._id = $(event.target).attr('id');
+    console.log('toDelete', toDelete);
+    deleteAndRender(toDelete);
+  });
+
   // console.log(orderedMeals.map(m => m);
 };
+
+// do some api calls for delete
 
 $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
@@ -269,5 +277,4 @@ module.exports = {
   insertAndFlattenToHTML,
   sendMealToEndpoint,
   deleteAMealFromSchedule,
-  userClicksDelete,
 };
