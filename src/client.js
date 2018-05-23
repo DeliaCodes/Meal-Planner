@@ -22,8 +22,6 @@
 
 require('isomorphic-fetch');
 require('es6-promise').polyfill();
-
-
 const $ = require('jquery');
 
 const moment = require('moment');
@@ -85,8 +83,8 @@ const getMealsFromEndpoint = () =>
     .then(checkForErrors)
     .then(noErrorResponse);
 
-/* const deleteMealEndpoint = id => mockDelete(id);
- */
+const deleteMealEndpoint = id => mockDelete(id);
+
 const sendMealToEndpoint = data =>
   fetch('/meals', {
     method: 'POST',
