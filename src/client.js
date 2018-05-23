@@ -24,6 +24,10 @@
 require('isomorphic-fetch');
 require('es6-promise').polyfill();
 
+const {
+  mockDelete,
+} = require('./app');
+
 const $ = require('jquery');
 
 const moment = require('moment');
@@ -82,6 +86,8 @@ const getMealsFromEndpoint = () =>
   fetch('/meals')
     .then(checkForErrors)
     .then(noErrorResponse);
+
+const deleteMealEndpoint = id => mockDelete(id);
 
 const sendMealToEndpoint = data =>
   fetch('/meals', {
@@ -179,10 +185,13 @@ const deleteAMealFromSchedule = (meal, store) => {
 // untested
 const deleteAndRender = (id) => {
   const rerenderMe = deleteAMealFromSchedule(id, STORE.schedule);
-  STORE.schedule = rerenderMe;
-  console.log('store', rerenderMe);
-  renderSchedule(rerenderMe);
+  deleteMealEndpoint(id).then(() => {
+    STORE.schedule = rerenderMe;
+    console.log('store', rerenderMe);
+    renderSchedule(rerenderMe);
+  });
 };
+
 
 /**
  @param {Schedule} meals - schedule for meals
@@ -206,8 +215,6 @@ const renderSchedule = (meals) => {
 
   // console.log(orderedMeals.map(m => m);
 };
-
-// do some api calls for delete
 
 $(document).ready(() => {
   getMealsFromEndpoint().then(value =>

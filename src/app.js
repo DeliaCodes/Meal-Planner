@@ -93,7 +93,10 @@ app.get('/schedule', (req, res) => {
   });
 });
 
+const mockDelete = id => Promise.resolve(true);
+
 module.exports = {
   app,
   sortMealData,
+  mockDelete,
 };
