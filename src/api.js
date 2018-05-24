@@ -10,7 +10,9 @@ const addMealToDB = mealModel.create.bind(mealModel);
 
 const getAllMealsFromDB = () => mealModel.find();
 
-const removeMealFromDB = (id) => {};
+const removeMealFromDB = id => mealModel.deleteOne({
+  _id: id,
+});
 
 // exporting get and post functions.
 module.exports = {

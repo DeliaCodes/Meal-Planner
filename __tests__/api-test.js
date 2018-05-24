@@ -32,10 +32,9 @@ describe('Database Api works as expected', () => {
     const input = {
       name: 'Potatoes',
       description: 'Mashed',
-      _id: '123456',
     };
-    return addMealToDB(input).then(() => {
-      removeMealFromDB(input._id).then(() => {
+    return addMealToDB(input).then((data) => {
+      removeMealFromDB(data._id).then(() => {
         expect(Response).toBeDefined();
       });
     });
