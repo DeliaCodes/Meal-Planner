@@ -4,6 +4,7 @@ import {TEST_DATABASE_URL,} from '../config';
 const {
   getAllMealsFromDB,
   addMealToDB,
+  removeMealFromDB,
 } = require('../src/api');
 
 describe('Database Api works as expected', () => {
@@ -25,6 +26,18 @@ describe('Database Api works as expected', () => {
     return addMealToDB(input).then((data) => {
       expect(data).toHaveProperty('name', 'Macaroni and Cheese');
       expect(data.id).toBeDefined();
+    });
+  });
+  test('Data is removed as expected', () => {
+    const input = {
+      name: 'Potatoes',
+      description: 'Mashed',
+      _id: '123456',
+    };
+    return addMealToDB(input).then(() => {
+      removeMealFromDB(input._id).then(() => {
+        expect(Response).toBeDefined();
+      });
     });
   });
 });
