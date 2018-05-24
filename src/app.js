@@ -94,6 +94,10 @@ app.get('/schedule', (req, res) => {
   });
 });
 
+app.delete('/meals', (req, res) => {
+  removeMealFromDB(req).then(() => res.status(200));
+});
+
 module.exports = {
   app,
   sortMealData,
