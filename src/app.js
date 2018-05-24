@@ -39,6 +39,7 @@ app.use(bodyParser.json());
 const {
   addMealToDB,
   getAllMealsFromDB,
+  removeMealFromDB,
 } = require('./api.js');
 
 app.use(express.static('dist'));
@@ -49,7 +50,7 @@ app.get('/', (req, res) => {
 
 // add endpoint to get all meals
 app.get('/meals', (req, res) => {
-  console.log('something');
+  console.log('/meals get');
   getAllMealsFromDB().then((meals) => {
     res.status(200).json(meals);
   });
