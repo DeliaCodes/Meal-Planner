@@ -104,8 +104,11 @@ describe('Meal Endpoint Tests', () => {
       description: 'brined',
       dayOfWeek: '2',
     })
-    .then(Response => request(app).delete(Response._id).then((res) => {
-      // expect(Response).toBeDefined();
-      expect(res.statusCode).toEqual(200);
-    })));
+    .then(Response => request(app)
+      .delete('/meals')
+      .send(Response._id)
+      .then((res) => {
+        expect(Response).toBeDefined();
+        expect(res.statusCode).toEqual(204);
+      })));
 });

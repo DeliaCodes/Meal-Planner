@@ -95,7 +95,7 @@ app.get('/schedule', (req, res) => {
 });
 
 app.delete('/meals', (req, res) => {
-  removeMealFromDB(req).then(() => res.status(200));
+  removeMealFromDB(req.params.id).then(() => res.status(204).end());
 });
 
 module.exports = {
