@@ -21,6 +21,7 @@ const {
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
   sendMealToEndpoint,
+  deleteMealEndpoint,
   deleteAMealFromSchedule,
 } = require('../src/client');
 
@@ -43,6 +44,14 @@ describe('Client Side tests', () => {
       const result = sendMealToEndpoint(input);
       expect(result.status).toBe(200);
       expect(result.body).toContain(input);
+    });
+    it('deletes a meal from the meals endpoint', () => {
+      const input = {
+        name: 'Coffee',
+        description: 'Coffee and water',
+      };
+      const result = sendMealToEndpoint(input).then(response => deleteMealEndpoint(Response));
+      expect(result.status).toBe(204);
     });
   });
 
