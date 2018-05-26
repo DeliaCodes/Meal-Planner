@@ -62,7 +62,7 @@ app.post('/meals', (req, res) => {
     description: req.body.description,
     dayOfWeek: req.body.dayOfWeek,
   };
-  addMealToDB(newMeal).then(() => res.status(200).json(newMeal));
+  addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
 
 
@@ -94,7 +94,7 @@ app.get('/schedule', (req, res) => {
   });
 });
 
-app.delete('/meals', (req, res) => {
+app.delete('/meals/:id', (req, res) => {
   removeMealFromDB(req.params.id).then(() => res.status(204).end());
 });
 
