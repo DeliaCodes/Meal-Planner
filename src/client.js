@@ -75,15 +75,21 @@ const noErrorResponse = response => response.json();
 
 const getScheduleFromEndpoint = () =>
   fetch('/schedule')
-  .then(checkForErrors)
-  .then(noErrorResponse);
+    .then(checkForErrors)
+    .then(noErrorResponse);
 
 const getMealsFromEndpoint = () =>
   fetch('/meals')
-  .then(checkForErrors)
-  .then(noErrorResponse);
+    .then(checkForErrors)
+    .then(noErrorResponse);
 
-const deleteMealEndpoint = id => mockDelete(id);
+const deleteMealEndpoint = id =>
+  fetch(`/meals/${id}`, {
+    method: 'delete',
+  })
+    .then(checkForErrors)
+    .then(noErrorResponse);
+
 
 const sendMealToEndpoint = data =>
   fetch('/meals', {
@@ -122,13 +128,13 @@ const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
 const convertWeekDayToNumber = data =>
   moment()
-  .day(data)
-  .format('d');
+    .day(data)
+    .format('d');
 
 const convertNumberToWeekDay = number =>
   moment()
-  .weekday(number)
-  .format('ddd');
+    .weekday(number)
+    .format('ddd');
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
@@ -279,6 +285,6 @@ module.exports = {
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
   sendMealToEndpoint,
-  deleteMealEndpoint
+  deleteMealEndpoint,
   deleteAMealFromSchedule,
 };

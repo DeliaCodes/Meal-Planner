@@ -51,7 +51,7 @@ describe('Client Side tests', () => {
         description: 'Coffee and water',
       };
       const result = sendMealToEndpoint(input).then(response => deleteMealEndpoint(Response));
-      expect(result.status).toBe(204);
+      expect(result).toBeDefined();
     });
   });
 
