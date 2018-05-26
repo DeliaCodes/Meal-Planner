@@ -28,7 +28,7 @@ const moment = require('moment');
 
 moment().format();
 
-const mockDelete = id => Promise.resolve(true);
+// const mockDelete = id => Promise.resolve(true);
 
 // add a state variable to store meals
 const STORE = {
@@ -83,14 +83,13 @@ const getMealsFromEndpoint = () =>
     .then(checkForErrors)
     .then(noErrorResponse);
 
+// mock endpoint and then test the rest - don't test status codes
 const deleteMealEndpoint = id =>
   fetch(`/meals/${id}`, {
     method: 'delete',
-  })
-    .then(checkForErrors)
-    .then(noErrorResponse);
+  }).then(checkForErrors);
 
-
+// move fetches into client api-client and then rename api-datate
 const sendMealToEndpoint = data =>
   fetch('/meals', {
     method: 'POST',
@@ -185,9 +184,10 @@ const deleteAMealFromSchedule = (meal, store) => {
 };
 
 // untested
-const deleteAndRender = (id) => {
-  const rerenderMe = deleteAMealFromSchedule(id, STORE.schedule);
-  deleteMealEndpoint(id).then(() => {
+// break into two separate functions
+const deleteAndRender = (mealID) => {
+  const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);
+  deleteMealEndpoint(mealID.id).then(() => {
     STORE.schedule = rerenderMe;
     console.log('store', rerenderMe);
     renderSchedule(rerenderMe);
@@ -206,11 +206,11 @@ const renderSchedule = (meals) => {
   $('#displaySchedule')
     .empty()
     .append(mealsHtml);
-
+  // move this out and call it in there
   $('.delete').click(() => {
     event.preventDefault();
     const toDelete = {};
-    toDelete._id = $(event.target).attr('id');
+    toDelete.id = $(event.target).attr('id');
     console.log('toDelete', toDelete);
     deleteAndRender(toDelete);
   });
