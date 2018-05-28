@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
-import {
-
-  TEST_DATABASE_URL,
-
-} from '../config';
+import {TEST_DATABASE_URL,} from '../config';
 
 
 const request = require('supertest');
@@ -45,6 +41,7 @@ describe('Pure function tests', () => {
       Fri: [],
       Sat: [],
     };
+    // @ts-ignore
     expect(sortMealData(data)).toEqual(result);
   });
 });
@@ -59,33 +56,37 @@ describe('Meal Endpoint Tests', () => {
   describe('Root Path', () => {
     test('response to get', () =>
       request(app)
-      .get('/')
-      .then((Response) => {
-        expect(Response.statusCode).toBe(200);
-      }));
+        .get('/')
+        .then((Response) => {
+        // @ts-ignore
+          expect(Response.statusCode).toBe(200);
+        }));
   });
 
   test('GET - returns meals saved in db', () =>
     request(app)
-    .get('/meals')
-    .then((Response) => {
-      pect(Response.status).toBe(200);
-      epect(Response.body).toBeDefined();
-    }));
+      .get('/meals')
+      .then((Response) => {
+      // @ts-ignore
+        expect(Response.status).toBe(200);
+        // @ts-ignore
+        expect(Response.body).toBeDefined();
+      }));
 
   test('POST - returns saved meal', () =>
-    request(app) ost('/meals')
-    .end({
-      name: 'cheeseburger',
-      scription: 'cheese, burger, and bun',
-      dyOfWeek: '3',
-    })
-    .tn((Response) => {
-      epect(Response.statusCode).toEqual(200);
-      expect(Response.body.name).toEqual('cheeseburger');
-      pect(Response.body.description).toContain('cheese');
-      epect(Response.body.dayOfWeek).toEqual('3');
-    }));
+    request(app).post('/meals')
+      .send({
+      // @ts-ignore
+        name: 'cheeseburger',
+        description: 'cheese, burger, and bun',
+        dayOfWeek: '3',
+      })
+      .then((Response) => {
+        expect(Response.statusCode).toEqual(200);
+        expect(Response.body.name).toEqual('cheeseburger');
+        expect(Response.body.description).toContain('cheese');
+        expect(Response.body.dayOfWeek).toEqual('3');
+      }));
 
   test('GET and POST - returns schedule', () => request(app)
     .post('/meals')
@@ -95,7 +96,7 @@ describe('Meal Endpoint Tests', () => {
       dayOfWeek: '5',
     })
     .then(() =>
-      request(app) et('/schedule'))
+      request(app).get('/schedule'))
     .then((Response) => {
       expect(Response.body.Fri[0].name).toEqual('mince meat');
     }));
@@ -110,6 +111,7 @@ describe('Meal Endpoint Tests', () => {
       // .send(Response.body)
       .then((res) => {
         expect(res).toBeDefined();
+        // @ts-ignore
         expect(res.statusCode).toEqual(204);
       })));
 });
