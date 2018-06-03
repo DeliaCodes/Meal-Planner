@@ -172,21 +172,26 @@ const insertAndFlattenToHTML = (weekMeals, week) => {
 
 /* eslint-disable no-underscore-dangle */
 const deleteAMealFromSchedule = (meal, store) => {
-  const itemToDelete = meal._id;
+  const itemToDelete = meal.id;
   const newStore = {};
   const storeKeys = Object.keys(store);
+  console.log('item to delete', itemToDelete);
 
   for (let i = 0; i < storeKeys.length; i++) {
-    const newMeals = store[storeKeys[i]].filter(m => m._id !== itemToDelete);
+    const newMeals = store[storeKeys[i]].filter((m) => {
+      console.log('M in for loop', m);
+      return m._id !== itemToDelete;
+    });
     newStore[storeKeys[i]] = newMeals;
   }
+  console.log('newStore', newStore);
   return newStore;
 };
 
-// untested
-// break into two separate functions
+
 const deleteAndRender = (mealID) => {
   const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);
+
   deleteMealEndpoint(mealID.id).then(() => {
     STORE.schedule = rerenderMe;
     console.log('store', rerenderMe);
@@ -194,11 +199,18 @@ const deleteAndRender = (mealID) => {
   });
 };
 
+const afterDelete = (event) => {
+  const toDelete = {};
+  toDelete.id = $(event.target).attr('id');
+  console.log('toDelete', toDelete);
+  deleteAndRender(toDelete);
+};
 
 /**
  @param {Schedule} meals - schedule for meals
  */
 const renderSchedule = (meals) => {
+  console.log('render called', meals);
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
@@ -207,14 +219,10 @@ const renderSchedule = (meals) => {
     .empty()
     .append(mealsHtml);
   // move this out and call it in there
-  $('.delete').click(() => {
+  $('.delete').click((event) => {
     event.preventDefault();
-    const toDelete = {};
-    toDelete.id = $(event.target).attr('id');
-    console.log('toDelete', toDelete);
-    deleteAndRender(toDelete);
+    afterDelete(event);
   });
-
   // console.log(orderedMeals.map(m => m);
 };
 
