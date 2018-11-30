@@ -33,7 +33,7 @@
     "superagent": "^3.8.3",
     "supertest": "^3.3.0",
     "webpack": "^4.26.1",
-    "webpack-cli": "^2.1.5"
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
     "test": "jest --testURL=\"http://localhost\"",
