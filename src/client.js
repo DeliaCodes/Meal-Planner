@@ -161,7 +161,7 @@ const iterIterDay = mealsForDay =>
 const insertAndFlattenToHTML = (weekMeals, week) => {
   // console.log(week);
   const accumulatorArray = [];
-  for (let i = 0; i < weekMeals.length; i++) {
+  for (let i = 0; i < weekMeals.length; i += 1) {
     accumulatorArray.push(dayTemplate(week[i]));
     accumulatorArray.push(iterIterDay(weekMeals[i]));
     // console.log(i);
@@ -177,7 +177,7 @@ const deleteAMealFromSchedule = (meal, store) => {
   const storeKeys = Object.keys(store);
   console.log('item to delete', itemToDelete);
 
-  for (let i = 0; i < storeKeys.length; i++) {
+  for (let i = 0; i < storeKeys.length; i += 1) {
     const newMeals = store[storeKeys[i]].filter((m) => {
       console.log('M in for loop', m);
       return m._id !== itemToDelete;
