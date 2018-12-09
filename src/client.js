@@ -188,7 +188,7 @@ const deleteAMealFromSchedule = (meal, store) => {
   return newStore;
 };
 
-
+// in progress
 const deleteAndRender = (mealID) => {
   const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);
 
@@ -199,12 +199,19 @@ const deleteAndRender = (mealID) => {
   });
 };
 
+// in progress
 const afterDelete = (event) => {
   const toDelete = {};
   toDelete.id = $(event.target).attr('id');
   console.log('toDelete', toDelete);
   deleteAndRender(toDelete);
 };
+
+// in progress
+const handleDeleteClick = () => $('.delete').click((event) => {
+  event.preventDefault();
+  afterDelete(event);
+});
 
 /**
  @param {Schedule} meals - schedule for meals
@@ -218,11 +225,7 @@ const renderSchedule = (meals) => {
   $('#displaySchedule')
     .empty()
     .append(mealsHtml);
-  // move this out and call it in there
-  $('.delete').click((event) => {
-    event.preventDefault();
-    afterDelete(event);
-  });
+  handleDeleteClick();
   // console.log(orderedMeals.map(m => m);
 };
 
