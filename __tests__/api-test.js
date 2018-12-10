@@ -34,10 +34,19 @@ describe('Database Api works as expected', () => {
       name: 'Potatoes',
       description: 'Mashed',
     };
-    return addMealToDB(input).then((data) => {
-      removeMealFromDB(data._id).then(() => {
-        expect(Response).toBeDefined();
-      });
-    });
+    return addMealToDB(input).then(data => removeMealFromDB(data._id).then(() =>
+      expect(Response).toBeDefined()));
+  });
+  // eslint-disable-next-line jest/no-disabled-tests
+  xtest('Data is updated as expected', () => {
+    const input = {
+      name: 'Back-lava',
+      description: 'Molten',
+    };
+    /*    const updateToInput = {
+         name: 'Baclava',
+         description: 'Molten',
+       }; */
+    return addMealToDB(input).then(data => placeholderFunction(data._id).then(() => expect(Response).toBeDefined()));
   });
 });
