@@ -114,4 +114,18 @@ describe('Meal Endpoint Tests', () => {
         // @ts-ignore
         expect(res.statusCode).toEqual(204);
       })));
+  test('PUT', () => request(app)
+    .post('/meals')
+    .send({
+      name: 'jellyfish sautee',
+      description: 'brined',
+    })
+    .then(Response => request(app)
+      .put(`/meals/${Response.body._id}`)
+      // .send(Response.body)
+      .then((res) => {
+        expect(res).toBeDefined();
+        // @ts-ignore
+        expect(res.statusCode).toEqual(204);
+      })));
 });
