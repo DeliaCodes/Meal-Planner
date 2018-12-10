@@ -66,6 +66,7 @@ const checkForErrors = (response) => {
 
 const noErrorResponse = response => response.json();
 
+// move fetches into client into api and then rename api to data -
 const getScheduleFromEndpoint = () =>
   fetch('/schedule')
     .then(checkForErrors)
@@ -81,12 +82,6 @@ const deleteMealEndpoint = id =>
     method: 'delete',
   }).then(checkForErrors);
 
-/* const updateMealEndpoint = id =>
-  fetch(`/meals/${id}`, {
-    method: 'put',
-  }); */
-
-// move fetches into client api-client and then rename api-datate - update this, is this still relevant?
 const sendMealToEndpoint = data =>
   fetch('/meals', {
     method: 'POST',
@@ -102,6 +97,14 @@ const sendMealToEndpoint = data =>
     return response.json();
   });
 
+const updateMealEndpoint = (id, data) =>
+  fetch(`/meals/${id}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
 
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
