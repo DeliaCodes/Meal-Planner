@@ -123,7 +123,11 @@ describe('Meal Endpoint Tests', () => {
     })
     .then(Response => request(app)
       .put(`/meals/${Response.body._id}`)
-      // .send(Response.body)
+      .send({
+        id: Response.body._id,
+        name: Response.body.name,
+        description: 'salted',
+      })
       .then((res) => {
         expect(res).toBeDefined();
         // @ts-ignore
