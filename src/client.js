@@ -56,13 +56,6 @@ const render = (store) => {
   $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
 };
 
-/* const passMealToAPI = (input) => {
-  $.ajax({
-    url: '/meals',
-    type: 'POST',
-    dataType: 'json',
-  });
-}; */
 const checkForErrors = (response) => {
   if (response.status >= 400) {
     // console.log(response);
@@ -83,13 +76,17 @@ const getMealsFromEndpoint = () =>
     .then(checkForErrors)
     .then(noErrorResponse);
 
-// mock endpoint and then test the rest - don't test status codes
 const deleteMealEndpoint = id =>
   fetch(`/meals/${id}`, {
     method: 'delete',
   }).then(checkForErrors);
 
-// move fetches into client api-client and then rename api-datate
+/* const updateMealEndpoint = id =>
+  fetch(`/meals/${id}`, {
+    method: 'put',
+  }); */
+
+// move fetches into client api-client and then rename api-datate - update this, is this still relevant?
 const sendMealToEndpoint = data =>
   fetch('/meals', {
     method: 'POST',
@@ -105,11 +102,7 @@ const sendMealToEndpoint = data =>
     return response.json();
   });
 
-/* const seedDataIntoDb = data => new Promise((resolve, reject) => {
-  if (getMealsFromEndpoint() === undefined) {
-    sendMealToEndpoint(data);
-  }
-}); */
+
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
@@ -159,13 +152,10 @@ const iterIterDay = mealsForDay =>
   mealsForDay.map(meals => scheduleTemplate(meals));
 
 const insertAndFlattenToHTML = (weekMeals, week) => {
-  // console.log(week);
   const accumulatorArray = [];
   for (let i = 0; i < weekMeals.length; i += 1) {
     accumulatorArray.push(dayTemplate(week[i]));
     accumulatorArray.push(iterIterDay(weekMeals[i]));
-    // console.log(i);
-    // console.log(week[i]);
   }
   return accumulatorArray.reduce((acc, x) => acc.concat(x), []).join('');
 };
@@ -188,7 +178,7 @@ const deleteAMealFromSchedule = (meal, store) => {
   return newStore;
 };
 
-// in progress
+// is this tested
 const deleteAndRender = (mealID) => {
   const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);
 
@@ -199,7 +189,7 @@ const deleteAndRender = (mealID) => {
   });
 };
 
-// in progress
+// is this tested
 const afterDelete = (event) => {
   const toDelete = {};
   toDelete.id = $(event.target).attr('id');
@@ -207,7 +197,7 @@ const afterDelete = (event) => {
   deleteAndRender(toDelete);
 };
 
-// in progress
+// is this tested?
 const handleDeleteClick = () => $('.delete').click((event) => {
   event.preventDefault();
   afterDelete(event);
