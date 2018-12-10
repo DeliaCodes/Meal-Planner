@@ -115,7 +115,7 @@ describe('Meal Endpoint Tests', () => {
         expect(res.statusCode).toEqual(204);
       })));
   // eslint-disable-next-line jest/no-disabled-tests
-  xtest('PUT', () => request(app)
+  test('PUT', () => request(app)
     .post('/meals')
     .send({
       name: 'jellyfish sautee',

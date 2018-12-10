@@ -14,9 +14,12 @@ const removeMealFromDB = id => mealModel.deleteOne({
   _id: id,
 });
 
+const updateMealInDB = (id, obj) => mealModel.findByIdAndUpdate(id, obj);
+
 // exporting get and post functions.
 module.exports = {
   getAllMealsFromDB,
   addMealToDB,
   removeMealFromDB,
+  updateMealInDB,
 };

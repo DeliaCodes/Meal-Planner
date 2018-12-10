@@ -40,6 +40,7 @@ const {
   addMealToDB,
   getAllMealsFromDB,
   removeMealFromDB,
+  updateMealInDB,
 } = require('./api.js');
 
 app.use(express.static('dist'));
@@ -63,6 +64,16 @@ app.post('/meals', (req, res) => {
     dayOfWeek: req.body.dayOfWeek,
   };
   addMealToDB(newMeal).then(meal => res.status(200).json(meal));
+});
+
+app.put('/meals:id', (req, res) => {
+  const mealToSend = {
+    _id: req.params.id,
+    name: req.body.name,
+    description: req.body.description,
+    dayOfWeek: req.body.dayOfWeek,
+  };
+  updateMealInDB(mealToSend).then(() => res.status(204).end());
 });
 
 

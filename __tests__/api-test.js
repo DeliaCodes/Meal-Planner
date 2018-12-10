@@ -5,6 +5,7 @@ const {
   getAllMealsFromDB,
   addMealToDB,
   removeMealFromDB,
+  updateMealInDB,
 } = require('../src/api');
 
 describe('Database Api works as expected', () => {
@@ -43,10 +44,10 @@ describe('Database Api works as expected', () => {
       name: 'Back-lava',
       description: 'Molten',
     };
-    /*    const updateToInput = {
-         name: 'Baclava',
-         description: 'Molten',
-       }; */
-    return addMealToDB(input).then(data => placeholderFunction(data._id).then(() => expect(Response).toBeDefined()));
+    const updateToInput = {
+      name: 'Baclava',
+      description: 'Molten',
+    };
+    return addMealToDB(input).then(data => updateMealInDB(data._id, updateToInput).then(() => expect(Response).toBeDefined()));
   });
 });
