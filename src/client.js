@@ -181,6 +181,12 @@ const deleteAMealFromSchedule = (meal, store) => {
   return newStore;
 };
 
+// take in store and meal id, change store entry of meal to editable, pass to renderEdit
+// renderEdit - render some sort of form to take in changes
+// saveEdit - send mealupdate to backend, add edit to local store, rerender schedule
+const editMealFromSchedule = (id, store) => {};
+
+
 // is this tested
 const deleteAndRender = (mealID) => {
   const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);

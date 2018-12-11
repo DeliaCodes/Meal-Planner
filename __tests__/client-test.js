@@ -141,6 +141,45 @@ describe('Client Side tests', () => {
     };
     expect(deleteAMealFromSchedule(mealToDelete, changeMe)).toEqual(result);
   });
+  /*  it('successfully edits a meal', () => {
+     const changeMe = {
+       Tue: [{
+         dayOfWeek: '0',
+         description: 'Sugar and Water',
+         name: 'Simple Syrup',
+         _id: 8765309,
+       }],
+       Wed: [{
+         dayOfWeek: '0',
+         description: 'Salted Fish Sauce',
+         name: 'Garam',
+         _id: 90210,
+       }],
+     };
+
+     const mealToEdit = {
+       dayOfWeek: '0',
+       description: 'Roman Salted Fish Sauce',
+       name: 'Garum',
+       _id: 90210,
+     };
+
+     const result = {
+       Tue: [{
+         dayOfWeek: '0',
+         description: 'Sugar and Water',
+         name: 'Simple Syrup',
+         _id: 8765309,
+       }],
+       Wed: [{
+         dayOfWeek: '0',
+         description: 'Roman Salted Fish Sauce',
+         name: 'Garum',
+         _id: 90210,
+       }],
+     };
+   }); */
+
   it('renders Schedule test', () => {
     document.body.innerHTML = '<div><div id="displaySchedule"/></div>';
     const meals = {
