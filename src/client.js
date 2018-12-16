@@ -181,9 +181,25 @@ const deleteAMealFromSchedule = (meal, store) => {
   return newStore;
 };
 
-// take in store and meal id, change store entry of meal to editable, pass to renderEdit
-// renderEdit - render some sort of form to take in changes
-// saveEdit - send mealupdate to backend, add edit to local store, rerender schedule
+const afterEditClick = (event) => {
+  const edit = {};
+  edit.id = $('.delete').attr('id');
+  console.log('selector', edit);
+  editRender(edit.id, STORE);
+};
+/* steps for afterEditClick
+  get id from delete button
+  calls renderedit passing id value on */
+
+const editRender = (id, store) => {};
+/* steps for editRender
+objective: rerender schedule as is except for form, or rerender
+steps:
+  create new copy of store and adds an editable flag
+  finds id within store, changes flag
+  render some sort of form to take in changes
+
+saveEdit - send mealupdate to backend, add edit to local store, rerender schedule */
 // const editMealFromSchedule = (id, store) => {};
 
 
@@ -198,7 +214,7 @@ const deleteAndRender = (mealID) => {
   });
 };
 
-// is this tested
+// is this tested?
 const afterDelete = (event) => {
   const toDelete = {};
   toDelete.id = $(event.target).attr('id');
@@ -210,6 +226,11 @@ const afterDelete = (event) => {
 const handleDeleteClick = () => $('.delete').click((event) => {
   event.preventDefault();
   afterDelete(event);
+});
+
+const handleEditClick = () => $('.editMeal').click((event) => {
+  event.preventDefault();
+  afterEditClick(event);
 });
 
 /**
@@ -225,6 +246,7 @@ const renderSchedule = (meals) => {
     .empty()
     .append(mealsHtml);
   handleDeleteClick();
+  handleEditClick();
   // console.log(orderedMeals.map(m => m);
 };
 
