@@ -183,7 +183,7 @@ const deleteAMealFromSchedule = (meal, store) => {
 
 const afterEditClick = (event) => {
   const edit = {};
-  edit.id = $('.delete').attr('id');
+  edit.id = $(event.target).prev().attr('id');
   console.log('selector', edit);
   editRender(edit.id, STORE);
 };
