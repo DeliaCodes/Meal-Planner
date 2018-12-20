@@ -114,7 +114,6 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
-// add day of week for div class
 const scheduleTemplate = meals =>
   `<div class="meal ${meals.dayOfWeek}"><p class="name">${meals.name}</p><p class="description">${
     meals.description
@@ -188,16 +187,42 @@ const afterEditClick = (event) => {
   console.log('selector', edit);
   const itemName = $(event.target).parent().find('.name').text();
   const itemDescription = $(event.target).parent().find('.description').text();
-  editRender(edit.id, STORE, itemName, itemDescription);
+  editRender(edit.id, STORE, itemName, itemDescription, event);
 
 };
 /* steps for afterEditClick
   get id from delete button
   calls renderedit passing id value on */
 
-const editRender = (id, store, name, description) => {
-console.log('storing', store);
-  
+ // untested 
+const editFormTemplate = (name, desc) => `<form id="editMealForm">
+<fieldset>
+  <label for="editName">
+    Edit Meal Name Here:
+    <input role="textbox" id="editName" type="text" value="${name}" name="Meal Name" role="input" required>
+  </label>
+
+  <label for="editDescription">
+    Edit Your Meal Description Here:
+    <input role="textbox" id="editDescription" value="${desc}" type="text" name="meal description" required>
+  </label>
+  <label for="editDayOfWeek">Edit The Day Of The Week For This Meal:
+    <select name="select day of week" id="editDayOfWeek" required>
+      <option value="monday">Monday</option>
+      <option value="tuesday">Tuesday</option>
+      <option value="wednesday">Wednesday</option>
+      <option value="thursday">Thursday</option>
+      <option value="friday">Friday</option>
+      <option value="saturday">Saturday</option>
+      <option value="sunday">Sunday</option>
+    </select>
+  </label>
+  <input id="editSubmit" type="submit" name="submit" role="button">
+</fieldset>
+</form>`;
+
+const editRender = (id, store, name, description, event) => {
+  $(event.target).parent().empty().append(editFormTemplate(name, description));
 };
 /* steps for editRender
 objective: rerender schedule as is except for form, or rerender
