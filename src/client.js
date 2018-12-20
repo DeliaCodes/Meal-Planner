@@ -114,6 +114,7 @@ const hideEverything = () => {
   $('#addMealSection').hide();
 };
 
+// add day of week for div class
 const scheduleTemplate = meals =>
   `<div class="meal"><p class="name">${meals.name}</p><p class="description">${
     meals.description
@@ -185,13 +186,19 @@ const afterEditClick = (event) => {
   const edit = {};
   edit.id = $(event.target).prev().attr('id');
   console.log('selector', edit);
-  editRender(edit.id, STORE);
+  const itemName = $(event.target).parent().find('.name').text();
+  const itemDescription = $(event.target).parent().find('.description').text();
+  editRender(edit.id, STORE, itemName, itemDescription);
+
 };
 /* steps for afterEditClick
   get id from delete button
   calls renderedit passing id value on */
 
-const editRender = (id, store) => {};
+const editRender = (id, store, name, description) => {
+console.log('storing', store);
+  
+};
 /* steps for editRender
 objective: rerender schedule as is except for form, or rerender
 steps:
