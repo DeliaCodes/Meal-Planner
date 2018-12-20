@@ -116,7 +116,7 @@ const hideEverything = () => {
 
 // add day of week for div class
 const scheduleTemplate = meals =>
-  `<div class="meal"><p class="name">${meals.name}</p><p class="description">${
+  `<div class="meal ${meals.dayOfWeek}"><p class="name">${meals.name}</p><p class="description">${
     meals.description
   }</p><a class="edit delete" id="${meals._id}">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
