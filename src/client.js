@@ -115,9 +115,13 @@ const hideEverything = () => {
 };
 
 const scheduleTemplate = meals =>
-  `<div class="meal ${meals.dayOfWeek}"><p class="name">${meals.name}</p><p class="description">${
+  `<div class="meal ${meals.dayOfWeek}"><p class="name">${
+    meals.name
+  }</p><p class="description">${
     meals.description
-  }</p><a class="edit delete" id="${meals._id}">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
+  }</p><a class="edit delete" id="${
+    meals._id
+  }">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
@@ -183,18 +187,25 @@ const deleteAMealFromSchedule = (meal, store) => {
 
 const afterEditClick = (event) => {
   const edit = {};
-  edit.id = $(event.target).prev().attr('id');
+  edit.id = $(event.target)
+    .prev()
+    .attr('id');
   console.log('selector', edit);
-  const itemName = $(event.target).parent().find('.name').text();
-  const itemDescription = $(event.target).parent().find('.description').text();
-  editRender(edit.id, STORE, itemName, itemDescription, event);
-
+  const itemName = $(event.target)
+    .parent()
+    .find('.name')
+    .text();
+  const itemDescription = $(event.target)
+    .parent()
+    .find('.description')
+    .text();
+  editRenderForm(edit.id, itemName, itemDescription, event);
 };
 /* steps for afterEditClick
   get id from delete button
   calls renderedit passing id value on */
 
- // untested 
+// untested
 const editFormTemplate = (name, desc) => `<form id="editMealForm">
 <fieldset>
   <label for="editName">
@@ -221,19 +232,36 @@ const editFormTemplate = (name, desc) => `<form id="editMealForm">
 </fieldset>
 </form>`;
 
-const editRender = (id, store, name, description, event) => {
-  $(event.target).parent().empty().append(editFormTemplate(name, description));
+// bind to on submit
+const submitEditForm = (id, store) => {
+  $('#editMealForm').submit((event) => {
+    event.preventDefault();
+    const dayNumber = $(event.target)
+      .closest('.meal')
+      .attr('class')
+      .slice(5);
+    const displayDay = moment().day(dayNumber).format('ddd');
+    console.log('displayDay Store', store.schedule[displayDay].find(e => e._id === id));
+  });
 };
-/* steps for editRender
-objective: rerender schedule as is except for form, or rerender
-steps:
-  create new copy of store and adds an editable flag
-  finds id within store, changes flag
-  render some sort of form to take in changes
 
-saveEdit - send mealupdate to backend, add edit to local store, rerender schedule */
-// const editMealFromSchedule = (id, store) => {};
-
+const editRenderForm = (id, name, description, event) => {
+  $(event.target)
+    .parent()
+    .empty()
+    .append(editFormTemplate(name, description));
+  submitEditForm(id, STORE);
+  // console.log('STORING', Object.keys(store));
+};
+/*
+Rerender using local STORE and send to backend
+convert that to day
+use the day to access right portion of STORE.schedule
+find _id within that
+update store
+render
+send to backend
+*/
 
 // is this tested
 const deleteAndRender = (mealID) => {
@@ -255,15 +283,17 @@ const afterDelete = (event) => {
 };
 
 // is this tested?
-const handleDeleteClick = () => $('.delete').click((event) => {
-  event.preventDefault();
-  afterDelete(event);
-});
+const handleDeleteClick = () =>
+  $('.delete').click((event) => {
+    event.preventDefault();
+    afterDelete(event);
+  });
 
-const handleEditClick = () => $('.editMeal').click((event) => {
-  event.preventDefault();
-  afterEditClick(event);
-});
+const handleEditClick = () =>
+  $('.editMeal').click((event) => {
+    event.preventDefault();
+    afterEditClick(event);
+  });
 
 /**
  @param {Schedule} meals - schedule for meals
