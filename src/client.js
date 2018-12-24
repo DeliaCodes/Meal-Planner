@@ -137,7 +137,7 @@ const convertNumberToWeekDay = number =>
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay));
+    convertWeekDayToNumber(stringDay),);
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -232,6 +232,16 @@ const editFormTemplate = (name, desc) => `<form id="editMealForm">
 </fieldset>
 </form>`;
 
+const getEditedMealFromUser = () => {
+  const newMeal = {};
+  newMeal.name = document.getElementById('editName').value;
+  newMeal.description = [];
+  newMeal.description.push(document.getElementById('editDescription').value);
+  const userWeekday = document.getElementById('editDayOfWeek').value;
+  newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
+  return newMeal;
+};
+
 // bind to on submit
 const submitEditForm = (id, store) => {
   $('#editMealForm').submit((event) => {
@@ -240,8 +250,14 @@ const submitEditForm = (id, store) => {
       .closest('.meal')
       .attr('class')
       .slice(5);
-    const displayDay = moment().day(dayNumber).format('ddd');
-    console.log('displayDay Store', store.schedule[displayDay].find(e => e._id === id));
+    const displayDay = moment()
+      .day(dayNumber)
+      .format('ddd');
+    const newMeal = getEditedMealFromUser();
+    const sliceVal = store.schedule[displayDay].findIndex(e => e._id === id);
+    store.schedule[displayDay].splice(sliceVal, 1);
+    // console.log('Edited Meal', store.schedule[displayDay]);
+    // console.log('displayDay Store');
   });
 };
 
@@ -255,10 +271,9 @@ const editRenderForm = (id, name, description, event) => {
 };
 /*
 Rerender using local STORE and send to backend
-convert that to day
-use the day to access right portion of STORE.schedule
-find _id within that
-update store
+get form values
+use find to remove from STORE
+process form values and insert into STORE
 render
 send to backend
 */
@@ -316,7 +331,7 @@ $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }));
+    }),);
 
   getScheduleFromEndpoint().then((value) => {
     STORE.schedule = value;
@@ -350,12 +365,12 @@ const addUserMeals = () => {
   $('form').submit((event) => {
     event.preventDefault();
     const dataToAdd = getMealsFromUser();
-    // do I need to pass in data to add to anon function below?
     sendMealToEndpoint(dataToAdd).then(() => {
       addToState(STORE, dataToAdd);
       render(STORE);
       $('#addMealForm')[0].reset();
     });
+    // do I need to pass in data to add to anon function below?
   });
 };
 
