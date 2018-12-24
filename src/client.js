@@ -201,9 +201,6 @@ const afterEditClick = (event) => {
     .text();
   editRenderForm(edit.id, itemName, itemDescription, event);
 };
-/* steps for afterEditClick
-  get id from delete button
-  calls renderedit passing id value on */
 
 // untested
 const editFormTemplate = (name, desc) => `<form id="editMealForm">
@@ -250,16 +247,23 @@ const submitEditForm = (id, store) => {
       .closest('.meal')
       .attr('class')
       .slice(5);
-    const displayDay = moment()
-      .day(dayNumber)
-      .format('ddd');
+    const displayDay = convertNumberToWeekDay(dayNumber);
     const newMeal = getEditedMealFromUser();
     const sliceVal = store.schedule[displayDay].findIndex(e => e._id === id);
     store.schedule[displayDay].splice(sliceVal, 1);
+    const editedDay = convertNumberToWeekDay(newMeal.dayOfWeek);
     // console.log('Edited Meal', store.schedule[displayDay]);
-    // console.log('displayDay Store');
+    store.schedule[editedDay].push(newMeal);
+    return renderSchedule(store.schedule);
   });
 };
+
+/*
+Rerender using local STORE and send to backend
+process form values and insert into STORE
+render
+send to backend
+*/
 
 const editRenderForm = (id, name, description, event) => {
   $(event.target)
@@ -269,14 +273,6 @@ const editRenderForm = (id, name, description, event) => {
   submitEditForm(id, STORE);
   // console.log('STORING', Object.keys(store));
 };
-/*
-Rerender using local STORE and send to backend
-get form values
-use find to remove from STORE
-process form values and insert into STORE
-render
-send to backend
-*/
 
 // is this tested
 const deleteAndRender = (mealID) => {
