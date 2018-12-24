@@ -99,12 +99,18 @@ const sendMealToEndpoint = data =>
 
 const updateMealEndpoint = (id, data) =>
   fetch(`/meals/${id}`, {
-    method: 'put',
+    method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(data),
-  });
+  }); /* .then((response) => {
+    if (response.status >= 400) {
+      console.log(response);
+      throw new Error('Bad response from server');
+    }
+    return response.json();
+  }) */
 
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
@@ -254,6 +260,7 @@ const submitEditForm = (id, store) => {
     const editedDay = convertNumberToWeekDay(newMeal.dayOfWeek);
     // console.log('Edited Meal', store.schedule[displayDay]);
     store.schedule[editedDay].push(newMeal);
+    updateMealEndpoint(id, newMeal);
     return renderSchedule(store.schedule);
   });
 };
