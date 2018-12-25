@@ -69,13 +69,13 @@ const noErrorResponse = response => response.json();
 // move fetches into client into api and then rename api to data -
 const getScheduleFromEndpoint = () =>
   fetch('/schedule')
-    .then(checkForErrors)
-    .then(noErrorResponse);
+  .then(checkForErrors)
+  .then(noErrorResponse);
 
 const getMealsFromEndpoint = () =>
   fetch('/meals')
-    .then(checkForErrors)
-    .then(noErrorResponse);
+  .then(checkForErrors)
+  .then(noErrorResponse);
 
 const deleteMealEndpoint = id =>
   fetch(`/meals/${id}`, {
@@ -97,20 +97,17 @@ const sendMealToEndpoint = data =>
     return response.json();
   });
 
-const updateMealEndpoint = (id, data) =>
-  fetch(`/meals/${id}`, {
+const updateMealEndpoint = (id, data) => {
+  console.log('Update Data', data);
+
+  return fetch(`/meals/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(data),
-  }); /* .then((response) => {
-    if (response.status >= 400) {
-      console.log(response);
-      throw new Error('Bad response from server');
-    }
-    return response.json();
-  }) */
+  })
+};
 
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
@@ -133,17 +130,17 @@ const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
 const convertWeekDayToNumber = data =>
   moment()
-    .day(data)
-    .format('d');
+  .day(data)
+  .format('d');
 
 const convertNumberToWeekDay = number =>
   moment()
-    .weekday(number)
-    .format('ddd');
+  .weekday(number)
+  .format('ddd');
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay),);
+    convertWeekDayToNumber(stringDay));
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -334,7 +331,7 @@ $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }),);
+    }));
 
   getScheduleFromEndpoint().then((value) => {
     STORE.schedule = value;
@@ -396,6 +393,7 @@ module.exports = {
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
+  updateMealEndpoint,
   sendMealToEndpoint,
   deleteMealEndpoint,
   deleteAMealFromSchedule,

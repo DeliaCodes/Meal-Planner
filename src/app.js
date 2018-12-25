@@ -66,14 +66,14 @@ app.post('/meals', (req, res) => {
   addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
 
-app.put('/meals:id', (req, res) => {
+app.put('/meals/:id', (req, res) => {
   const mealToSend = {
     _id: req.params.id,
     name: req.body.name,
     description: req.body.description,
     dayOfWeek: req.body.dayOfWeek,
   };
-  updateMealInDB(mealToSend).then(() => res.status(204).end());
+  updateMealInDB(req.params.id, mealToSend).then(() => res.status(204).end());
 });
 
 
