@@ -20,19 +20,19 @@
  * @property {Meal[]} Sat - The first day
  */
 
-require("isomorphic-fetch");
-require("es6-promise").polyfill();
-const $ = require("jquery");
+require('isomorphic-fetch');
+require('es6-promise').polyfill();
+const $ = require('jquery');
 
-const moment = require("moment");
+const moment = require('moment');
 
 const {
   getMealsFromEndpoint,
   updateMealEndpoint,
   sendMealToEndpoint,
   deleteMealEndpoint,
-  getScheduleFromEndpoint
-} = require("./api.js");
+  getScheduleFromEndpoint,
+} = require('./api.js');
 
 moment().format();
 
@@ -40,7 +40,7 @@ moment().format();
 
 // add a state variable to store meals
 const STORE = {
-  meals: []
+  meals: [],
 };
 
 const addToState = (storeToChange, meal, index) => {
@@ -56,20 +56,20 @@ const addToState = (storeToChange, meal, index) => {
 const template = item =>
   `<p>Name: ${item.name}</p> <p>Description: ${item.description}</p>`;
 
-const mappingMealsIntoTemplate = input => input.map(m => template(m)).join("");
+const mappingMealsIntoTemplate = input => input.map(m => template(m)).join('');
 
 // to convert to vanilla JS use https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
-const render = store => {
+const render = (store) => {
   /* document.getElementById('currentMeals').innerHTML(mappingMealsIntoTemplate(store.meals)) */
-  $("#currentMeals").append(mappingMealsIntoTemplate(store.meals));
+  $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
 };
 
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
 const hideEverything = () => {
-  $("#schedule").hide();
-  $("#addMealSection").hide();
+  $('#schedule').hide();
+  $('#addMealSection').hide();
 };
 
 const scheduleTemplate = meals =>
@@ -86,17 +86,16 @@ const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 const convertWeekDayToNumber = data =>
   moment()
     .day(data)
-    .format("d");
+    .format('d');
 
 const convertNumberToWeekDay = number =>
   moment()
     .weekday(number)
-    .format("ddd");
+    .format('ddd');
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay)
-  );
+    convertWeekDayToNumber(stringDay));
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -123,7 +122,7 @@ const insertAndFlattenToHTML = (weekMeals, week) => {
     accumulatorArray.push(dayTemplate(week[i]));
     accumulatorArray.push(iterIterDay(weekMeals[i]));
   }
-  return accumulatorArray.reduce((acc, x) => acc.concat(x), []).join("");
+  return accumulatorArray.reduce((acc, x) => acc.concat(x), []).join('');
 };
 
 /* eslint-disable no-underscore-dangle */
@@ -131,32 +130,32 @@ const deleteAMealFromSchedule = (meal, store) => {
   const itemToDelete = meal.id;
   const newStore = {};
   const storeKeys = Object.keys(store);
-  console.log("item to delete", itemToDelete);
+  console.log('item to delete', itemToDelete);
 
   for (let i = 0; i < storeKeys.length; i += 1) {
-    const newMeals = store[storeKeys[i]].filter(m => {
-      console.log("M in for loop", m);
+    const newMeals = store[storeKeys[i]].filter((m) => {
+      console.log('M in for loop', m);
       return m._id !== itemToDelete;
     });
     newStore[storeKeys[i]] = newMeals;
   }
-  console.log("newStore", newStore);
+  console.log('newStore', newStore);
   return newStore;
 };
 
-const afterEditClick = event => {
+const afterEditClick = (event) => {
   const edit = {};
   edit.id = $(event.target)
     .prev()
-    .attr("id");
-  console.log("selector", edit);
+    .attr('id');
+  console.log('selector', edit);
   const itemName = $(event.target)
     .parent()
-    .find(".name")
+    .find('.name')
     .text();
   const itemDescription = $(event.target)
     .parent()
-    .find(".description")
+    .find('.description')
     .text();
   editRenderForm(edit.id, itemName, itemDescription, event);
 };
@@ -190,21 +189,21 @@ const editFormTemplate = (name, desc) => `<form id="editMealForm">
 
 const getEditedMealFromUser = () => {
   const newMeal = {};
-  newMeal.name = document.getElementById("editName").value;
+  newMeal.name = document.getElementById('editName').value;
   newMeal.description = [];
-  newMeal.description.push(document.getElementById("editDescription").value);
-  const userWeekday = document.getElementById("editDayOfWeek").value;
+  newMeal.description.push(document.getElementById('editDescription').value);
+  const userWeekday = document.getElementById('editDayOfWeek').value;
   newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
   return newMeal;
 };
 
 // bind to on submit
 const submitEditForm = (id, store) => {
-  $("#editMealForm").submit(event => {
+  $('#editMealForm').submit((event) => {
     event.preventDefault();
     const dayNumber = $(event.target)
-      .closest(".meal")
-      .attr("class")
+      .closest('.meal')
+      .attr('class')
       .slice(5);
     const displayDay = convertNumberToWeekDay(dayNumber);
     const newMeal = getEditedMealFromUser();
@@ -235,33 +234,33 @@ const editRenderForm = (id, name, description, event) => {
 };
 
 // is this tested
-const deleteAndRender = mealID => {
+const deleteAndRender = (mealID) => {
   const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);
 
   deleteMealEndpoint(mealID.id).then(() => {
     STORE.schedule = rerenderMe;
-    console.log("store", rerenderMe);
+    console.log('store', rerenderMe);
     renderSchedule(rerenderMe);
   });
 };
 
 // is this tested?
-const afterDelete = event => {
+const afterDelete = (event) => {
   const toDelete = {};
-  toDelete.id = $(event.target).attr("id");
-  console.log("toDelete", toDelete);
+  toDelete.id = $(event.target).attr('id');
+  console.log('toDelete', toDelete);
   deleteAndRender(toDelete);
 };
 
 // is this tested?
 const handleDeleteClick = () =>
-  $(".delete").click(event => {
+  $('.delete').click((event) => {
     event.preventDefault();
     afterDelete(event);
   });
 
 const handleEditClick = () =>
-  $(".editMeal").click(event => {
+  $('.editMeal').click((event) => {
     event.preventDefault();
     afterEditClick(event);
   });
@@ -269,13 +268,13 @@ const handleEditClick = () =>
 /**
  @param {Schedule} meals - schedule for meals
  */
-const renderSchedule = meals => {
-  console.log("render called", meals);
+const renderSchedule = (meals) => {
+  console.log('render called', meals);
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
   const mealsHtml = insertAndFlattenToHTML(orderedMeals, nextWeek);
-  $("#displaySchedule")
+  $('#displaySchedule')
     .empty()
     .append(mealsHtml);
   handleDeleteClick();
@@ -286,46 +285,45 @@ const renderSchedule = meals => {
 $(document).ready(() => {
   getMealsFromEndpoint().then(value =>
     render({
-      meals: value
-    })
-  );
+      meals: value,
+    }));
 
-  getScheduleFromEndpoint().then(value => {
+  getScheduleFromEndpoint().then((value) => {
     STORE.schedule = value;
     return renderSchedule(value);
   });
 
-  $("#mealNav").click(() => {
-    $("#addMealSection").show();
-    $("#schedule").hide();
+  $('#mealNav').click(() => {
+    $('#addMealSection').show();
+    $('#schedule').hide();
   });
 
-  $("#scheduleNav").click(() => {
-    $("#addMealSection").hide();
-    $("#schedule").show();
+  $('#scheduleNav').click(() => {
+    $('#addMealSection').hide();
+    $('#schedule').show();
   });
 });
 
 // untested
 const getMealsFromUser = () => {
   const newMeal = {};
-  newMeal.name = document.getElementById("meal-name").value;
+  newMeal.name = document.getElementById('meal-name').value;
   newMeal.description = [];
-  newMeal.description.push(document.getElementById("description").value);
-  const userWeekday = document.getElementById("dayOfWeek").value;
+  newMeal.description.push(document.getElementById('description').value);
+  const userWeekday = document.getElementById('dayOfWeek').value;
   newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
   return newMeal;
 };
 
 // not tested
 const addUserMeals = () => {
-  $("form").submit(event => {
+  $('form').submit((event) => {
     event.preventDefault();
     const dataToAdd = getMealsFromUser();
     sendMealToEndpoint(dataToAdd).then(() => {
       addToState(STORE, dataToAdd);
       render(STORE);
-      $("#addMealForm")[0].reset();
+      $('#addMealForm')[0].reset();
     });
     // do I need to pass in data to add to anon function below?
   });
@@ -349,5 +347,5 @@ module.exports = {
   accessEachDaysMealsInOrder,
   convertWeekDayToNumber,
   insertAndFlattenToHTML,
-  deleteAMealFromSchedule
+  deleteAMealFromSchedule,
 };
