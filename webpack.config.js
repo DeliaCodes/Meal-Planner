@@ -1,13 +1,14 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   entry: {
-    client: './src/client.js',
-    // api: './src/api.js',
+    client: "./src/client.js",
+    api: "./src/api.js"
+    // data: './src/data.js',
   },
-  mode: 'development',
+  mode: "development",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist")
+  }
 };

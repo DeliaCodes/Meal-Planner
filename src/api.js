@@ -1,25 +1,62 @@
-// this file is a layer between the database, the models, and the app aka endpoints
+require("isomorphic-fetch");
 
-const mongoose = require('mongoose');
+const checkForErrors = response => {
+  if (response.status >= 400) {
+    // console.log(response);
+    throw new Error("Bad response from server");
+  }
+  return response;
+};
 
-const {
-  mealModel,
-} = require('./models.js');
+const noErrorResponse = response => response.json();
 
-const addMealToDB = mealModel.create.bind(mealModel);
+// move fetches into client into api and then rename api to data -
+const getScheduleFromEndpoint = () =>
+  fetch("/schedule")
+    .then(checkForErrors)
+    .then(noErrorResponse);
 
-const getAllMealsFromDB = () => mealModel.find();
+const getMealsFromEndpoint = () =>
+  fetch("/meals")
+    .then(checkForErrors)
+    .then(noErrorResponse);
 
-const removeMealFromDB = id => mealModel.deleteOne({
-  _id: id,
-});
+const deleteMealEndpoint = id =>
+  fetch(`/meals/${id}`, {
+    method: "delete"
+  }).then(checkForErrors);
 
-const updateMealInDB = (id, obj) => mealModel.findByIdAndUpdate(id, obj);
+const sendMealToEndpoint = data =>
+  fetch("/meals", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  }).then(response => {
+    if (response.status >= 400) {
+      // console.log(response);
+      throw new Error("Bad response from server");
+    }
+    return response.json();
+  });
 
-// exporting get and post functions.
+const updateMealEndpoint = (id, data) => {
+  console.log("Update Data", data);
+
+  return fetch(`/meals/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    body: JSON.stringify(data)
+  });
+};
+
 module.exports = {
-  getAllMealsFromDB,
-  addMealToDB,
-  removeMealFromDB,
-  updateMealInDB,
+  getMealsFromEndpoint,
+  updateMealEndpoint,
+  sendMealToEndpoint,
+  deleteMealEndpoint,
+  getScheduleFromEndpoint
 };

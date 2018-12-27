@@ -41,7 +41,7 @@ const {
   getAllMealsFromDB,
   removeMealFromDB,
   updateMealInDB,
-} = require('./api.js');
+} = require('./data-layer.js');
 
 app.use(express.static('dist'));
 
