@@ -10,9 +10,15 @@ const checkForErrors = (response) => {
 
 const noErrorResponse = response => response.json();
 
-// move fetches into client into api and then rename api to data -
-const getScheduleFromEndpoint = () =>
-  fetch('/schedule')
+// add JWT that you get from your endpoints
+// create auth end point, this changes user to not null
+
+const user = null;
+// user.name from server
+// copy set into each one
+
+const getScheduleFromEndpoint = user =>
+  fetch('/schedule').set('Authorization', `Bearer ${user.authToken}`)
     .then(checkForErrors)
     .then(noErrorResponse);
 
