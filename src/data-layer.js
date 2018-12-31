@@ -8,6 +8,9 @@ const {
 
 const addMealToDB = mealModel.create.bind(mealModel);
 
+/* pass in user name and default value of null,
+if user name is passed in get only meals with that user */
+
 const getAllMealsFromDB = () => mealModel.find();
 
 const removeMealFromDB = id => mealModel.deleteOne({
