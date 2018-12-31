@@ -49,7 +49,8 @@ app.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-// add endpoint to get all meals
+// add JWT endpoint to get all meals
+
 app.get('/meals', (req, res) => {
   console.log('/meals get');
   getAllMealsFromDB().then((meals) => {
@@ -62,6 +63,7 @@ app.post('/meals', (req, res) => {
     name: req.body.name,
     description: req.body.description,
     dayOfWeek: req.body.dayOfWeek,
+    user: req.user._id,
   };
   addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
