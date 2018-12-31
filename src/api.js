@@ -22,24 +22,24 @@ const getScheduleFromEndpoint = user =>
     .then(checkForErrors)
     .then(noErrorResponse);
 
-const getMealsFromEndpoint = () =>
-  fetch('/meals')
+const getMealsFromEndpoint = user =>
+  fetch('/meals').set('Authorization', `Bearer ${user.authToken}`)
     .then(checkForErrors)
     .then(noErrorResponse);
 
-const deleteMealEndpoint = id =>
+const deleteMealEndpoint = (user, id) =>
   fetch(`/meals/${id}`, {
     method: 'delete',
-  }).then(checkForErrors);
+  }).set('Authorization', `Bearer ${user.authToken}`).then(checkForErrors);
 
-const sendMealToEndpoint = data =>
+const sendMealToEndpoint = (data, user) =>
   fetch('/meals', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  }).then((response) => {
+  }).set('Authorization', `Bearer ${user.authToken}`).then((response) => {
     if (response.status >= 400) {
       // console.log(response);
       throw new Error('Bad response from server');
@@ -47,7 +47,7 @@ const sendMealToEndpoint = data =>
     return response.json();
   });
 
-const updateMealEndpoint = (id, data) => {
+const updateMealEndpoint = (id, data, user) => {
   console.log('Update Data', data);
 
   return fetch(`/meals/${id}`, {
@@ -56,7 +56,7 @@ const updateMealEndpoint = (id, data) => {
       'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(data),
-  });
+  }).set('Authorization', `Bearer ${user.authToken}`);
 };
 
 module.exports = {
