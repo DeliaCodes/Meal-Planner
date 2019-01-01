@@ -1,8 +1,7 @@
-'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const {User} = require('./models');
+const { User } = require('./models');
 
 const router = express.Router();
 
@@ -32,7 +31,7 @@ router.post('/', jsonParser, (req, res) => {
       code: 422,
       reason: 'ValidationError',
       message: 'Incorrect field type: expected string',
-      location: nonStringField
+      location: nonStringField,
     });
   }
 
@@ -53,30 +52,30 @@ router.post('/', jsonParser, (req, res) => {
       code: 422,
       reason: 'ValidationError',
       message: 'Cannot start or end with whitespace',
-      location: nonTrimmedField
+      location: nonTrimmedField,
     });
   }
 
   const sizedFields = {
     username: {
-      min: 1
+      min: 1,
     },
     password: {
       min: 10,
       // bcrypt truncates after 72 characters, so let's not give the illusion
       // of security by storing extra (unused) info
-      max: 72
+      max: 72,
     }
   };
   const tooSmallField = Object.keys(sizedFields).find(
     field =>
       'min' in sizedFields[field] &&
-            req.body[field].trim().length < sizedFields[field].min
+      req.body[field].trim().length < sizedFields[field].min
   );
   const tooLargeField = Object.keys(sizedFields).find(
     field =>
       'max' in sizedFields[field] &&
-            req.body[field].trim().length > sizedFields[field].max
+      req.body[field].trim().length > sizedFields[field].max
   );
 
   if (tooSmallField || tooLargeField) {
@@ -92,15 +91,15 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  let {username, password, firstName = '', lastName = ''} = req.body;
+  let { username, password, firstName = '', lastName = '' } = req.body;
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
 
-  return User.find({username})
+  return User.find({ username })
     .count()
-    .then(count => {
+    .then((count) => {
       if (count > 0) {
         // There is an existing user with the same username
         return Promise.reject({
@@ -113,24 +112,24 @@ router.post('/', jsonParser, (req, res) => {
       // If there is no existing user, hash the password
       return User.hashPassword(password);
     })
-    .then(hash => {
+    .then((hash) => {
       return User.create({
         username,
         password: hash,
         firstName,
-        lastName
+        lastName,
       });
     })
-    .then(user => {
+    .then((user) => {
       return res.status(201).json(user.serialize());
     })
-    .catch(err => {
+    .catch((err) => {
       // Forward validation errors on to the client, otherwise give a 500
       // error because something unexpected has happened
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
-      res.status(500).json({code: 500, message: 'Internal server error'});
+      res.status(500).json({ code: 500, message: 'Internal server error' });
     });
 });
 
@@ -141,7 +140,7 @@ router.post('/', jsonParser, (req, res) => {
 router.get('/', (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.serialize())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+    .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
-module.exports = {router};
+module.exports = { router };
