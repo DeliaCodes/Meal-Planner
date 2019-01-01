@@ -19,22 +19,23 @@
  * @property {Meal[]} Sat - The first day
  */
 
-
+const moment = require('moment');
 const bodyParser = require('body-parser');
-
 const express = require('express');
+const morgan = require('morgan');
+const passport = require('passport');
+
+const app = express();
 
 const {
   mealModel,
 } = require('./models');
 
-const moment = require('moment');
-
 moment().format();
 
-const app = express();
-
 app.use(bodyParser.json());
+app.use(morgan('common'));
+
 
 const {
   addMealToDB,
@@ -43,22 +44,29 @@ const {
   updateMealInDB,
 } = require('./data-layer.js');
 
+const { localStrategy, jwtStrategy } = require('./auth/strategies.js');
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
 app.use(express.static('dist'));
 
-app.get('/', (req, res) => {
+app.get('/', jwtAuth, (req, res) => {
   res.sendStatus(200);
 });
 
 // add JWT endpoint to get all meals
 
-app.get('/meals', (req, res) => {
+app.get('/meals', jwtAuth, (req, res) => {
   console.log('/meals get');
   getAllMealsFromDB().then((meals) => {
     res.status(200).json(meals);
   });
 });
 
-app.post('/meals', (req, res) => {
+app.post('/meals', jwtAuth, (req, res) => {
   const newMeal = {
     name: req.body.name,
     description: req.body.description,
@@ -68,7 +76,7 @@ app.post('/meals', (req, res) => {
   addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
 
-app.put('/meals/:id', (req, res) => {
+app.put('/meals/:id', jwtAuth, (req, res) => {
   const mealToSend = {
     _id: req.params.id,
     name: req.body.name,
@@ -99,7 +107,7 @@ const sortMealData = (data) => {
   return sortedItems;
 };
 
-app.get('/schedule', (req, res) => {
+app.get('/schedule', jwtAuth, (req, res) => {
   getAllMealsFromDB().then((meals) => {
     console.log(meals);
     const scheduledMeals = sortMealData(meals);
@@ -107,7 +115,7 @@ app.get('/schedule', (req, res) => {
   });
 });
 
-app.delete('/meals/:id', (req, res) => {
+app.delete('/meals/:id', jwtAuth, (req, res) => {
   removeMealFromDB(req.params.id).then(() => res.status(204).end());
 });
 
