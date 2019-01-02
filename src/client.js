@@ -67,11 +67,6 @@ const render = (store) => {
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
-const hideEverything = () => {
-  $('#schedule').hide();
-  $('#addMealSection').hide();
-};
-
 const scheduleTemplate = meals =>
   `<div class="meal ${meals.dayOfWeek}"><p class="name">${
   meals.name
@@ -286,6 +281,31 @@ const renderIntoMain = (temp) => {
   $('#main').empty().append(temp);
 };
 
+// untested
+const getMealsFromUser = () => {
+  const newMeal = {};
+  newMeal.name = document.getElementById('meal-name').value;
+  newMeal.description = [];
+  newMeal.description.push(document.getElementById('description').value);
+  const userWeekday = document.getElementById('dayOfWeek').value;
+  newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
+  return newMeal;
+};
+
+// not tested
+const addUserMeals = () => {
+  $('form').submit((event) => {
+    event.preventDefault();
+    const dataToAdd = getMealsFromUser();
+    sendMealToEndpoint(dataToAdd).then(() => {
+      addToState(STORE, dataToAdd);
+      render(STORE);
+      $('#addMealForm')[0].reset();
+    });
+    // do I need to pass in data to add to anon function below?
+  });
+};
+
 const addMealFormView = () => {
   const addMealForm = `<section id="addMealSection">
   <h1 class="title">Add A Meal Here</h1>
@@ -320,6 +340,7 @@ const addMealFormView = () => {
     render({
       meals: value,
     }));
+  addUserMeals();
 };
 
 const scheduleView = () => {
@@ -339,35 +360,6 @@ $(document).ready(() => {
   $('#mealNav').click(() => addMealFormView());
   $('#scheduleNav').click(() => scheduleView());
 });
-
-// untested
-const getMealsFromUser = () => {
-  const newMeal = {};
-  newMeal.name = document.getElementById('meal-name').value;
-  newMeal.description = [];
-  newMeal.description.push(document.getElementById('description').value);
-  const userWeekday = document.getElementById('dayOfWeek').value;
-  newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
-  return newMeal;
-};
-
-// not tested
-const addUserMeals = () => {
-  $('form').submit((event) => {
-    event.preventDefault();
-    const dataToAdd = getMealsFromUser();
-    sendMealToEndpoint(dataToAdd).then(() => {
-      addToState(STORE, dataToAdd);
-      render(STORE);
-      $('#addMealForm')[0].reset();
-    });
-    // do I need to pass in data to add to anon function below?
-  });
-};
-
-addUserMeals();
-
-hideEverything();
 
 module.exports = {
   render,
