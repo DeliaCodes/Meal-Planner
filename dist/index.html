@@ -1,75 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="main.css" />
-    <title>Meal Planner</title>
-  </head>
 
-  <body>
-    <header><h1 class="title">Meal Planner</h1></header>
-    <div class="blankSpace"></div>
-    <nav>
-      <a id="mealNav" class="mealNav">Add A Meal</a>
-      <a id="scheduleNav" class="scheduleNav">Schedule</a>
-    </nav>
-    <main role="main">
-      <section id="addMealSection">
-        <h1 class="title">Add A Meal Here</h1>
-        <form id="addMealForm">
-          <fieldset>
-            <label for="meal-name">
-              Insert Meal Name Here:
-              <input
-                role="textbox"
-                id="meal-name"
-                type="text"
-                name="Meal Name"
-                role="input"
-                required
-              />
-            </label>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+  <title>Meal Planner</title>
+</head>
 
-            <label for="description">
-              Insert Your Meal Description Here:
-              <input
-                role="textbox"
-                id="description"
-                type="text"
-                name="meal description"
-                required
-              />
-            </label>
-            <label for="dayOfWeek"
-              >Select The Day Of The Week For This Meal:
-              <select name="select day of week" id="dayOfWeek" required>
-                <option value="monday">Monday</option>
-                <option value="tuesday">Tuesday</option>
-                <option value="wednesday">Wednesday</option>
-                <option value="thursday">Thursday</option>
-                <option value="friday">Friday</option>
-                <option value="saturday">Saturday</option>
-                <option value="sunday">Sunday</option>
-              </select>
-            </label>
-            <input id="submit" type="submit" name="submit" role="button" />
-          </fieldset>
-        </form>
-      </section>
-      <div id="schedule">
-        <h1>My Upcoming Meals</h1>
-        <div id="displaySchedule" aria-live="assertive"></div>
-        <!--     <a class="edit editSchedule" id="editSchedule">Edit Schedule</a> -->
-      </div>
-      <!-- <div id="displayMeals">
+<body>
+  <header>
+    <h1 class="title">Meal Planner</h1>
+  </header>
+  <div class="blankSpace"></div>
+  <nav>
+    <a id="mealNav" class="mealNav">Add A Meal</a>
+    <a id="scheduleNav" class="scheduleNav">Schedule</a>
+  </nav>
+  <main role="main" id="main">
+    <!-- <div id="displayMeals">
       <h1 class="title">Your Current Meals</h1>
       <div id="currentMeals" aria-live="assertive"></div>
     </div> -->
-    </main>
-    <script type="application/javascript" src="client.bundle.js"></script>
-    <script type="application/javascript" src="api.bundle.js"></script>
-  </body>
+  </main>
+  <script type="application/javascript" src="client.bundle.js"></script>
+  <script type="application/javascript" src="api.bundle.js"></script>
+</body>
+
 </html>

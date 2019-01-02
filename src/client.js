@@ -74,11 +74,11 @@ const hideEverything = () => {
 
 const scheduleTemplate = meals =>
   `<div class="meal ${meals.dayOfWeek}"><p class="name">${
-    meals.name
+  meals.name
   }</p><p class="description">${
-    meals.description
+  meals.description
   }</p><a class="edit delete" id="${
-    meals._id
+  meals._id
   }">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
@@ -282,26 +282,62 @@ const renderSchedule = (meals) => {
   // console.log(orderedMeals.map(m => m);
 };
 
-$(document).ready(() => {
+const renderIntoMain = (temp) => {
+  $('#main').empty().append(temp);
+};
+
+const addMealFormView = () => {
+  const addMealForm = `<section id="addMealSection">
+  <h1 class="title">Add A Meal Here</h1>
+  <form id="addMealForm">
+    <fieldset>
+      <label for="meal-name">
+        Insert Meal Name Here:
+        <input role="textbox" id="meal-name" type="text" name="Meal Name" role="input" required />
+      </label>
+
+      <label for="description">
+        Insert Your Meal Description Here:
+        <input role="textbox" id="description" type="text" name="meal description" required />
+      </label>
+      <label for="dayOfWeek">Select The Day Of The Week For This Meal:
+        <select name="select day of week" id="dayOfWeek" required>
+          <option value="monday">Monday</option>
+          <option value="tuesday">Tuesday</option>
+          <option value="wednesday">Wednesday</option>
+          <option value="thursday">Thursday</option>
+          <option value="friday">Friday</option>
+          <option value="saturday">Saturday</option>
+          <option value="sunday">Sunday</option>
+        </select>
+      </label>
+      <input id="submit" type="submit" name="submit" role="button" />
+    </fieldset>
+  </form>
+</section>`;
+  renderIntoMain(addMealForm);
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
     }));
+};
+
+const scheduleView = () => {
+  const scheduleDisplay = `<div id="schedule">
+  <h1>My Upcoming Meals</h1>
+  <div id="displaySchedule" aria-live="assertive"></div></div>`;
+
+  renderIntoMain(scheduleDisplay);
 
   getScheduleFromEndpoint().then((value) => {
     STORE.schedule = value;
     return renderSchedule(value);
   });
+};
 
-  $('#mealNav').click(() => {
-    $('#addMealSection').show();
-    $('#schedule').hide();
-  });
-
-  $('#scheduleNav').click(() => {
-    $('#addMealSection').hide();
-    $('#schedule').show();
-  });
+$(document).ready(() => {
+  $('#mealNav').click(() => addMealFormView());
+  $('#scheduleNav').click(() => scheduleView());
 });
 
 // untested
