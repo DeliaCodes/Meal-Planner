@@ -294,7 +294,7 @@ const getMealsFromUser = () => {
 
 // not tested
 const addUserMeals = () => {
-  $('form').submit((event) => {
+  $('#addMealForm').submit((event) => {
     event.preventDefault();
     const dataToAdd = getMealsFromUser();
     sendMealToEndpoint(dataToAdd).then(() => {
@@ -356,7 +356,68 @@ const scheduleView = () => {
   });
 };
 
+const loginAction = () => { };
+
+const registerUserView = () => {
+  const registerForm = `<section id="newUserRegistration">
+  <h1 class="title">Register Here</h1>
+  <form id="userRegistrationForm">
+    <fieldset>
+    <label for="registerEmail">
+        Email:
+        <input role="textbox" id="registerEmail" type="text" name="Register Email" role="input" required />
+      </label>
+      <label for="registerUsername">
+        Username:
+        <input role="textbox" id="registerUsername" type="text" name="Register Username" role="input" required />
+      </label>
+      <label for="registerPassword">
+        Password:
+        <input role="textbox" id="registerPassword" type="text" name="Login Password" required />
+      <input id="registerSubmit" type="submit" name="submit" role="button" />
+      <a id="registerDemo" class="register demo">Unsure? Try this demo account</a>
+      <a id="loginUser" class="login here">Go back to the Login page here</a>
+    </fieldset>
+  </form>
+</section>`;
+  renderIntoMain(registerForm);
+  $('#userRegistrationForm').submit((event) => {
+    event.preventDefault();
+    // perform user reg actions and then loginAction();
+  });
+  $('#registerDemo').click(() => loginAction());
+  $('#loginUser').click(() => userLoginView());
+};
+
+const userLoginView = () => {
+  const userLoginForm = `<section id="userLoginOrRegister">
+  <h1 class="title">Login Here</h1>
+  <form id="userLogin">
+    <fieldset>
+      <label for="loginUsername">
+        Username:
+        <input role="textbox" id="loginUsername" type="text" name="Login Username" role="input" required />
+      </label>
+      <label for="loginPassword">
+        Password:
+        <input role="textbox" id="loginPassword" type="text" name="Login Password" required />
+      <input id="loginSubmit" type="submit" name="submit" role="button" />
+      <a id="registerDemo" class="register demo">Unsure? Try this demo account</a>
+      <a id="registerUserHere" class="register here">Or you can signup here</a>
+    </fieldset>
+  </form>
+</section>`;
+  renderIntoMain(userLoginForm);
+  $('#userLogin').submit((event) => {
+    event.preventDefault();
+    loginAction();
+  });
+  $('#registerDemo').click(() => loginAction());
+  $('#registerUserHere').click(() => registerUserView());
+};
+
 $(document).ready(() => {
+  userLoginView();
   $('#mealNav').click(() => addMealFormView());
   $('#scheduleNav').click(() => scheduleView());
 });
