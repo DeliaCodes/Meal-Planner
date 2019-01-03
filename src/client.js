@@ -69,11 +69,11 @@ const accessEachDaysMealsInOrder = (week, mealObject) =>
 
 const scheduleTemplate = meals =>
   `<div class="meal ${meals.dayOfWeek}"><p class="name">${
-  meals.name
+    meals.name
   }</p><p class="description">${
-  meals.description
+    meals.description
   }</p><a class="edit delete" id="${
-  meals._id
+    meals._id
   }">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
@@ -90,7 +90,7 @@ const convertNumberToWeekDay = number =>
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay));
+    convertWeekDayToNumber(stringDay),);
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -278,7 +278,9 @@ const renderSchedule = (meals) => {
 };
 
 const renderIntoMain = (temp) => {
-  $('#main').empty().append(temp);
+  $('#main')
+    .empty()
+    .append(temp);
 };
 
 // untested
@@ -339,7 +341,7 @@ const addMealFormView = () => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }));
+    }),);
   addUserMeals();
 };
 
@@ -356,7 +358,7 @@ const scheduleView = () => {
   });
 };
 
-const loginAction = () => { };
+const loginAction = (user, pass) => {};
 
 const registerUserView = () => {
   const registerForm = `<section id="newUserRegistration">
@@ -383,7 +385,10 @@ const registerUserView = () => {
   renderIntoMain(registerForm);
   $('#userRegistrationForm').submit((event) => {
     event.preventDefault();
-    // perform user reg actions and then loginAction();
+    const email = document.getElementById('registerEmail').value;
+    const username = document.getElementById('registerUsername').value;
+    const password = document.getElementById('registerPassword').value;
+    // do some sort of reg and login
   });
   $('#registerDemo').click(() => loginAction());
   $('#loginUser').click(() => userLoginView());
@@ -410,7 +415,9 @@ const userLoginView = () => {
   renderIntoMain(userLoginForm);
   $('#userLogin').submit((event) => {
     event.preventDefault();
-    loginAction();
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    loginAction(username, password);
   });
   $('#registerDemo').click(() => loginAction());
   $('#registerUserHere').click(() => registerUserView());
