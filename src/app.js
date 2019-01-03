@@ -27,15 +27,12 @@ const passport = require('passport');
 
 const app = express();
 
-const {
-  mealModel,
-} = require('./models');
+const { mealModel } = require('./models');
 
 moment().format();
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
-
 
 const {
   addMealToDB,
@@ -43,6 +40,8 @@ const {
   removeMealFromDB,
   updateMealInDB,
 } = require('./data-layer.js');
+const { router: usersRouter } = require('./users');
+const { router: authRouter } = require('./auth');
 
 const { localStrategy, jwtStrategy } = require('./auth/strategies.js');
 
@@ -53,14 +52,21 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 app.use(express.static('dist'));
 
+app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
+
+// normally this is your express static
 app.get('/', jwtAuth, (req, res) => {
   res.sendStatus(200);
 });
 
-// add JWT endpoint to get all meals
+// create meals folder and stick router into it
+
+// add /api to all of these and should be a router
 
 app.get('/meals', jwtAuth, (req, res) => {
   console.log('/meals get');
+  // pass userid into this
   getAllMealsFromDB().then((meals) => {
     res.status(200).json(meals);
   });
@@ -86,7 +92,6 @@ app.put('/meals/:id', jwtAuth, (req, res) => {
   updateMealInDB(req.params.id, mealToSend).then(() => res.status(204).end());
 });
 
-
 /**
  * @param {Meal[]} data
  * @returns {Schedule} sortedItems items sorted
@@ -102,12 +107,18 @@ const sortMealData = (data) => {
     Sat: [],
   };
 
-  data.forEach(m => sortedItems[`${moment().weekday(m.dayOfWeek).format('ddd')}`].push(m));
+  data.forEach(m =>
+    sortedItems[
+      `${moment()
+        .weekday(m.dayOfWeek)
+        .format('ddd')}`
+    ].push(m),);
 
   return sortedItems;
 };
 
 app.get('/schedule', jwtAuth, (req, res) => {
+  // add user paramter to getAllMeals
   getAllMealsFromDB().then((meals) => {
     console.log(meals);
     const scheduledMeals = sortMealData(meals);
