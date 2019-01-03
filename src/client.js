@@ -377,10 +377,12 @@ const registerUserView = () => {
         Password:
         <input role="textbox" id="registerPassword" type="text" name="Login Password" required />
       <input id="registerSubmit" type="submit" name="submit" role="button" />
-      <a id="registerDemo" class="register demo">Unsure? Try this demo account</a>
-      <a id="loginUser" class="login here">Go back to the Login page here</a>
     </fieldset>
   </form>
+  <nav class ="userNav">
+    <a id="registerDemo" class="nav register demo">Unsure? Try this demo account</a>
+      <a id="loginUser" class="login here">Go back to the Login page here</a>
+      </nav>
 </section>`;
   renderIntoMain(registerForm);
   $('#userRegistrationForm').submit((event) => {
@@ -407,10 +409,12 @@ const userLoginView = () => {
         Password:
         <input role="textbox" id="loginPassword" type="text" name="Login Password" required />
       <input id="loginSubmit" type="submit" name="submit" role="button" />
-      <a id="registerDemo" class="register demo">Unsure? Try this demo account</a>
-      <a id="registerUserHere" class="register here">Or you can signup here</a>
     </fieldset>
   </form>
+  <nav class="userNav">
+  <a id="registerDemo" class="register demo">Unsure? Try this demo account</a>
+      <a id="registerUserHere" class="register here">Or you can signup here</a>
+  </nav>
 </section>`;
   renderIntoMain(userLoginForm);
   $('#userLogin').submit((event) => {
