@@ -212,13 +212,6 @@ const submitEditForm = (id, store) => {
   });
 };
 
-/*
-Rerender using local STORE and send to backend
-process form values and insert into STORE
-render
-send to backend
-*/
-
 const editRenderForm = (id, name, description, event) => {
   $(event.target)
     .parent()
