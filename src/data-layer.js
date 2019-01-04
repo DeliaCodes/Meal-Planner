@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const { mealModel } = require('./models.js');
+const { mealModel } = require('./meals/meal-models.js');
 
 const addMealToDB = mealModel.create.bind(mealModel);
 

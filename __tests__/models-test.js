@@ -1,6 +1,6 @@
 const {
   mealModel,
-} = require('../src/models');
+} = require('../src/meals/meal-models');
 const mongoose = require('mongoose');
 
 const {

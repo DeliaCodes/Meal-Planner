@@ -1,7 +1,7 @@
 const {
   stringCheck,
   hasNameAndDescription,
-} = require('../src/validation.js');
+} = require('../src/meals/validation.js');
 
 describe('successfully validates meal input', () => {
   it('returns a message if an input is not a string', () => {
