@@ -351,6 +351,11 @@ const scheduleView = () => {
   });
 };
 
+const demo = {
+  username: 'DemoAutomaton',
+  password: 'Explain-Ocean_Everything*RunninG',
+};
+
 const loginAction = (user, pass) => { };
 
 const registerUserView = () => {
@@ -388,7 +393,7 @@ const registerUserView = () => {
     const password = document.getElementById('registerPassword').value;
     // do some sort of reg and login
   });
-  $('#registerDemo').click(() => loginAction());
+  $('#registerDemo').click(() => loginAction(demo.username, demo.password));
   $('#loginUser').click(() => userLoginView());
 };
 
@@ -422,7 +427,7 @@ const userLoginView = () => {
     const password = document.getElementById('loginPassword').value;
     loginAction(username, password);
   });
-  $('#registerDemo').click(() => loginAction());
+  $('#registerDemo').click(() => loginAction(demo.username, demo.password));
   $('#registerUserHere').click(() => registerUserView());
 };
 
