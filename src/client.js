@@ -373,7 +373,10 @@ const registerUserView = () => {
     </fieldset>
   </form>
   <nav class ="userNav">
-    <a id="registerDemo" class="nav register demo">Unsure? Try this demo account</a>
+  <a id="registerDemo" class="register demo">Unsure? Try this demo account:
+  Username: DemoAutomaton
+  Password: Explain-Ocean_Everything*RunninG
+  </a>
       <a id="loginUser" class="login here">Go back to the Login page here</a>
       </nav>
 </section>`;
@@ -405,7 +408,10 @@ const userLoginView = () => {
     </fieldset>
   </form>
   <nav class="userNav">
-  <a id="registerDemo" class="register demo">Unsure? Try this demo account</a>
+  <a id="registerDemo" class="register demo">Unsure? Try this demo account:
+  Username: DemoAutomaton
+  Password: Explain-Ocean_Everything*RunninG
+  </a>
       <a id="registerUserHere" class="register here">Or you can signup here</a>
   </nav>
 </section>`;
