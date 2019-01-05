@@ -32,6 +32,9 @@ const {
   sendMealToEndpoint,
   deleteMealEndpoint,
   getScheduleFromEndpoint,
+  userLogin,
+  userRegister,
+  userRefresh,
 } = require('./api.js');
 
 moment().format();
@@ -69,11 +72,11 @@ const accessEachDaysMealsInOrder = (week, mealObject) =>
 
 const scheduleTemplate = meals =>
   `<div class="meal ${meals.dayOfWeek}"><p class="name">${
-    meals.name
+  meals.name
   }</p><p class="description">${
-    meals.description
+  meals.description
   }</p><a class="edit delete" id="${
-    meals._id
+  meals._id
   }">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
@@ -90,7 +93,7 @@ const convertNumberToWeekDay = number =>
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay),);
+    convertWeekDayToNumber(stringDay));
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -334,7 +337,7 @@ const addMealFormView = () => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }),);
+    }));
   addUserMeals();
 };
 
@@ -356,7 +359,12 @@ const demo = {
   password: 'Explain-Ocean_Everything*RunninG',
 };
 
-const loginAction = (user, pass) => {};
+const loginAction = (user, pass) => {
+  const loginUser = {};
+  loginUser.username = user;
+  loginUser.password = pass;
+  return userLogin(loginUser);
+};
 
 const registerUserView = () => {
   const registerForm = `<section id="newUserRegistration">
@@ -388,10 +396,12 @@ const registerUserView = () => {
   renderIntoMain(registerForm);
   $('#userRegistrationForm').submit((event) => {
     event.preventDefault();
-    const email = document.getElementById('registerEmail').value;
-    const username = document.getElementById('registerUsername').value;
-    const password = document.getElementById('registerPassword').value;
-    // do some sort of reg and login
+    const registration = {}
+    registration.email = document.getElementById('registerEmail').value;
+    registration.username = document.getElementById('registerUsername').value;
+    registration.password = document.getElementById('registerPassword').value;
+    userRegister(registration);
+    // do something to refresh the page or confirm registration
   });
   $('#registerDemo').click(() => loginAction(demo.username, demo.password));
   $('#loginUser').click(() => userLoginView());
