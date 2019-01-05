@@ -17,6 +17,29 @@ const user = null;
 // user.name from server
 // copy set into each one
 
+const userLogin = user => fetch('/login', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  body: JSON.stringify({
+    username: user.username,
+    password: user.password,
+  }),
+});
+
+const userRefresh = user => fetch('/refresh').set('Authorization', `Bearer ${user.authToken}`)
+
+const userRegister = user => fetch('/register', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  body: JSON.stringify({
+    username: user.username,
+    password: user.password,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    email: user.email,
+  }),
+});
+
 const getScheduleFromEndpoint = user =>
   fetch('/api/schedule').set('Authorization', `Bearer ${user.authToken}`)
     .then(checkForErrors)
@@ -65,4 +88,7 @@ module.exports = {
   sendMealToEndpoint,
   deleteMealEndpoint,
   getScheduleFromEndpoint,
+  userLogin,
+  userRefresh,
+  userRegister,
 };
