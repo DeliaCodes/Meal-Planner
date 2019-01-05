@@ -18,22 +18,22 @@ const user = null;
 // copy set into each one
 
 const getScheduleFromEndpoint = user =>
-  fetch('/schedule').set('Authorization', `Bearer ${user.authToken}`)
+  fetch('/api/schedule').set('Authorization', `Bearer ${user.authToken}`)
     .then(checkForErrors)
     .then(noErrorResponse);
 
 const getMealsFromEndpoint = user =>
-  fetch('/meals').set('Authorization', `Bearer ${user.authToken}`)
+  fetch('/api/meals').set('Authorization', `Bearer ${user.authToken}`)
     .then(checkForErrors)
     .then(noErrorResponse);
 
-const deleteMealEndpoint = (user, id) =>
-  fetch(`/meals/${id}`, {
+const deleteMealEndpoint = (id, user) =>
+  fetch(`/api/meals/${id}`, {
     method: 'delete',
   }).set('Authorization', `Bearer ${user.authToken}`).then(checkForErrors);
 
 const sendMealToEndpoint = (data, user) =>
-  fetch('/meals', {
+  fetch('/api/meals', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const sendMealToEndpoint = (data, user) =>
 const updateMealEndpoint = (id, data, user) => {
   console.log('Update Data', data);
 
-  return fetch(`/meals/${id}`, {
+  return fetch(`/api/meals/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',

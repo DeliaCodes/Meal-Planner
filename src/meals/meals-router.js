@@ -32,7 +32,7 @@ const {
 
 // add /api to all of these and should be a router
 
-app.get('/meals', jwtAuth, (req, res) => {
+app.get('/api/meals', jwtAuth, (req, res) => {
     console.log('/meals get');
     // pass userid into this
     getAllMealsFromDB().then((meals) => {
@@ -40,7 +40,7 @@ app.get('/meals', jwtAuth, (req, res) => {
     });
 });
 
-app.post('/meals', jwtAuth, (req, res) => {
+app.post('/api/meals', jwtAuth, (req, res) => {
     const newMeal = {
         name: req.body.name,
         description: req.body.description,
@@ -50,7 +50,7 @@ app.post('/meals', jwtAuth, (req, res) => {
     addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
 
-app.put('/meals/:id', jwtAuth, (req, res) => {
+app.put('/api/meals/:id', jwtAuth, (req, res) => {
     const mealToSend = {
         _id: req.params.id,
         name: req.body.name,
@@ -85,7 +85,7 @@ const sortMealData = (data) => {
     return sortedItems;
 };
 
-app.get('/schedule', jwtAuth, (req, res) => {
+app.get('/api/schedule', jwtAuth, (req, res) => {
     // add user paramter to getAllMeals
     getAllMealsFromDB().then((meals) => {
         console.log(meals);
@@ -94,7 +94,7 @@ app.get('/schedule', jwtAuth, (req, res) => {
     });
 });
 
-app.delete('/meals/:id', jwtAuth, (req, res) => {
+app.delete('/api/meals/:id', jwtAuth, (req, res) => {
     removeMealFromDB(req.params.id).then(() => res.status(204).end());
 });
 
