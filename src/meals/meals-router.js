@@ -33,6 +33,7 @@ const {
   getAllMealsFromDB,
   removeMealFromDB,
   updateMealInDB,
+  getUserIDFromDB,
 } = require('../data-layer.js');
 
 const { mealModel } = require('./meal-models');
@@ -87,7 +88,7 @@ const sortMealData = (data) => {
       `${moment()
         .weekday(m.dayOfWeek)
         .format('ddd')}`
-    ].push(m),);
+    ].push(m));
 
   return sortedItems;
 };
