@@ -72,11 +72,11 @@ const accessEachDaysMealsInOrder = (week, mealObject) =>
 
 const scheduleTemplate = meals =>
   `<div class="meal ${meals.dayOfWeek}"><p class="name">${
-  meals.name
+    meals.name
   }</p><p class="description">${
-  meals.description
+    meals.description
   }</p><a class="edit delete" id="${
-  meals._id
+    meals._id
   }">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
@@ -93,7 +93,7 @@ const convertNumberToWeekDay = number =>
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay));
+    convertWeekDayToNumber(stringDay),);
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -337,7 +337,7 @@ const addMealFormView = () => {
   getMealsFromEndpoint().then(value =>
     render({
       meals: value,
-    }));
+    }),);
   addUserMeals();
 };
 
@@ -363,7 +363,7 @@ const loginAction = (user, pass) => {
   const loginUser = {};
   loginUser.username = user;
   loginUser.password = pass;
-  return userLogin(loginUser);
+  return userLogin(loginUser).then(() => addMealFormView());
 };
 
 const registerUserView = () => {
@@ -396,11 +396,11 @@ const registerUserView = () => {
   renderIntoMain(registerForm);
   $('#userRegistrationForm').submit((event) => {
     event.preventDefault();
-    const registration = {}
+    const registration = {};
     registration.email = document.getElementById('registerEmail').value;
     registration.username = document.getElementById('registerUsername').value;
     registration.password = document.getElementById('registerPassword').value;
-    userRegister(registration);
+    userRegister(registration).then(() => userLoginView());
     // do something to refresh the page or confirm registration
   });
   $('#registerDemo').click(() => loginAction(demo.username, demo.password));
@@ -445,7 +445,7 @@ $(document).ready(() => {
   userLoginView();
   $('#mealNav').click(() => addMealFormView());
   $('#scheduleNav').click(() => scheduleView());
-  $('#userNav').click(() => userLoginView);
+  $('#userNav').click(() => userLoginView());
 });
 
 module.exports = {

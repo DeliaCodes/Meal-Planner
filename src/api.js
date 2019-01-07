@@ -25,7 +25,9 @@ const userLogin = user =>
       username: user.username,
       password: user.password,
     }),
-  });
+  })
+    .then(checkForErrors)
+    .then(noErrorResponse);
 
 const userRefresh = user =>
   fetch('api/auth/refresh').set('Authorization', `Bearer ${user.authToken}`);
