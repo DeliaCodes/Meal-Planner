@@ -17,7 +17,7 @@ const user = null;
 // user.name from server
 // copy set into each one
 
-const userLogin = user =>
+const userEndpointLogin = user =>
   fetch('api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -99,7 +99,7 @@ module.exports = {
   sendMealToEndpoint,
   deleteMealEndpoint,
   getScheduleFromEndpoint,
-  userLogin,
+  userEndpointLogin,
   userRefresh,
   userRegister,
 };

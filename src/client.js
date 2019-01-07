@@ -32,7 +32,7 @@ const {
   sendMealToEndpoint,
   deleteMealEndpoint,
   getScheduleFromEndpoint,
-  userLogin,
+  userEndpointLogin,
   userRegister,
   userRefresh,
 } = require('./api.js');
@@ -363,7 +363,7 @@ const loginAction = (user, pass) => {
   const loginUser = {};
   loginUser.username = user;
   loginUser.password = pass;
-  return userLogin(loginUser).then(() => addMealFormView());
+  return userEndpointLogin(loginUser).then(() => addMealFormView());
 };
 
 const registerUserView = () => {
