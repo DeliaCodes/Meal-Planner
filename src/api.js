@@ -1,3 +1,4 @@
+// @ts-nocheck
 require('isomorphic-fetch');
 
 const checkForErrors = (response) => {
@@ -49,7 +50,7 @@ const getScheduleFromEndpoint = user =>
   fetch('/api/schedule', {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${user}`,
+      Authorization: `Bearer ${user.authToken}`,
     },
   })
     .then(checkForErrors)
@@ -59,8 +60,11 @@ const getMealsFromEndpoint = user =>
   fetch('/api/meals', {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${user}`,
+      Authorization: `Bearer ${user.authToken}`,
     },
+    body: JSON.stringify({
+      userID: user.id,
+    }),
   })
     .then(checkForErrors)
     .then(noErrorResponse);
@@ -69,8 +73,11 @@ const deleteMealEndpoint = (id, user) =>
   fetch(`/api/meals/${id}`, {
     method: 'delete',
     headers: {
-      Authorization: `Bearer ${user}`,
+      Authorization: `Bearer ${user.authToken}`,
     },
+    body: JSON.stringify({
+      userID: user.id,
+    }),
   }).then(checkForErrors);
 
 const sendMealToEndpoint = (data, user) =>
@@ -78,7 +85,7 @@ const sendMealToEndpoint = (data, user) =>
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${user}`,
+      Authorization: `Bearer ${user.authToken}`,
     },
     body: JSON.stringify(data),
   }).then((response) => {
@@ -96,7 +103,7 @@ const updateMealEndpoint = (id, data, user) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      Authorization: `Bearer ${user}`,
+      Authorization: `Bearer ${user.authToken}`,
     },
     body: JSON.stringify(data),
   });
