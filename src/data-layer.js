@@ -12,11 +12,6 @@ if user name is passed in get only meals with that user */
 
 const getAllMealsFromDB = userID => mealModel.find({ userID });
 
-const getUserIDFromDB = (username) => {
-  console.log('getUserID username', username);
-  return usersModel.find({ username });
-}
-
 // add userID validation
 const removeMealFromDB = (id, userID) =>
   mealModel.deleteOne({
@@ -33,5 +28,4 @@ module.exports = {
   addMealToDB,
   removeMealFromDB,
   updateMealInDB,
-  getUserIDFromDB,
 };
