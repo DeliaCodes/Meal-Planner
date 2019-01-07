@@ -364,7 +364,8 @@ const loginAction = (user, pass) => {
   loginUser.username = user;
   loginUser.password = pass;
   return userEndpointLogin(loginUser).then((value) => {
-    STORE.user = value.authToken;
+    STORE.user.authToken = value.authToken;
+    STORE.user.id = value.userID;
     return addMealFormView();
   });
 };
