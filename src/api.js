@@ -61,10 +61,8 @@ const getMealsFromEndpoint = user =>
     method: 'GET',
     headers: {
       Authorization: `Bearer ${user.authToken}`,
+      userID: user.userID,
     },
-    body: JSON.stringify({
-      userID: user.id,
-    }),
   })
     .then(checkForErrors)
     .then(noErrorResponse);
