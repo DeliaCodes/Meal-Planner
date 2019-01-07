@@ -17,43 +17,50 @@ const user = null;
 // user.name from server
 // copy set into each one
 
-const userLogin = user => fetch('/login', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json; charset=utf-8' },
-  body: JSON.stringify({
-    username: user.username,
-    password: user.password,
-  }),
-});
+const userLogin = user =>
+  fetch('api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({
+      username: user.username,
+      password: user.password,
+    }),
+  });
 
-const userRefresh = user => fetch('/refresh').set('Authorization', `Bearer ${user.authToken}`)
+const userRefresh = user =>
+  fetch('api/auth/refresh').set('Authorization', `Bearer ${user.authToken}`);
 
-const userRegister = user => fetch('/register', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json; charset=utf-8' },
-  body: JSON.stringify({
-    username: user.username,
-    password: user.password,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    email: user.email,
-  }),
-});
+const userRegister = user =>
+  fetch('api/users/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({
+      username: user.username,
+      password: user.password,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+    }),
+  });
 
 const getScheduleFromEndpoint = user =>
-  fetch('/api/schedule').set('Authorization', `Bearer ${user.authToken}`)
+  fetch('/api/schedule')
+    .set('Authorization', `Bearer ${user.authToken}`)
     .then(checkForErrors)
     .then(noErrorResponse);
 
 const getMealsFromEndpoint = user =>
-  fetch('/api/meals').set('Authorization', `Bearer ${user.authToken}`)
+  fetch('/api/meals')
+    .set('Authorization', `Bearer ${user.authToken}`)
     .then(checkForErrors)
     .then(noErrorResponse);
 
 const deleteMealEndpoint = (id, user) =>
   fetch(`/api/meals/${id}`, {
     method: 'delete',
-  }).set('Authorization', `Bearer ${user.authToken}`).then(checkForErrors);
+  })
+    .set('Authorization', `Bearer ${user.authToken}`)
+    .then(checkForErrors);
 
 const sendMealToEndpoint = (data, user) =>
   fetch('/api/meals', {
@@ -62,13 +69,15 @@ const sendMealToEndpoint = (data, user) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  }).set('Authorization', `Bearer ${user.authToken}`).then((response) => {
-    if (response.status >= 400) {
-      // console.log(response);
-      throw new Error('Bad response from server');
-    }
-    return response.json();
-  });
+  })
+    .set('Authorization', `Bearer ${user.authToken}`)
+    .then((response) => {
+      if (response.status >= 400) {
+        // console.log(response);
+        throw new Error('Bad response from server');
+      }
+      return response.json();
+    });
 
 const updateMealEndpoint = (id, data, user) => {
   console.log('Update Data', data);
