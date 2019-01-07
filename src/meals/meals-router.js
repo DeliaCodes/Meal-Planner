@@ -18,8 +18,15 @@
  * @property {Meal[]} Fri - The first day
  * @property {Meal[]} Sat - The first day
  */
+const express = require('express');
+const passport = require('passport');
+const moment = require('moment');
 
-const { app } = require('../app.js');
+const router = express.Router();
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+moment().format();
 
 const {
   addMealToDB,
@@ -28,9 +35,11 @@ const {
   updateMealInDB,
 } = require('../data-layer.js');
 
+const { mealModel } = require('./meal-models');
+
 // add /api to all of these and should be a router
 
-app.get('/api/meals', jwtAuth, (req, res) => {
+router.get('/meals', jwtAuth, (req, res) => {
   console.log('/meals get');
   // pass userid into this
   getAllMealsFromDB().then((meals) => {
@@ -38,7 +47,7 @@ app.get('/api/meals', jwtAuth, (req, res) => {
   });
 });
 
-app.post('/api/meals', jwtAuth, (req, res) => {
+router.post('/meals', jwtAuth, (req, res) => {
   const newMeal = {
     name: req.body.name,
     description: req.body.description,
@@ -48,7 +57,7 @@ app.post('/api/meals', jwtAuth, (req, res) => {
   addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
 
-app.put('/api/meals/:id', jwtAuth, (req, res) => {
+router.put('/meals/:id', jwtAuth, (req, res) => {
   const mealToSend = {
     _id: req.params.id,
     name: req.body.name,
@@ -83,7 +92,7 @@ const sortMealData = (data) => {
   return sortedItems;
 };
 
-app.get('/api/schedule', jwtAuth, (req, res) => {
+router.get('/schedule', jwtAuth, (req, res) => {
   // add user paramter to getAllMeals
   getAllMealsFromDB().then((meals) => {
     console.log(meals);
@@ -92,11 +101,11 @@ app.get('/api/schedule', jwtAuth, (req, res) => {
   });
 });
 
-app.delete('/api/meals/:id', jwtAuth, (req, res) => {
+router.delete('/meals/:id', jwtAuth, (req, res) => {
   removeMealFromDB(req.params.id).then(() => res.status(204).end());
 });
 
 module.exports = {
-  app,
+  router,
   sortMealData,
 };
