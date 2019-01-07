@@ -46,40 +46,48 @@ const userRegister = user =>
   });
 
 const getScheduleFromEndpoint = user =>
-  fetch('/api/schedule')
-    .set('Authorization', `Bearer ${user.authToken}`)
+  fetch('/api/schedule', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${user}`,
+    },
+  })
     .then(checkForErrors)
     .then(noErrorResponse);
 
 const getMealsFromEndpoint = user =>
-  fetch('/api/meals')
-    .set('Authorization', `Bearer ${user.authToken}`)
+  fetch('/api/meals', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${user}`,
+    },
+  })
     .then(checkForErrors)
     .then(noErrorResponse);
 
 const deleteMealEndpoint = (id, user) =>
   fetch(`/api/meals/${id}`, {
     method: 'delete',
-  })
-    .set('Authorization', `Bearer ${user.authToken}`)
-    .then(checkForErrors);
+    headers: {
+      Authorization: `Bearer ${user}`,
+    },
+  }).then(checkForErrors);
 
 const sendMealToEndpoint = (data, user) =>
   fetch('/api/meals', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${user}`,
     },
     body: JSON.stringify(data),
-  })
-    .set('Authorization', `Bearer ${user.authToken}`)
-    .then((response) => {
-      if (response.status >= 400) {
-        // console.log(response);
-        throw new Error('Bad response from server');
-      }
-      return response.json();
-    });
+  }).then((response) => {
+    if (response.status >= 400) {
+      // console.log(response);
+      throw new Error('Bad response from server');
+    }
+    return response.json();
+  });
 
 const updateMealEndpoint = (id, data, user) => {
   console.log('Update Data', data);
@@ -88,9 +96,10 @@ const updateMealEndpoint = (id, data, user) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${user}`,
     },
     body: JSON.stringify(data),
-  }).set('Authorization', `Bearer ${user.authToken}`);
+  });
 };
 
 module.exports = {

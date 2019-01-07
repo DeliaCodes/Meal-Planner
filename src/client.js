@@ -210,7 +210,7 @@ const submitEditForm = (id, store) => {
     const editedDay = convertNumberToWeekDay(newMeal.dayOfWeek);
     // console.log('Edited Meal', store.schedule[displayDay]);
     store.schedule[editedDay].push(newMeal);
-    updateMealEndpoint(id, newMeal);
+    updateMealEndpoint(id, newMeal, STORE.user);
     return renderSchedule(store.schedule);
   });
 };
@@ -228,7 +228,7 @@ const editRenderForm = (id, name, description, event) => {
 const deleteAndRender = (mealID) => {
   const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);
 
-  deleteMealEndpoint(mealID.id).then(() => {
+  deleteMealEndpoint(mealID.id, STORE.user).then(() => {
     STORE.schedule = rerenderMe;
     console.log('store', rerenderMe);
     renderSchedule(rerenderMe);
@@ -295,7 +295,7 @@ const addUserMeals = () => {
   $('#addMealForm').submit((event) => {
     event.preventDefault();
     const dataToAdd = getMealsFromUser();
-    sendMealToEndpoint(dataToAdd).then(() => {
+    sendMealToEndpoint(dataToAdd, STORE.user).then(() => {
       addToState(STORE, dataToAdd);
       render(STORE);
       $('#addMealForm')[0].reset();
@@ -334,7 +334,7 @@ const addMealFormView = () => {
   </form>
 </section>`;
   renderIntoMain(addMealForm);
-  getMealsFromEndpoint().then(value =>
+  getMealsFromEndpoint(STORE.user).then(value =>
     render({
       meals: value,
     }),);
@@ -348,7 +348,7 @@ const scheduleView = () => {
 
   renderIntoMain(scheduleDisplay);
 
-  getScheduleFromEndpoint().then((value) => {
+  getScheduleFromEndpoint(STORE.user).then((value) => {
     STORE.schedule = value;
     return renderSchedule(value);
   });
@@ -363,7 +363,10 @@ const loginAction = (user, pass) => {
   const loginUser = {};
   loginUser.username = user;
   loginUser.password = pass;
-  return userEndpointLogin(loginUser).then(() => addMealFormView());
+  return userEndpointLogin(loginUser).then((value) => {
+    STORE.user = value.authToken;
+    return addMealFormView();
+  });
 };
 
 const registerUserView = () => {
