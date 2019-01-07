@@ -93,7 +93,7 @@ const convertNumberToWeekDay = number =>
 
 const sortWeekDays = (daysToSort, currentDay) => {
   const numberedDays = daysToSort.map(stringDay =>
-    convertWeekDayToNumber(stringDay),);
+    convertWeekDayToNumber(stringDay));
   const sortedDayNumbers = numberedDays
     .filter(x => x >= currentDay)
     .concat(numberedDays.filter(x => x < currentDay));
@@ -287,6 +287,7 @@ const getMealsFromUser = () => {
   newMeal.description.push(document.getElementById('description').value);
   const userWeekday = document.getElementById('dayOfWeek').value;
   newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
+  newMeal.user._id = STORE.user.userID;
   return newMeal;
 };
 
@@ -337,7 +338,7 @@ const addMealFormView = () => {
   getMealsFromEndpoint(STORE.user).then(value =>
     render({
       meals: value,
-    }),);
+    }));
   addUserMeals();
 };
 
@@ -364,8 +365,8 @@ const loginAction = (user, pass) => {
   loginUser.username = user;
   loginUser.password = pass;
   return userEndpointLogin(loginUser).then((value) => {
-    STORE.user.authToken = value.authToken;
-    STORE.user.id = value.userID;
+    STORE.user = value;
+    console.log('does the STORE Exist', STORE);
     return addMealFormView();
   });
 };
