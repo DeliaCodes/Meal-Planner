@@ -43,7 +43,7 @@ const { mealModel } = require('./meal-models');
 router.get('/meals', jwtAuth, (req, res) => {
   console.log('/meals get');
   // pass userid into this
-  getAllMealsFromDB().then((meals) => {
+  getAllMealsFromDB(req.body.userID).then((meals) => {
     res.status(200).json(meals);
   });
 });
@@ -88,14 +88,14 @@ const sortMealData = (data) => {
       `${moment()
         .weekday(m.dayOfWeek)
         .format('ddd')}`
-    ].push(m));
+    ].push(m),);
 
   return sortedItems;
 };
 
 router.get('/schedule', jwtAuth, (req, res) => {
   // add user paramter to getAllMeals
-  getAllMealsFromDB().then((meals) => {
+  getAllMealsFromDB(req.body.userID).then((meals) => {
     console.log(meals);
     const scheduledMeals = sortMealData(meals);
     return res.status(200).json(scheduledMeals);
@@ -103,7 +103,8 @@ router.get('/schedule', jwtAuth, (req, res) => {
 });
 
 router.delete('/meals/:id', jwtAuth, (req, res) => {
-  removeMealFromDB(req.params.id).then(() => res.status(204).end());
+  removeMealFromDB(req.params.id, req.body.userID).then(() =>
+    res.status(204).end(),);
 });
 
 module.exports = {
