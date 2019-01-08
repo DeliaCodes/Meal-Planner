@@ -5,8 +5,10 @@ const mongoose = require('mongoose');
 const { mealModel } = require('./meals/meal-models.js');
 const { usersModel } = require('./users/user-models.js');
 
-const addMealToDB = mealModel.create.bind(mealModel);
-
+const addMealToDB = (data) => {
+  console.log('Meal Model Create Data', data);
+  return mealModel.create(data);
+};
 /* pass in user name and default value of null,
 if user name is passed in get only meals with that user */
 

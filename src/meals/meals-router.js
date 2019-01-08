@@ -53,7 +53,7 @@ router.post('/meals', jwtAuth, (req, res) => {
     name: req.body.name,
     description: req.body.description,
     dayOfWeek: req.body.dayOfWeek,
-    user: req.user._id,
+    userID: req.body.userID,
   };
   addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
@@ -95,8 +95,9 @@ const sortMealData = (data) => {
 
 router.get('/schedule', jwtAuth, (req, res) => {
   // add user paramter to getAllMeals
-  getAllMealsFromDB(req.headers.userID).then((meals) => {
-    console.log(meals);
+  console.log('Headers', req.user);
+  getAllMealsFromDB(req.user.userID).then((meals) => {
+    console.log('Schedule Meals', meals);
     const scheduledMeals = sortMealData(meals);
     return res.status(200).json(scheduledMeals);
   });

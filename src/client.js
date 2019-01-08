@@ -287,7 +287,7 @@ const getMealsFromUser = () => {
   newMeal.description.push(document.getElementById('description').value);
   const userWeekday = document.getElementById('dayOfWeek').value;
   newMeal.dayOfWeek = convertWeekDayToNumber(userWeekday);
-  newMeal.user._id = STORE.user.userID;
+  newMeal.userID = STORE.user.userID;
   return newMeal;
 };
 
