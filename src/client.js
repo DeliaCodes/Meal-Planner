@@ -389,12 +389,14 @@ const registerUserView = () => {
     </fieldset>
   </form>
   <nav class ="userNav">
-  <a id="registerDemo" class="register demo">Unsure? Try this demo account:
-  Username: DemoAutomaton
-  Password: Explain-Ocean_Everything*RunninG
+  <a id="registerDemo" class="register demo">Unsure? Click here to login using a demo account.
   </a>
       <a id="loginUser" class="login here">Go back to the Login page here</a>
       </nav>
+      <div class="">
+      <p>Username: DemoAutomaton</p>
+      <p>Password: Explain-Ocean_Everything*RunninG</p>
+      </div>
 </section>`;
   renderIntoMain(registerForm);
   $('#userRegistrationForm').submit((event) => {
@@ -426,12 +428,14 @@ const userLoginView = () => {
     </fieldset>
   </form>
   <nav class="userNav">
-  <a id="registerDemo" class="register demo">Unsure? Try this demo account:
-  Username: DemoAutomaton
-  Password: Explain-Ocean_Everything*RunninG
+  <a id="registerDemo" class="register demo">Unsure? Click here to login using a demo account.
   </a>
       <a id="registerUserHere" class="register here">Or you can signup here</a>
   </nav>
+  <div class="">
+      <p>Username: DemoAutomaton</p>
+      <p>Password: Explain-Ocean_Everything*RunninG</p>
+      </div>
 </section>`;
   renderIntoMain(userLoginForm);
   $('#userLogin').submit((event) => {
