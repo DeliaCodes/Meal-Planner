@@ -70,13 +70,12 @@ const render = (store) => {
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
-const scheduleTemplate = meals =>
-  `<div class="meal ${meals.dayOfWeek}"><p class="name">${
-    meals.name
+const scheduleTemplate = meals => `<div class="meal ${meals.dayOfWeek}"><p class="name">${
+  meals.name
   }</p><p class="description">${
-    meals.description
+  meals.description
   }</p><a class="edit delete" id="${
-    meals._id
+  meals._id
   }">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
@@ -107,12 +106,11 @@ const daysFromCurrentDay = (weeksWorthOfMeals, currentDay) => {
   const standardWeek = Object.keys(weeksWorthOfMeals);
   return sortWeekDays(standardWeek, currentDay);
 };
+
 /**
  @param {Schedule} mealsForDay - array of current week
  */
-
-const iterIterDay = mealsForDay =>
-  mealsForDay.map(meals => scheduleTemplate(meals));
+const iterIterDay = mealsForDay => mealsForDay.length > 0 ? mealsForDay.map((meals) => scheduleTemplate(meals)) : '<div class="meal"><p class="name">There are no meals for this day</p></div>';
 
 const insertAndFlattenToHTML = (weekMeals, week) => {
   const accumulatorArray = [];
