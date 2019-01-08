@@ -43,7 +43,7 @@ const { mealModel } = require('./meal-models');
 router.get('/meals', jwtAuth, (req, res) => {
   console.log('/meals get');
   // pass userid into this
-  getAllMealsFromDB(req.headers.userID).then((meals) => {
+  getAllMealsFromDB(req.user.userID).then((meals) => {
     res.status(200).json(meals);
   });
 });
@@ -53,7 +53,7 @@ router.post('/meals', jwtAuth, (req, res) => {
     name: req.body.name,
     description: req.body.description,
     dayOfWeek: req.body.dayOfWeek,
-    userID: req.body.userID,
+    userID: req.user.userID,
   };
   addMealToDB(newMeal).then(meal => res.status(200).json(meal));
 });
