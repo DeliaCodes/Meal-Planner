@@ -22,7 +22,7 @@ router.post('/register', jsonParser, (req, res) => {
   }
 
   const stringFields = ['username', 'password', 'firstName', 'lastName'];
-  const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string',);
+  const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
 
   if (nonStringField) {
     return res.status(422).json({
@@ -41,7 +41,7 @@ router.post('/register', jsonParser, (req, res) => {
   // We'll silently trim the other fields, because they aren't credentials used
   // to log in, so it's less of a problem.
   const explicityTrimmedFields = ['username', 'password'];
-  const nonTrimmedField = explicityTrimmedFields.find(field => req.body[field].trim() !== req.body[field],);
+  const nonTrimmedField = explicityTrimmedFields.find(field => req.body[field].trim() !== req.body[field]);
 
   if (nonTrimmedField) {
     return res.status(422).json({
@@ -64,11 +64,11 @@ router.post('/register', jsonParser, (req, res) => {
     },
   };
   const tooSmallField = Object.keys(sizedFields).find(field =>
-      'min' in sizedFields[field] &&
-      req.body[field].trim().length < sizedFields[field].min,);
+    'min' in sizedFields[field] &&
+    req.body[field].trim().length < sizedFields[field].min);
   const tooLargeField = Object.keys(sizedFields).find(field =>
-      'max' in sizedFields[field] &&
-      req.body[field].trim().length > sizedFields[field].max,);
+    'max' in sizedFields[field] &&
+    req.body[field].trim().length > sizedFields[field].max);
 
   if (tooSmallField || tooLargeField) {
     return res.status(422).json({
@@ -82,8 +82,8 @@ router.post('/register', jsonParser, (req, res) => {
   }
 
   let {
- username, password, firstName = '', lastName = '' 
-} = req.body;
+    username, password, firstName = '', lastName = ''
+  } = req.body;
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
@@ -110,7 +110,7 @@ router.post('/register', jsonParser, (req, res) => {
         password: hash,
         firstName,
         lastName,
-      }),)
+      }))
     .then(user => res.status(201).json(user.serialize()))
     .catch((err) => {
       // Forward validation errors on to the client, otherwise give a 500
@@ -121,15 +121,5 @@ router.post('/register', jsonParser, (req, res) => {
       res.status(500).json({ code: 500, message: 'Internal server error' });
     });
 });
-
-// Never expose all your users like below in a prod application
-// we're just doing this so we have a quick way to see
-// if we're creating users. keep in mind, you can also
-// verify this in the Mongo shell.
-/* router.get('/', (req, res) => {
-  return User.find()
-    .then(users => res.json(users.map(user => user.serialize())))
-    .catch(err => res.status(500).json({ message: 'Internal server error' }));
-}); */
 
 module.exports = { router };
