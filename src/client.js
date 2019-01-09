@@ -158,7 +158,7 @@ const afterEditClick = (event) => {
 
 // untested
 const editFormTemplate = (name, desc) => `<form id="editMealForm">
-<fieldset>
+<fieldset id="editMealFieldset">
   <label for="editName">
     Edit Meal Name Here:
     <input role="textbox" id="editName" type="text" value="${name}" name="Meal Name" role="input" required>
@@ -179,7 +179,7 @@ const editFormTemplate = (name, desc) => `<form id="editMealForm">
       <option value="sunday">Sunday</option>
     </select>
   </label>
-  <input id="editSubmit" type="submit" name="submit" role="button">
+  <input id="editSubmit" class="submit" type="submit" name="submit" role="button">
 </fieldset>
 </form>`;
 
@@ -307,7 +307,7 @@ const addMealFormView = () => {
   const addMealForm = `<section id="addMealSection">
   <h1 class="title">Add A Meal Here</h1>
   <form id="addMealForm">
-    <fieldset>
+    <fieldset id="addMealFieldset">
       <label for="meal-name">
         Insert Meal Name Here:
         <input role="textbox" id="meal-name" type="text" name="Meal Name" role="input" required />
@@ -328,7 +328,7 @@ const addMealFormView = () => {
           <option value="sunday">Sunday</option>
         </select>
       </label>
-      <input id="submit" type="submit" name="submit" role="button" />
+      <input id="submit" class="submit" type="submit" name="submit" role="button" />
     </fieldset>
   </form>
 </section>`;
@@ -371,9 +371,9 @@ const loginAction = (user, pass) => {
 
 const registerUserView = () => {
   const registerForm = `<section id="newUserRegistration">
-  <h1 class="title">Register Here</h1>
+  <h1 id="registerTitle" class="title">Register Here</h1>
   <form id="userRegistrationForm">
-    <fieldset>
+    <fieldset id="userRegistrationFieldset">
     <label for="registerEmail">
         Email:
         <input role="textbox" id="registerEmail" type="text" name="Register Email" role="input" required />
@@ -386,11 +386,11 @@ const registerUserView = () => {
         Password:
         <input role="textbox" id="registerPassword" type="text" name="Login Password" required />
         </label>
-      <input id="registerSubmit" type="submit" name="submit" role="button" />
+      <input id="registerSubmit" class="submit" type="submit" name="submit" role="button" />
     </fieldset>
   </form>
   <nav class ="userNav">
-  <a id="registerDemo" class="register demo">Unsure? Click here to login using a demo account.
+  <a id="registerDemo" class="register demo">Login using a demo account.
   </a>
       <a id="registerUserHere" class="register here">Or you can signup here</a>
   </nav>
@@ -415,9 +415,9 @@ const registerUserView = () => {
 
 const userLoginView = () => {
   const userLoginForm = `<section id="userLoginOrRegister">
-  <h1 class="title">Login Here</h1>
+  <h1 id="loginTitle" class="title">Login Here</h1>
   <form id="userLogin">
-    <fieldset>
+    <fieldset id="userLoginFieldset">
       <label for="loginUsername">
         Username:
         <input role="textbox" id="loginUsername" type="text" name="Login Username" role="input" required />
@@ -426,11 +426,11 @@ const userLoginView = () => {
         Password:
         <input role="textbox" id="loginPassword" type="text" name="Login Password" required />
         </label>
-      <input id="loginSubmit" type="submit" name="submit" role="button" />
+      <input id="loginSubmit" class="submit" type="submit" name="submit" role="button" />
     </fieldset>
   </form>
   <nav class="userNav">
-  <a id="registerDemo" class="register demo">Unsure? Click here to login using a demo account.
+  <a id="registerDemo" class="register demo">Login using a demo account.
   </a>
       <a id="registerUserHere" class="register here">Or you can signup here</a>
   </nav>
