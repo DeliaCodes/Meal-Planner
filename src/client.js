@@ -358,6 +358,30 @@ const demo = {
   password: 'Explain-Ocean_Everything*RunninG',
 };
 
+const addLoginButton = () => {
+  const loginView = `<a id="mealNav" class="mealNav">Add A Meal</a>
+<a id="scheduleNav" class="scheduleNav">Schedule</a>
+<a id="logoutNav" class="mealNav">Login</a>`;
+  $('.headerNav').empty().append(loginView);
+  $('#mealNav').click(() => addMealFormView());
+  $('#scheduleNav').click(() => scheduleView());
+  $('#logoutNav').click(() => userLoginView());
+};
+
+const addLogoutButton = () => {
+  const logoutView = `<a id="mealNav" class="mealNav">Add A Meal</a>
+<a id="scheduleNav" class="scheduleNav">Schedule</a>
+<a id="logoutNav" class="mealNav">Logout</a>`;
+  $('.headerNav').empty().append(logoutView);
+  $('#mealNav').click(() => addMealFormView());
+  $('#scheduleNav').click(() => scheduleView());
+  return $('#logoutNav').click(() => {
+    delete STORE.user;
+    userLoginView();
+    return addLoginButton();
+  });
+};
+
 const loginAction = (user, pass) => {
   const loginUser = {};
   loginUser.username = user;
@@ -365,6 +389,7 @@ const loginAction = (user, pass) => {
   return userEndpointLogin(loginUser).then((value) => {
     STORE.user = value;
     console.log('does the STORE Exist', STORE);
+    addLogoutButton();
     return addMealFormView();
   });
 };
@@ -389,7 +414,7 @@ const registerUserView = () => {
       <input id="registerSubmit" class="submit" type="submit" name="submit" role="button" />
     </fieldset>
   </form>
-  <nav class ="userNav">
+  <nav class="userNav">
   <a id="registerDemo" class="register demo">Login using a demo account.
   </a>
       <a id="registerUserHere" class="register here">Or you can signup here</a>
@@ -454,7 +479,7 @@ $(document).ready(() => {
   userLoginView();
   $('#mealNav').click(() => addMealFormView());
   $('#scheduleNav').click(() => scheduleView());
-  $('#userNav').click(() => userLoginView());
+  $('#logoutNav').click(() => userLoginView());
 });
 
 module.exports = {
