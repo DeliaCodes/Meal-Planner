@@ -103,6 +103,10 @@ header h1 {
     margin-bottom: 1.25em;
 }
 
+#registerSubmit {
+  width: 100%;
+}
+
 section h1 {
   background: #FF937F;
 }
