@@ -88,6 +88,10 @@ header h1 {
   font-size: 2em;
 }
 
+.logo {
+  align-self: left;
+}
+
 #loginTitle {
   min-width: 12em;
   margin-top: 0.75em;
