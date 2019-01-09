@@ -242,6 +242,10 @@ label input {
   cursor: pointer;
 }
 
+#addMealSection h1 {
+  min-width: 14em;
+}
+
 @media only screen and (orientation: portrait) {
 
   .headerNav {
@@ -279,7 +283,7 @@ label input {
     font-size: 2em;
   }
 
-  .displaySchedule {
+  .displaySchedule * {
     font-size: 2em;
   }
 
@@ -313,5 +317,9 @@ label input {
     font-size: 2em;
     margin-bottom: 2em;
     margin-top: 1em;
+  }
+
+  #addMealSection h1 {
+    min-width: 23em;
   }
 }
