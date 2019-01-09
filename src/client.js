@@ -1,5 +1,4 @@
-// import {resolve,} from 'url';
-// this file manipulates client side
+// this file manipulates client side and provides the front end code
 /**
  * Meal
  * @typedef {Object} Meal
@@ -34,12 +33,9 @@ const {
   getScheduleFromEndpoint,
   userEndpointLogin,
   userRegister,
-  userRefresh,
 } = require('./api.js');
 
 moment().format();
-
-// const mockDelete = id => Promise.resolve(true);
 
 // add a state variable to store meals
 const STORE = {
@@ -55,28 +51,19 @@ const addToState = (storeToChange, meal, index) => {
   return storeToChange;
 };
 
-// create template for the insertion
 const template = item =>
   `<p>Name: ${item.name}</p> <p>Description: ${item.description}</p>`;
 
 const mappingMealsIntoTemplate = input => input.map(m => template(m)).join('');
 
-// to convert to vanilla JS use https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
 const render = (store) => {
-  /* document.getElementById('currentMeals').innerHTML(mappingMealsIntoTemplate(store.meals)) */
   $('#currentMeals').append(mappingMealsIntoTemplate(store.meals));
 };
 
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
-const scheduleTemplate = meals => `<div class="meal ${meals.dayOfWeek}"><p class="name">${
-  meals.name
-  }</p><p class="description">${
-  meals.description
-  }</p><a class="edit delete" id="${
-  meals._id
-  }">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
+const scheduleTemplate = meals => `<div class="meal ${meals.dayOfWeek}"><p class="name">${meals.name}</p><p class="description">${meals.description}</p><a class="edit delete" id="${meals._id}">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
 
@@ -110,7 +97,7 @@ const daysFromCurrentDay = (weeksWorthOfMeals, currentDay) => {
 /**
  @param {Schedule} mealsForDay - array of current week
  */
-const iterIterDay = mealsForDay => mealsForDay.length > 0 ? mealsForDay.map((meals) => scheduleTemplate(meals)) : '<div class="meal"><p class="name">There are no meals for this day</p></div>';
+const iterIterDay = mealsForDay => mealsForDay.length > 0 ? mealsForDay.map(meals => scheduleTemplate(meals)) : '<div class="meal"><p class="name">There are no meals for this day</p></div>';
 
 const insertAndFlattenToHTML = (weekMeals, week) => {
   const accumulatorArray = [];
@@ -126,16 +113,13 @@ const deleteAMealFromSchedule = (meal, store) => {
   const itemToDelete = meal.id;
   const newStore = {};
   const storeKeys = Object.keys(store);
-  console.log('item to delete', itemToDelete);
 
   for (let i = 0; i < storeKeys.length; i += 1) {
     const newMeals = store[storeKeys[i]].filter((m) => {
-      console.log('M in for loop', m);
       return m._id !== itemToDelete;
     });
     newStore[storeKeys[i]] = newMeals;
   }
-  console.log('newStore', newStore);
   return newStore;
 };
 
@@ -144,7 +128,6 @@ const afterEditClick = (event) => {
   edit.id = $(event.target)
     .prev()
     .attr('id');
-  console.log('selector', edit);
   const itemName = $(event.target)
     .parent()
     .find('.name')
@@ -156,7 +139,6 @@ const afterEditClick = (event) => {
   editRenderForm(edit.id, itemName, itemDescription, event);
 };
 
-// untested
 const editFormTemplate = (name, desc) => `<form id="editMealForm">
 <fieldset id="editMealFieldset">
   <label for="editName">
@@ -193,7 +175,6 @@ const getEditedMealFromUser = () => {
   return newMeal;
 };
 
-// bind to on submit
 const submitEditForm = (id, store) => {
   $('#editMealForm').submit((event) => {
     event.preventDefault();
@@ -206,7 +187,6 @@ const submitEditForm = (id, store) => {
     const sliceVal = store.schedule[displayDay].findIndex(e => e._id === id);
     store.schedule[displayDay].splice(sliceVal, 1);
     const editedDay = convertNumberToWeekDay(newMeal.dayOfWeek);
-    // console.log('Edited Meal', store.schedule[displayDay]);
     store.schedule[editedDay].push(newMeal);
     updateMealEndpoint(id, newMeal, STORE.user);
     return renderSchedule(store.schedule);
@@ -219,29 +199,23 @@ const editRenderForm = (id, name, description, event) => {
     .empty()
     .append(editFormTemplate(name, description));
   submitEditForm(id, STORE);
-  // console.log('STORING', Object.keys(store));
 };
 
-// is this tested
 const deleteAndRender = (mealID) => {
   const rerenderMe = deleteAMealFromSchedule(mealID, STORE.schedule);
 
   deleteMealEndpoint(mealID.id, STORE.user).then(() => {
     STORE.schedule = rerenderMe;
-    console.log('store', rerenderMe);
     renderSchedule(rerenderMe);
   });
 };
 
-// is this tested?
 const afterDelete = (event) => {
   const toDelete = {};
   toDelete.id = $(event.target).attr('id');
-  console.log('toDelete', toDelete);
   deleteAndRender(toDelete);
 };
 
-// is this tested?
 const handleDeleteClick = () =>
   $('.delete').click((event) => {
     event.preventDefault();
@@ -258,7 +232,6 @@ const handleEditClick = () =>
  @param {Schedule} meals - schedule for meals
  */
 const renderSchedule = (meals) => {
-  console.log('render called', meals);
   const today = moment().weekday();
   const nextWeek = daysFromCurrentDay(meals, today);
   const orderedMeals = accessEachDaysMealsInOrder(nextWeek, meals);
@@ -268,7 +241,6 @@ const renderSchedule = (meals) => {
     .append(mealsHtml);
   handleDeleteClick();
   handleEditClick();
-  // console.log(orderedMeals.map(m => m);
 };
 
 const renderIntoMain = (temp) => {
@@ -289,7 +261,6 @@ const getMealsFromUser = () => {
   return newMeal;
 };
 
-// not tested
 const addUserMeals = () => {
   $('#addMealForm').submit((event) => {
     event.preventDefault();
@@ -388,7 +359,6 @@ const loginAction = (user, pass) => {
   loginUser.password = pass;
   return userEndpointLogin(loginUser).then((value) => {
     STORE.user = value;
-    console.log('does the STORE Exist', STORE);
     addLogoutButton();
     return addMealFormView();
   });
@@ -432,7 +402,6 @@ const registerUserView = () => {
     registration.username = document.getElementById('registerUsername').value;
     registration.password = document.getElementById('registerPassword').value;
     userRegister(registration).then(() => userLoginView());
-    // do something to refresh the page or confirm registration
   });
   $('#registerDemo').click(() => loginAction(demo.username, demo.password));
   $('#loginUser').click(() => userLoginView());
