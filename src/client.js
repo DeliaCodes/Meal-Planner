@@ -385,18 +385,19 @@ const registerUserView = () => {
       <label for="registerPassword">
         Password:
         <input role="textbox" id="registerPassword" type="text" name="Login Password" required />
+        </label>
       <input id="registerSubmit" type="submit" name="submit" role="button" />
     </fieldset>
   </form>
   <nav class ="userNav">
   <a id="registerDemo" class="register demo">Unsure? Click here to login using a demo account.
   </a>
-      <a id="loginUser" class="login here">Go back to the Login page here</a>
-      </nav>
-      <div class="">
-      <p>Username: DemoAutomaton</p>
-      <p>Password: Explain-Ocean_Everything*RunninG</p>
-      </div>
+      <a id="registerUserHere" class="register here">Or you can signup here</a>
+  </nav>
+  <div class="loginInfo">
+  <p class="loginText">Username: DemoAutomaton</p>
+  <p class="loginText">Password: Explain-Ocean_Everything*RunninG</p>
+  </div>
 </section>`;
   renderIntoMain(registerForm);
   $('#userRegistrationForm').submit((event) => {
@@ -424,6 +425,7 @@ const userLoginView = () => {
       <label for="loginPassword">
         Password:
         <input role="textbox" id="loginPassword" type="text" name="Login Password" required />
+        </label>
       <input id="loginSubmit" type="submit" name="submit" role="button" />
     </fieldset>
   </form>
@@ -432,10 +434,10 @@ const userLoginView = () => {
   </a>
       <a id="registerUserHere" class="register here">Or you can signup here</a>
   </nav>
-  <div class="">
-      <p>Username: DemoAutomaton</p>
-      <p>Password: Explain-Ocean_Everything*RunninG</p>
-      </div>
+  <div class="loginInfo">
+  <p class="loginText">Username: DemoAutomaton</p>
+  <p class="loginText">Password: Explain-Ocean_Everything*RunninG</p>
+  </div>
 </section>`;
   renderIntoMain(userLoginForm);
   $('#userLogin').submit((event) => {
