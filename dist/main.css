@@ -209,6 +209,14 @@ label input {
   padding: 0.25em;
 }
 
+#userRegistrationForm {
+  width: 28em;
+}
+
+#registerTitle {
+  min-width: 14em;
+}
+
 .name {
   font-size: 1em;
 }
@@ -272,7 +280,10 @@ label input {
 
   #userLogin {
     width: 50em;
-    min-height: 40vh;
+  }
+
+  #userRegistrationForm {
+    width: 50em;
   }
 
   label input {
@@ -303,6 +314,10 @@ label input {
     min-width: 20em;
   }
 
+  #registerSubmit {
+    min-width: 23em;
+  }
+
   #registerDemo {
     min-width: 90%;
     font-size: 2em;
@@ -311,6 +326,10 @@ label input {
   #registerUserHere {
     min-width: 90%;
     font-size: 2em;
+  }
+
+  #userRegistrationFieldset {
+    padding-bottom: 3em;
   }
 
   fieldset label {
