@@ -35,7 +35,7 @@ nav {
 
 nav a:hover {
   background: #FF937F;
-  border: 2px solid #000000;
+  border: 3px solid #000000;
   color: #000000;
 }
 
@@ -46,6 +46,29 @@ nav a:hover {
   padding: 1em;
   margin-top: 0.5em;
   margin-bottom: 1em;
+}
+
+#explainerTitle {
+  background: #FF937F;
+  color: #000000;
+  margin-top: 1em;
+  width: 15em;
+}
+
+#explainer {
+  background: #FFFFFF;
+  border: 3px solid #000000;
+}
+
+.explainer {
+  font-size: 1.5em;
+  margin-bottom: 0.25em;
+}
+
+#explainerSummary {
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+  text-align: center;
 }
 
 .demo {
@@ -180,14 +203,14 @@ label input {
 
 .loginInfo {
   background: #FFFFFF;
-  border: 2px solid #000000;
+  border: 3px solid #000000;
   flex-direction: column;
   padding: 1.5em;
 }
 
 #displaySchedule {
   background: #FFFFFF;
-  border: 2px solid #000000;
+  border: 3px solid #000000;
   padding: 2em;
   display: flex;
   flex-direction: column;
@@ -210,7 +233,7 @@ label input {
 
 .edit:hover {
   background: #FF937F;
-  border: 2px solid #000000;
+  border: 3px solid #000000;
   color: #000000;
 }
 
@@ -272,6 +295,16 @@ label input {
   .headerNav a {
     padding-bottom: 1em;
     padding-top: 1em;
+  }
+
+  #beginNav {
+    width: 75%;
+    font-size: 4em;
+  }
+
+  #explainerTitle {
+    width: 18em;
+    font-size: 3em;
   }
 
   .userNav {

@@ -444,7 +444,7 @@ const userLoginView = () => {
 };
 
 $(document).ready(() => {
-  userLoginView();
+  $('#beginNav').click(() => userLoginView());
   $('#mealNav').click(() => addMealFormView());
   $('#scheduleNav').click(() => scheduleView());
   $('#logoutNav').click(() => userLoginView());
