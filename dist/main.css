@@ -294,7 +294,15 @@ label input {
     font-size: 2em;
   }
 
-  .displaySchedule * {
+  .name {
+    font-size: 2em;
+  }
+
+  .day {
+    font-size: 2em;
+  }
+
+  .description {
     font-size: 2em;
   }
 
