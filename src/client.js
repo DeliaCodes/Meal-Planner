@@ -63,6 +63,7 @@ const render = (store) => {
 const accessEachDaysMealsInOrder = (week, mealObject) =>
   week.map(day => mealObject[day]);
 
+/* eslint-disable no-underscore-dangle */
 const scheduleTemplate = meals => `<div class="meal ${meals.dayOfWeek}"><p class="name">${meals.name}</p><p class="description">${meals.description}</p><a class="edit delete" id="${meals._id}">Delete Meal</a><a class="edit editMeal">Edit Meal</a></div>`;
 
 const dayTemplate = dayInWeek => `<h2 class="day">${dayInWeek}</h2>`;
@@ -115,9 +116,7 @@ const deleteAMealFromSchedule = (meal, store) => {
   const storeKeys = Object.keys(store);
 
   for (let i = 0; i < storeKeys.length; i += 1) {
-    const newMeals = store[storeKeys[i]].filter((m) => {
-      return m._id !== itemToDelete;
-    });
+    const newMeals = store[storeKeys[i]].filter(m => m._id !== itemToDelete);
     newStore[storeKeys[i]] = newMeals;
   }
   return newStore;

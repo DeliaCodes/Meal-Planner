@@ -13,6 +13,7 @@ const createAuthToken = user =>
     algorithm: 'HS256',
   });
 
+/* eslint-disable no-underscore-dangle */
 const localAuth = passport.authenticate('local', { session: false });
 router.use(bodyParser.json());
 // The user provides a username and password to login
