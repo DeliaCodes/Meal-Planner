@@ -10,10 +10,13 @@ html {
 }
 
 body {
-  /*height: 100%;*/
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+}
+
+#beginNav {
+  font-size: 1.5em;
 }
 
 header {
