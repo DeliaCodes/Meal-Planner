@@ -16,7 +16,7 @@ Meal Planner is an assistant to help you schedule what meals you're going to mak
 
 ## Screenshots
 
-!['Landing Page Screenshot']( "Landing Page Screenshot")
+!['Landing Page Screenshot'](https://github.com/DeliaCodes/Meal-Planner/blob/master/dist/assets/landingPageScreenshot.PNG "Landing Page Screenshot")
 
 !['Login Page Screenshot'](https://github.com/DeliaCodes/Meal-Planner/blob/master/dist/assets/loginScreenshot.PNG "Login Page Screenshot")
 
